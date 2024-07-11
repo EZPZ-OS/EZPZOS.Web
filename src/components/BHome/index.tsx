@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 
 import Notice from '../Notice'
-import bg from './images/MainPageBackgroundImage.jpg'
+import bg from './images/background.png'
 import avatar from './images/avatar.png'
 import eat_icon from './images/eat_icon.png'
 import booking_icon from './images/booking_icon.png'
@@ -25,7 +25,7 @@ const BHome = () => {
     ])
 
     return (
-        <div className='h-screen bg-login-bg-color relative overflow-hidden'>
+        <div className='h-screen relative overflow-hidden' style={{'backgroundImage': `url(${bg})`}}>
             <div className='w-full flex flex-col justify-center items-center'>
                 <img src={avatar} className='w-[80px] h-[80px] mt-[80px]' alt="avatar"/>
                 <p className='text-3xl bg-gradient-to-r from-[#CDE1FF] to-[#E56923] text-transparent bg-clip-text'>Hi, @Username,</p>
@@ -53,7 +53,6 @@ const BHome = () => {
                 }
             </div>
             <img alt="b_logo" src={bottom_logo} className='absolute left-0 right-0 m-auto bottom-3'/>
-            {/* <img src={bg} className='fixed bottom-0 right-0 -z-10'/> */}
         </div>
     )
 }

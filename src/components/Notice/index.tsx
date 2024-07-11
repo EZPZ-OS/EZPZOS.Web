@@ -11,7 +11,7 @@ const Notice = (props: any) => {
                 <p className='text-white text-sm'>{props.title}</p>
                 <p className='text-white text-sm'>{props.content}</p>
             </div>
-            <SlArrowRight className='mr-3'/>
+            <SlArrowRight className='mr-3 text-white'/>
         </div>
     )
 }

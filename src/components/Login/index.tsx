@@ -1,10 +1,11 @@
 import React from 'react'
 
 import logo from './images/logo.png'
+import bg from './images/background.png'
 
 const Login = () => {
     return (
-        <div className='h-screen bg-login-bg-color relative overflow-hidden'>
+        <div className='h-screen relative overflow-hidden' style={{'backgroundImage': `url(${bg})`}}>
             <div className='w-full flex flex-col justify-center items-center'>
                 <img src={logo} className='w-[80px] h-[80px] mt-[80px]' alt="logo"/>
                 <p className='text-2xl font-normal bg-gradient-to-r from-[#CDE1FF] to-[#E56923] text-transparent bg-clip-text'>EZPZ OS</p>
