@@ -1,7 +1,7 @@
 import React from 'react'
 
-import logo from './images/logo.png'
-import bg from './images/background.png'
+import logo from './images/logo_icon.png'
+import bg from './images/background_bg.png'
 
 const Login = () => {
     return (

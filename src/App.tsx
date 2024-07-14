@@ -6,8 +6,8 @@ import BHome from './components/BHome'
 const App = () => {
   return (
     <div className="">
-      {/* <Login /> */}
-      <BHome />
+      <Login />
+      {/* <BHome /> */}
     </div>
   )
 };

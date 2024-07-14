@@ -1,12 +1,12 @@
 import React, {useState} from 'react'
 
 import Notice from '../Notice'
-import bg from './images/background.png'
-import avatar from './images/avatar.png'
+import bg from './images/background_bg.png'
+import avatar from './images/avatar_icon.png'
 import eat_icon from './images/eat_icon.png'
 import booking_icon from './images/booking_icon.png'
 import pick_up_icon from './images/pick_up_icon.png'
-import bottom_logo from './images/b_logo.png'
+import bottom_logo from './images/logo_pro_icon.png'
 
 const BHome = () => {
     const [noticeList] = useState([
