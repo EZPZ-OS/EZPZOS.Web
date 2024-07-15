@@ -1,15 +1,20 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import SignupPage from "./pages/signup/SignupPage";
+import { BrowserRouter } from "react-router-dom";
+import AppRoutes from "./Routes";
+import NavBar from "./Components/NavBar";
+import Footer from "./Components/Footer";
+// import "tailwindcss/tailwind.css";
 
 const App: React.FC = () => (
-  // other pages can directly put Route paths and elements as below, easy to test and render //
-  <BrowserRouter>
-    <Routes>
-      {/* <Route path="/" element={<Home />}/> */}
-      <Route path="signup" element={<SignupPage />} />
-    </Routes>
-  </BrowserRouter>
+  <div className="app">
+    <BrowserRouter>
+      <NavBar />
+      <main className="p-4">
+        <AppRoutes />
+      </main>
+      <Footer />
+    </BrowserRouter>
+  </div>
 );
 
 export default App;
