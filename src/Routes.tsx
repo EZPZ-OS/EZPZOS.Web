@@ -1,9 +1,9 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Home from "./Pages/Home";
-import QRScannerPage from "./Pages/QR/QRScannerPage";
-import Menu from "./Pages/Menu/Menu";
-import SignupPage from "./Pages/SignUp/SignUpPage";
+import Home from "./pages/Home";
+import QRScannerPage from "./pages/QR/QRScannerPage";
+import Menu from "./pages/Menu/Menu";
+import SignupPage from "./pages/Signup/SignupPage";
 
 const AppRoutes: React.FC = () => (
   <Routes>
