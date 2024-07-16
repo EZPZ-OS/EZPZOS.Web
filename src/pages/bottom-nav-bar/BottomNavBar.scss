@@ -1,0 +1,29 @@
+/* fix the nav bar at the bottom */
+.bottom-nav{
+    position:fixed;
+    bottom:0;
+    width:100%;
+    background-color: #f8f8f8;
+    padding: 10px 0;
+}
+
+.bottom-nav-item{
+    color: #888;
+}
+
+.flex {
+    display: flex;
+    .vertical{
+        flex-direction:column;
+    }
+    .align-center{
+        align-items: center;
+    }
+}
+
+.space-around {
+    justify-content: space-around;
+}
+
+
+
