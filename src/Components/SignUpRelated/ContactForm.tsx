@@ -1,4 +1,5 @@
-import GoogleIcon from "../../../image/GoogleIcon.png";
+import React from "react";
+import GoogleIcon from "../../Assets/Images/GoogleIcon.png";
 
 const ContactForm: React.FC = () => {
   return (
@@ -29,7 +30,7 @@ const ContactForm: React.FC = () => {
       </div>
 
       <button className="h-[50px] w-[370px] text-center text-xl text-[#4D4D4D] mt-16 bg-[#F8F9FA] rounded-lg relative">
-        <img src={GoogleIcon} className="absolute left-5 top-[10px]"/>
+        <img src={GoogleIcon} className="absolute left-5 top-[10px]" />
         Continue with Google
       </button>
 
