@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import BottomNavBar from "../../Components/BottomNavBar";
 import { IoChevronBackCircleSharp } from "react-icons/io5";
 import ScanIcon from "../../Assets/Icons/ScanIcon.png";
+import { LogHandler, LogLevel } from "ezpzos.core";
 
 const QRScannerPage: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -11,6 +12,7 @@ const QRScannerPage: React.FC = () => {
   const [scanning, setScanning] = useState(true);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const logger = new LogHandler("QRScannerPage");
 
   useEffect(() => {
     const video = videoRef.current;
@@ -21,7 +23,11 @@ const QRScannerPage: React.FC = () => {
 
     const handleLoadedMetadata = () => {
       video.play().catch((error) => {
-        console.error("Error playing video:", error);
+        logger.Log(
+          "handleLoadedMetadata",
+          `Error playing video: ${error}`,
+          LogLevel.ERROR
+        );
       });
       requestAnimationFrame(tick);
     };
@@ -35,7 +41,11 @@ const QRScannerPage: React.FC = () => {
         video.setAttribute("playsinline", "true");
         video.addEventListener("loadedmetadata", handleLoadedMetadata);
       } catch (error) {
-        console.error("Error accessing camera: ", error);
+        logger.Log(
+          "startVideo",
+          `Error accessing camera: ${error}`,
+          LogLevel.ERROR
+        );
       }
     };
 
@@ -61,6 +71,7 @@ const QRScannerPage: React.FC = () => {
             }, 2000); // Add a 2-second delay before navigating
           } else {
             setError("Invalid QR code. Please try again.");
+            logger.Log("tick", "Invalid QR code scanned.", LogLevel.WARN);
             setScanning(true);
             setTimeout(() => {
               setError("");
