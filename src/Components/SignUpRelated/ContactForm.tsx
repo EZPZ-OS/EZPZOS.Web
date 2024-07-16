@@ -1,4 +1,5 @@
-import GoogleIcon from "../../../Assets/Images/GoogleIcon.png";
+import React from "react";
+import GoogleIcon from "../../Assets/Images/GoogleIcon.png";
 
 const ContactForm: React.FC = () => {
   return (
