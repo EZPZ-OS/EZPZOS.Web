@@ -1,4 +1,5 @@
 import React from "react";
+import BottomNavBar from "../../Components/BottomNavBar";
 
 const Home: React.FC = () => (
   <div className="home">
@@ -7,6 +8,7 @@ const Home: React.FC = () => (
       Welcome to EZPZ.OS! Please scan the QR code on your table to start
       ordering.
     </p>
+    <BottomNavBar />
   </div>
 );
 

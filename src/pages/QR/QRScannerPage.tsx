@@ -1,6 +1,10 @@
 import React, { useRef, useEffect, useState } from "react";
 import jsQR from "jsqr";
 import { useNavigate } from "react-router-dom";
+import BottomNavBar from "../../Components/BottomNavBar";
+import { IoChevronBackOutline } from "react-icons/io5";
+import { IoChevronBackCircleSharp } from "react-icons/io5";
+import ScanIcon from "../../Assets/Icons/ScanIcon.png";
 
 const QRScannerPage: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -71,23 +75,31 @@ const QRScannerPage: React.FC = () => {
   }, [scanning, navigate]);
 
   return (
-    <div className="relative flex flex-col items-center justify-center h-screen bg-black">
-      <button
+    <div className="relative flex flex-col items-center justify-center h-screen">
+      <IoChevronBackCircleSharp
         onClick={() => navigate(-1)}
-        className="absolute top-4 left-4 bg-gradient-to-r from-[#FFB682F5] via-[#F8A27AF5] to-[#F28C83F5] text-white px-4 py-2 rounded"
-      >
-        Back
-      </button>
+        className="absolute top-14 left-6 text-white text-4xl cursor-pointer z-50"
+        size={55}
+      />
       <div className="relative w-full h-full">
         <video
           ref={videoRef}
           className="absolute inset-0 w-full h-full object-cover"
         ></video>
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="border-4 border-dashed border-white w-64 h-64"></div>
+          <div
+            className="w-80 h-80"
+            style={{
+              backgroundImage: `url(${ScanIcon})`,
+              backgroundSize: "contain",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center",
+            }}
+          ></div>
         </div>
       </div>
       <canvas ref={canvasRef} className="hidden"></canvas>
+      <BottomNavBar />
     </div>
   );
 };
