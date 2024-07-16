@@ -12,7 +12,6 @@ const QRScannerPage: React.FC = () => {
   const [scanning, setScanning] = useState(true);
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const logger = new LogHandler("QRScannerPage");
 
   useEffect(() => {
     const video = videoRef.current;
@@ -23,11 +22,7 @@ const QRScannerPage: React.FC = () => {
 
     const handleLoadedMetadata = () => {
       video.play().catch((error) => {
-        logger.Log(
-          "handleLoadedMetadata",
-          `Error playing video: ${error}`,
-          LogLevel.ERROR
-        );
+        console.error("Error playing video:", error);
       });
       requestAnimationFrame(tick);
     };
@@ -41,11 +36,7 @@ const QRScannerPage: React.FC = () => {
         video.setAttribute("playsinline", "true");
         video.addEventListener("loadedmetadata", handleLoadedMetadata);
       } catch (error) {
-        logger.Log(
-          "startVideo",
-          `Error accessing camera: ${error}`,
-          LogLevel.ERROR
-        );
+        console.error("Error accessing camera: ", error);
       }
     };
 
@@ -71,7 +62,6 @@ const QRScannerPage: React.FC = () => {
             }, 2000); // Add a 2-second delay before navigating
           } else {
             setError("Invalid QR code. Please try again.");
-            logger.Log("tick", "Invalid QR code scanned.", LogLevel.WARN);
             setScanning(true);
             setTimeout(() => {
               setError("");
