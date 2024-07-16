@@ -3,15 +3,15 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}", "./index.html"],
   theme: {
     extend: {
-      backgroundImage:{
-        'hero-pattern':"url('./image/MainPageBackgroundImage.png')"
+      backgroundImage: {
+        "hero-pattern": "url('./Assets/Images/MainPageBackgroundImage.png')",
       },
       fontSize: {
-        'lg':['38px']
+        lg: ["38px"],
       },
-      fontFamily:{
-        'sans':['Istok Web', 'sans-serif']
-      }
+      fontFamily: {
+        sans: ["Istok Web", "sans-serif"],
+      },
     },
   },
   plugins: [],
