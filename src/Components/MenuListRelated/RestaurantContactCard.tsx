@@ -52,6 +52,7 @@ const RestaurantContactCard: React.FC<RestaurantContactCardProps> = ({
         ))}
       </div>
       <div className="mt-2 flex justify-between">
+        {/* MenuTabs to switch between */}
         <Tabs className="w-[237px] h-[40px]" onSelect={handleSelect}>
           <TabList className="flex justify-center items-center text-center border-2 rounded-3xl border-transparent bg-primary-gray">
             <Tab

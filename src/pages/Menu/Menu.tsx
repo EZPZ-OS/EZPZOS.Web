@@ -19,6 +19,7 @@ const Menu: React.FC = () => {
     const tableNumber = params.get("tableNumber");
     setTableNumber(tableNumber);
 
+    //This is to control notification
     if (location.pathname.includes("menu-dinein")) {
       setSelectedTab("Dine in");
       showToast("You are now viewing the Dine In menu");
