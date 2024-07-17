@@ -10,7 +10,7 @@ const AppRoutes: React.FC = () => (
     <Route path="/" element={<Home />} />
     <Route path="signup" element={<SignUpPage />} />
     <Route path="scan" element={<QRScannerPage />} />
-    <Route path="menu" element={<Menu />} />
+    {/* <Route path="menu" element={<Menu />} /> */}
     <Route path="menu-dinein" element={<Menu />} />
     <Route path="menu-takeaway" element={<Menu />} />
   </Routes>

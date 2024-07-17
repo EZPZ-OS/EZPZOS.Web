@@ -58,7 +58,7 @@ const QRScannerPage: React.FC = () => {
           const tableNumber = params.get("tableNumber");
           if (tableNumber) {
             setTimeout(() => {
-              navigate(`/menu?tableNumber=${tableNumber}`);
+              navigate(`/menu-dinein?tableNumber=${tableNumber}`);
             }, 2000); // Add a 2-second delay before navigating
           } else {
             setError("Invalid QR code. Please try again.");

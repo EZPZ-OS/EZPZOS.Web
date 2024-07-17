@@ -1,8 +1,9 @@
 import React from "react";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import { Tab, Tabs, TabList } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import LogoWithBG from "../../Assets/Images/LogoWithBG.png";
 import { useNavigate } from "react-router-dom";
+import { IoChevronForward } from "react-icons/io5";
 
 interface RestaurantContactCardProps {
   name: string;
@@ -25,40 +26,43 @@ const RestaurantContactCard: React.FC<RestaurantContactCardProps> = ({
   };
 
   return (
-    <div className="px-6 py-2 bg-white rounded-lg max-w-md mx-auto">
-      <div className="flex items-center justify-between mb-4">
-        <div>
-          <h2 className="text-3xl font-bold text-gray-900">{name}</h2>
-          <p className="text-gray-500">{address}</p>
+    <div className="px-4 py-2 bg-white rounded-lg max-w-md mx-auto">
+      <div className="flex items-center justify-between">
+        <div className="pt-2">
+          <h2 className="text-[30px] font-extrabold text-gray-900">{name}</h2>
+          <div className="text-gray-500 flex items-center">
+            <p className="text-sm ">{address}</p>
+            <IoChevronForward className="mx-1" />
+          </div>
         </div>
         <img
           src={LogoWithBG}
           alt="Restaurant Logo"
-          className="w-24 h-24 object-cover rounded-sm shadow-md shadow-[#C1C1C1] -translate-y-8"
+          className="w-[120px] h-[120px] object-cover rounded-sm shadow-md shadow-[#C1C1C1] -translate-y-8"
         />
       </div>
-      <div className="mb-4">
+      <div className="mb-2">
         {tags.map((tag, index) => (
           <span
             key={index}
-            className="inline-block bg-clip-text text-transparent bg-gradient-to-r from-[#854f29f5] via-[#F8A27AF5] to-[#f45a4cf5] text-sm px-1 py-1 rounded-full"
+            className="inline-block bg-clip-text text-transparent font-bold bg-brown-gradient text-sm px-1 py-1 rounded-full"
           >
             #{tag}
           </span>
         ))}
       </div>
-      <div className="mt-4 flex justify-between">
-        <Tabs className="w-[235px]" onSelect={handleSelect}>
-          <TabList className="flex justify-center border-2 rounded-3xl border-transparent bg-gray-300">
+      <div className="mt-2 flex justify-between">
+        <Tabs className="w-[237px] h-[40px]" onSelect={handleSelect}>
+          <TabList className="flex justify-center items-center text-center border-2 rounded-3xl border-transparent bg-primary-gray">
             <Tab
-              className="list-none py-2 px-6 cursor-pointer text-gray-600 bg-gray-300 border-2 rounded-3xl border-gray-300 hover:text-gray-600 hover:bg-white transition-colors duration-300"
-              selectedClassName="border-[#FFB682] bg-white text-[#FFB682]"
+              className="w-[120px] list-none py-1 px-1 cursor-pointer text-[#5C3434] bg-primary-gray border-2 rounded-3xl border-primary-gbg-primary-gray transition-colors duration-300"
+              selectedClassName="bg-white text-[#5C3434] border-primary-gbg-primary-gray"
             >
               Dine in
             </Tab>
             <Tab
-              className="list-none py-2 px-6 cursor-pointer text-gray-600 bg-gray-300 border-2 rounded-3xl border-gray-300 hover:text-gray-600 hover:bg-white transition-colors duration-300"
-              selectedClassName="border-transparent text-[#FFB682]"
+              className="w-[120px] list-none py-1 px-1 cursor-pointer text-[#5C3434] bg-primary-gray border-2 rounded-3xl border-primary-gbg-primary-gray transition-colors duration-300"
+              selectedClassName="bg-white text-[#5C3434] border-primary-gbg-primary-gray"
             >
               Take away
             </Tab>
@@ -66,7 +70,7 @@ const RestaurantContactCard: React.FC<RestaurantContactCardProps> = ({
         </Tabs>
         <button
           onClick={onCallStaff}
-          className="bg-[#AD98A0] text-white px-4 py-2 rounded-3xl"
+          className="bg-[#AD98A0] text-white px-4 py-1 rounded-3xl w-[120px] h-[40px]"
         >
           Call Staff
         </button>
