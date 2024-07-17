@@ -1,9 +1,20 @@
 import React from "react";
 import "./BottomNavBar.css";
 
-const BottomNavBar: React.FC = (props) => {
+interface BottomNavBarProps {
+    isKitchen:boolean;
+}
+
+const BottomNavBar: React.FC<BottomNavBarProps> = (
+    {isKitchen}
+) => {
     // TODO: Add a boolean props to determine whether to return client bar or business bar
-    const {isKitchen} = props
+    const kitchen = {
+        iconList:['lni lni-home', 'lni lni-dinner', 'lni lni-clipboard', 'lni lni-user'],
+        wordList: ['HOME', 'KITCHEN', 'MENU', 'PROFILE']
+        
+    }
+    
 
     // TODO: Implement the click router for each page? 
 
@@ -12,10 +23,10 @@ const BottomNavBar: React.FC = (props) => {
         <nav className="bottom-nav flex space-around">
             <div className="bottom-nav-item flex vertical align-center">
                 <i className="lni lni-home"></i>
-                <span className="nav-item-span">Home</span>
+                <span className="nav-item-span">HOME</span>
             </div>
             <div className="bottom-nav-item flex vertical align-center">
-                <i className="lni lni-dinner "></i>
+                <i className="lni lni-dinner"></i>
                 <span className="nav-item-span">KITCHEN</span>
             </div>
             <div className="bottom-nav-item flex vertical align-center">

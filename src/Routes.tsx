@@ -4,6 +4,10 @@ import Home from "./pages/Home";
 import QRScannerPage from "./pages/QR/QRScannerPage";
 import Menu from "./pages/Menu/Menu";
 import SignUpPage from "./pages/SignUp/SignUpPage";
+import Profile from './pages/Profile/Profile';
+import Kitchen from './pages/Kitchen/Kitchen';
+import TakeAway from './pages/TakeAway/TakeAway'
+
 
 const AppRoutes: React.FC = () => (
   <Routes>
@@ -11,6 +15,9 @@ const AppRoutes: React.FC = () => (
     <Route path="signup" element={<SignUpPage />} />
     <Route path="scan" element={<QRScannerPage />} />
     <Route path="menu" element={<Menu />} />
+    <Route path="profile" element={<Profile />} />
+    <Route path="kitchen" element={<Kitchen />} />
+    <Route path="takeaway" element={<TakeAway />} />
   </Routes>
 );
 
