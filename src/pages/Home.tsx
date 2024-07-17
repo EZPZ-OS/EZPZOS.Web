@@ -1,7 +1,39 @@
 import React from "react";
+import NavBar from "../Components/NavBar";
+import Footer from "../Components/Footer";
+import ClientHomeComponent from "../Components/HomePageRelated/ClientHomeComponent";
+import BusinessHomeComponent from "../Components/HomePageRelated/BusinessHomeComponent";
 
 const Home = () => {
-	return <div>This is home page</div>;
+
+const ClientRole =true;
+
+  return (
+    <div>
+      <NavBar />
+
+      <div className="flex h-screen w-screen bg-hero-pattern bg-cover relative overflow-hidden">
+      <div className="h-screen w-screen bg-gradient-to-tl from-transparent from-0% via-[#33291f88] via-41%  to-[#000000ce] to-88%">
+        <div className="absolute h-screen w-screen bg-gradient-to-tl from-transparent from-0% via-[#33291f88] via-41%  to-[#000000ce] to-88%">
+        { ClientRole ? <ClientHomeComponent/>:<BusinessHomeComponent/>}
+
+
+        </div>
+      </div>
+    </div>
+
+
+            
+
+
+
+
+
+
+
+      <Footer />
+    </div>
+  );
 };
 
 export default Home;
