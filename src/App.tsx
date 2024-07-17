@@ -1,15 +1,15 @@
 import React from "react";
+import { BrowserRouter } from "react-router-dom";
+import AppRoutes from "./Routes";
 
-import Login from './components/Login'
-import BHome from './components/BHome'
-
-const App = () => {
-  return (
-    <div className="">
-      <Login />
-      {/* <BHome /> */}
-    </div>
-  )
-};
+const App: React.FC = () => (
+  <div className="app">
+    <BrowserRouter>
+      <main className="">
+        <AppRoutes />
+      </main>
+    </BrowserRouter>
+  </div>
+);
 
 export default App;
