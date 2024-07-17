@@ -28,11 +28,11 @@ const RestaurantContactCard: React.FC<RestaurantContactCardProps> = ({
   return (
     <div className="px-4 py-2 bg-white rounded-lg max-w-md mx-auto">
       <div className="flex items-center justify-between">
-        <div className="pt-2">
-          <h2 className="text-[30px] font-extrabold text-gray-900">{name}</h2>
+        <div className="">
+          <h2 className="text-[30px] font-extrabold text-gray-900 ">{name}</h2>
           <div className="text-gray-500 flex items-center">
-            <p className="text-sm ">{address}</p>
-            <IoChevronForward className="mx-1" />
+            <p className="text-sm pt-2">{address}</p>
+            <IoChevronForward className="mx-1 pt-2" />
           </div>
         </div>
         <img
