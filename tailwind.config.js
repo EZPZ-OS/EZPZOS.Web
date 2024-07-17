@@ -12,6 +12,10 @@ module.exports = {
       fontFamily: {
         sans: ["Istok Web", "sans-serif"],
       },
+      colors:{
+        'top-nav-lcl': '#f0ac78',
+        'top-nav-rcl': '#de8c8a',
+      },
     },
   },
   plugins: [],
