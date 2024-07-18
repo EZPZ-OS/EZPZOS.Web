@@ -1,11 +1,7 @@
 import React, {useState} from 'react'
+import Logo from "../../Assets/Images/Logo.png"
+import { Link } from 'react-router-dom';
 
-// import Notice from '../Notice'
-// import bg from './images/background_bg.png'
-// import avatar from './images/avatar_icon.png'
-// import eat_icon from './images/eat_icon.png'
-// import booking_icon from './images/booking_icon.png'
-// import pick_up_icon from './images/pick_up_icon.png'
 import GoogleIcon from 'src\Assets\Images\GoogleIcon.png'
 import HomePageButtons from './HomePageButtons';
 
@@ -15,20 +11,28 @@ const BusinessHomeComponent =()=>{
 
     return(
 <div>
-        <div className='w-full flex flex-col justify-center items-center'>
-            {/* <img src={avatar} className='w-[80px] h-[80px] mt-[80px]' alt="avatar"/> */}
-            <p className='text-3xl bg-gradient-to-r from-[#CDE1FF] to-[#E56923] text-transparent bg-clip-text'>Hi, @Username,</p>
-            <p className="text-base bg-gradient-to-r from-[#FBFBFB] to-[#959595] text-transparent bg-clip-text">Would you like to ...</p>
-        </div>
-        <HomePageButtons/>
-        {/* <div className='flex flex-col items-center mt-4'>
-            {
-                noticeList.map((item, index)=>{
-                    return <Notice key={index} title={item.title} content={item.content}/>
-                })
-            }
-        </div> */}
-        {/* <img alt="b_logo" src={bottom_logo} className='absolute left-0 right-0 m-auto bottom-3'/> */}
+            <div className='w-full flex flex-col justify-center items-center'>
+                    <img src={Logo} className='w-[90px] h-[100px] mt-44' alt="logo"/>
+                    <p className='text-2xl font-boldbg-gradient-to-r from-[#CDE1FF] to-[#E56923] text-transparent bg-clip-text'>EZPZ OS</p>
+                    {/* <p className='text-3xl font-bold bg-gradient-to-r from-[#CDE1FF] to-[#E56923] text-transparent bg-clip-text mt-7'>WELCOME BACK</p> */}
+                    {/* <p className='text-3xl font-bold bg-gradient-to-r from-[#CDE1FF] to-[#E56923] text-transparent bg-clip-text'>:D</p> */}
+
+                    <HomePageButtons/>
+
+                    <div className="flex-col">
+                        <Link to="signup" >
+                        <button className="h-[50px] w-[370px] rounded-lg mt-14 text-[#FFFFFF] text-xl bg-gradient-to-r from-[#FFB682F5] via-[#F8A27AF5] to-[#F28C83F5]">
+                         SIGN IN
+                             </button>
+                        </Link>
+                        <div className="mt-4">
+                            <span className=" text-[#dcdcdcbb] ">Don't have an account? </span>
+                            <Link to="" className="font-bold text-[#dcdcdcbb] ">Sign up :）</Link>
+                        </div>
+                    </div>
+            </div>
+
+
 
         </div>
     )
