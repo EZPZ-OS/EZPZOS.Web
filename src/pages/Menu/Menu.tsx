@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import BottomNavBar from "../../Components/BottomNavBar";
-import RestaurantContactCard from "../../Components/MenuListRelated/RestaurantContactCard";
+import RestaurantContactCard from "../../Components/MenuList/RestaurantContactCard";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import NavBar from "../../Components/NavBar";
-import TopPopUpToast from "../../Components/MenuListRelated/TopPopUpToast";
-import MenuTab from "../../Components/MenuListRelated/MenuTab";
-import { DafaultMenuRoutesValues } from "ezpzos.core";
+import TopPopUpToast from "../../Components/MenuList/TopPopUpToast";
+import MenuTab from "../../Components/MenuList/MenuTab";
+import { DafaultMenuRoutesValues } from "../../Common/Constants";
 
 const Menu: React.FC = () => {
   const location = useLocation();
@@ -17,6 +17,7 @@ const Menu: React.FC = () => {
     DafaultMenuRoutesValues.DineInDefaultValue
   );
 
+  //to extract the tablenumber from /scan page
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const tableNumber = params.get(
@@ -42,6 +43,7 @@ const Menu: React.FC = () => {
   }, [location.search, location.pathname]);
 
   const handleCallStaff = () => {
+    //TODO: placeholder only, need to be finalised
     console.log("Call Staff clicked");
   };
 

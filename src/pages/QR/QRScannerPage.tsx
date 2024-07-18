@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import BottomNavBar from "../../Components/BottomNavBar";
 import { IoChevronBackCircleSharp } from "react-icons/io5";
 import ScanIcon from "../../Assets/Icons/ScanIcon.png";
-import { LogHandler, LogLevel, DafaultMenuRoutesValues } from "ezpzos.core";
+import { DafaultMenuRoutesValues } from "../../Common/Constants";
 
 const QRScannerPage: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);

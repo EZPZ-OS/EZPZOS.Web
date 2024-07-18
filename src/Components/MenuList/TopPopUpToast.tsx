@@ -7,6 +7,12 @@ interface TopPopUpToastProps {
   closeToast?: () => void;
   toastProps?: ToastContentProps<{}>;
 }
+/**
+ * This interface defining the properties for the PopUpToast
+ * @param message is the message we want to display inthe notification {@link TopPopUpToastProps.message}
+ * @param closeToast is the callback function to click on icon to close {@link RTopPopUpToastProps.closeToast}
+ * @param toastProps is the properties {@link TopPopUpToastProps.toastProps}
+ */
 
 const TopPopUpToast: React.FC<TopPopUpToastProps> = ({
   message,

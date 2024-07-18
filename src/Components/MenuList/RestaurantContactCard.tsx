@@ -4,7 +4,7 @@ import "react-tabs/style/react-tabs.css";
 import LogoWithBG from "../../Assets/Images/LogoWithBG.png";
 import { useNavigate } from "react-router-dom";
 import { IoChevronForward } from "react-icons/io5";
-import { DafaultMenuRoutesValues } from "ezpzos.core";
+import { DafaultMenuRoutesValues } from "../../Common/Constants";
 
 interface RestaurantContactCardProps {
   name: string;
@@ -12,6 +12,12 @@ interface RestaurantContactCardProps {
   tags: string[];
   onCallStaff: () => void;
 }
+/**
+ * @param name is the name of the business {@link RestaurantContactCardProps.name}
+ * @param address is the address of the business {@link RestaurantContactCardProps.address}
+ * @param tags is an array of tags[] {@link RestaurantContactCardProps.tags}
+ * @param onCallStaff is the callback function for "call staff" button {@link RestaurantContactCardProps.onCallStaff}
+ */
 
 const RestaurantContactCard: React.FC<RestaurantContactCardProps> = ({
   name,
@@ -46,14 +52,17 @@ const RestaurantContactCard: React.FC<RestaurantContactCardProps> = ({
         />
       </div>
       <div className="mb-2">
-        {tags.map((tag, index) => (
-          <span
-            key={index}
-            className="inline-block bg-clip-text text-transparent font-bold bg-brown-gradient text-sm px-1 py-1 rounded-full"
-          >
-            #{tag}
-          </span>
-        ))}
+        {
+          //render each items in the tags list [], and display
+          tags.map((tag, index) => (
+            <span
+              key={index}
+              className="inline-block bg-clip-text text-transparent font-bold bg-brown-gradient text-sm px-1 py-1 rounded-full"
+            >
+              #{tag}
+            </span>
+          ))
+        }
       </div>
       <div className="mt-2 flex justify-between">
         {/* MenuTabs to switch between */}

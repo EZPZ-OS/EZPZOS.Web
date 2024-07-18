@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import QRScannerPage from "./pages/QR/QRScannerPage";
 import Menu from "./pages/Menu/Menu";
 import SignUpPage from "./pages/SignUp/SignUpPage";
-import { DafaultMenuRoutesValues } from "ezpzos.core";
+import { DafaultMenuRoutesValues } from "../src/Common/Constants";
 
 const AppRoutes: React.FC = () => (
   <Routes>

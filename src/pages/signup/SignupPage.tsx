@@ -1,7 +1,7 @@
 import React from "react";
-import WelcomeMessage from "../../Components/SignUpRelated/WelcomeMessage";
-import ContactForm from "../../Components/SignUpRelated/ContactForm";
-import Policy from "../../Components/SignUpRelated/Policy";
+import WelcomeMessage from "../../Components/SignUp/WelcomeMessage";
+import ContactForm from "../../Components/SignUp/ContactForm";
+import Policy from "../../Components/SignUp/Policy";
 
 const SignUpPage: React.FC = () => {
   return (
