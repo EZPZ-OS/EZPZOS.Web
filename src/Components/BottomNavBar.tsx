@@ -10,6 +10,17 @@ import { PiForkKnifeBold } from "react-icons/pi"; // kitchen icon
 import MenuIcon from '../Assets/Icons/BottomNavBarMenuIcon.png'; // menu icon
 import TakeAwayIcon from "../Assets/Icons/BottomNavBarTakeAwayIcon.png"; // take away icon
 
+/*
+  Read me first before and modification on this component.
+  
+  This component is to render the bottom nav bar, which mounted at the bottom in every necessary pages.
+  - Key prop to switch the display content: isClient: boolean.
+  - Two key objs for icons and hooks: (invoked in the jsx return, need to pay extra attention)
+      - businessNavBar
+      - clientNavBar
+  
+  Good luck with your codes.
+*/
 
 interface BottomNavBarProps {
   isClient: boolean;
@@ -33,7 +44,7 @@ const BottomNavBar: React.FC<BottomNavBarProps> = (
   const navBar = isClient ? clientNavBar : businessNavBar
   const navigate = useNavigate();
 
-
+  // The key function to render the icon.
   const renderIcon = (icon:any, alt:string, className:string) =>{
     if (typeof icon === 'string'){ 
       // img icon
@@ -54,7 +65,7 @@ const BottomNavBar: React.FC<BottomNavBarProps> = (
           <div key={index} className="flex flex-col items-center cursor-pointer" onClick={() => navigate(navBar.pathList[index])}>
             {/* here are two divs for each page: icon div + text span div. In the icon div, the flex items-center are to centralize the icon */}
             <div className="h-[30px] flex items-center">  
-              {/* Here "cloneElement" is to pass the style of w-full h-full to the predefined react icon components*/}
+              {/* Invoke the renderIcon function*/}
               {renderIcon(icon, navBar.wordList[index], 'h-full w-full object-contain')}
               </div>
             <span className="font-istok text-[14px] font-thin leading-[21px] text-center">{navBar.wordList[index]}</span>
@@ -62,7 +73,6 @@ const BottomNavBar: React.FC<BottomNavBarProps> = (
         ))}
       </div>
     </div>
-
   );
 }
 
