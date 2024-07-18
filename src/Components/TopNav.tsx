@@ -28,7 +28,7 @@ export default function TopNav() {
         <div>
             
             <Sidebar sideBarVisible={sideBarVisible} closeSidebar={closeSidebar}/>
-            <div className='bg-gradient-to-r from-top-nav-lcl to-top-nav-rcl h-36 flex'>
+            <div className='bg-gradient-to-r from-top-nav-lcl to-top-nav-rcl h-[142px] flex'>
                 
                 {/*AiOutlineScan is the icon of scanning */}
                 <div className='w-2/4 text-white mt-14' ><AiOutlineScan className=' text-5xl ml-3' onClick={scanerClicked}/></div>

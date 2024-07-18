@@ -4,14 +4,14 @@ import { IoClose } from "react-icons/io5";
 
 export default function Sidebar(props:any) {
     const sideBarContent:string[]=['Home','Login/Profile','E-Recipts','Vouchers','Restuarant Detail','Book','Payment','Settings','Error','Help']
-    const listItems=sideBarContent.map((content)=><li className='pl-7 py-4  text-black border-b-2 text-lg'>{content}</li>) 
+    const listItems=sideBarContent.map((content)=><li className='pl-7 py-4  border-b-2 '>{content}</li>) 
     const clickCloseSidebar =()=>{
         props.closeSidebar()
     }
   return (
-    <div className="fixed  w-full h-screen z-50 flex bg-black/[.5]" style={{ display: props.sideBarVisible ? 'block' : 'none' }}>
-      <ul className="w-[278px] bg-white h-full" >
-        <li className='bg-gradient-to-r from-[#c78d3f] to-[#b85572] text-white h-[107px] pl-6 pt-16 text-lg'>EZPZ.OS</li>
+    <div className="fixed  w-full h-screen z-50 flex bg-black/[.5] text-[20px] text-[#574545]" style={{ display: props.sideBarVisible ? 'block' : 'none' }}>
+      <ul className="w-[278px] bg-white h-full " >
+        <li className='bg-gradient-to-r from-[#c78d3f] to-[#b85572] text-white h-[107px] pl-6 pt-16'>EZPZ.OS</li>
         {listItems}
         <li className='flex pt-28 pl-2.5' >
             <div>Home</div>
