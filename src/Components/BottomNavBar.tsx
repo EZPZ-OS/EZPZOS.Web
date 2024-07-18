@@ -41,7 +41,7 @@ const BottomNavBar: React.FC<BottomNavBarProps> = (
               {/* Here "cloneElement" is to pass the style of w-full h-full to the predefined react icon components*/}
               {React.cloneElement(iconComponent, { className: 'h-full w-full' })}
               </div>
-            <span className="h-[21px] ">{navBar.wordList[index]}</span>
+            <span className="font-istok text-[14px] font-thin leading-[21px] text-center">{navBar.wordList[index]}</span>
           </div>
         ))}
       </div>
