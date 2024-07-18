@@ -19,7 +19,7 @@ const ContactForm: React.FC = () => {
         </p>
       </div>
 
-      <button className="h-[50px] w-[370px] rounded-lg mt-4 text-[#FFFFFF] text-xl bg-gradient-to-r from-[#BBDAFFF5] to-[#FF993CF5]">
+      <button className="h-[50px] w-[370px] rounded-lg mt-4 text-[#FFFFFF] text-xl bg-blue-gradient">
         SEND OTP
       </button>
 
@@ -40,7 +40,7 @@ const ContactForm: React.FC = () => {
         </p>
       </div>
 
-      <button className="h-[50px] w-[370px] rounded-lg mt-16 text-[#FFFFFF] text-xl bg-gradient-to-r from-[#FFB682F5] via-[#F8A27AF5] to-[#F28C83F5]">
+      <button className="h-[50px] w-[370px] rounded-lg mt-16 text-[#FFFFFF] text-xl bg-orange-gradient">
         SIGN IN
       </button>
     </div>
