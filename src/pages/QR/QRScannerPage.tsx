@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import BottomNavBar from "../../Components/BottomNavBar";
 import { IoChevronBackCircleSharp } from "react-icons/io5";
 import ScanIcon from "../../Assets/Icons/ScanIcon.png";
-import { LogHandler, LogLevel } from "ezpzos.core";
+import { DafaultMenuRoutesValues } from "../../Common/Constants";
 
 const QRScannerPage: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -55,10 +55,14 @@ const QRScannerPage: React.FC = () => {
         if (code) {
           setScanning(false);
           const params = new URLSearchParams(code.data);
-          const tableNumber = params.get("tableNumber");
+          const tableNumber = params.get(
+            DafaultMenuRoutesValues.TableNumberDefaultValue
+          );
           if (tableNumber) {
             setTimeout(() => {
-              navigate(`/menu?tableNumber=${tableNumber}`);
+              navigate(
+                `/${DafaultMenuRoutesValues.DineInRouteDefaultValue}?tableNumber=${tableNumber}`
+              );
             }, 2000); // Add a 2-second delay before navigating
           } else {
             setError("Invalid QR code. Please try again.");
