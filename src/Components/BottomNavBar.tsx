@@ -15,7 +15,7 @@ import TakeAwayIcon from "../Assets/Icons/BottomNavBarTakeAwayIcon.png"; // take
   
   This component is to render the bottom nav bar, which mounted at the bottom in every necessary pages.
   - Key prop to switch the display content: isClient: boolean.
-  - Two key objs for icons and hooks: (invoked in the jsx return, need to pay extra attention)
+  - Two key objs for icons and hooks: (invoked in the jsx return, need extra attention)
       - businessNavBar
       - clientNavBar
   
