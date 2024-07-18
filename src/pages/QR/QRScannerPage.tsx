@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import BottomNavBar from "../../Components/BottomNavBar";
 import { IoChevronBackCircleSharp } from "react-icons/io5";
 import ScanIcon from "../../Assets/Icons/ScanIcon.png";
-import { LogHandler, LogLevel } from "ezpzos.core";
+import { LogLevel,User } from "ezpzos.core";
 
 const QRScannerPage: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -17,12 +17,13 @@ const QRScannerPage: React.FC = () => {
     const video = videoRef.current;
     const canvas = canvasRef.current;
     const context = canvas?.getContext("2d");
+    const user =  new User(); //TODO Testing purpose, to be removed
 
     if (!video || !canvas || !context) return;
 
     const handleLoadedMetadata = () => {
       video.play().catch((error) => {
-        console.error("Error playing video:", error);
+        console.error("Error playing video:", LogLevel.ERROR);
       });
       requestAnimationFrame(tick);
     };
