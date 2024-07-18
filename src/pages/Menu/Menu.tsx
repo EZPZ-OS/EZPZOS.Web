@@ -1,53 +1,82 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { IoChevronBackCircleSharp } from "react-icons/io5";
 import BottomNavBar from "../../Components/BottomNavBar";
+import RestaurantContactCard from "../../Components/MenuList/RestaurantContactCard";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import NavBar from "../../Components/NavBar";
+import TopPopUpToast from "../../Components/MenuList/TopPopUpToast";
+import MenuTab from "../../Components/MenuList/MenuTab";
+import { DafaultMenuRoutesValues } from "../../Common/Constants";
 
 const Menu: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [tableNumber, setTableNumber] = useState<string | null>(null);
+  const [selectedTab, setSelectedTab] = useState<string>(
+    DafaultMenuRoutesValues.DineInDefaultValue
+  );
 
+  //to extract the tablenumber from /scan page
   useEffect(() => {
     const params = new URLSearchParams(location.search);
-    const tableNumber = params.get("tableNumber");
+    const tableNumber = params.get(
+      DafaultMenuRoutesValues.TableNumberDefaultValue
+    );
     setTableNumber(tableNumber);
-  }, [location.search]);
 
-  const BgGradientColour =
-    "bg-gradient-to-r from-[#FFB682F5] via-[#F8A27AF5] to-[#F28C83F5]";
+    if (
+      location.pathname.includes(
+        DafaultMenuRoutesValues.DineInRouteDefaultValue
+      )
+    ) {
+      setSelectedTab(DafaultMenuRoutesValues.DineInDefaultValue);
+      showToast(DafaultMenuRoutesValues.DineInToastDefaultValue);
+    } else if (
+      location.pathname.includes(
+        DafaultMenuRoutesValues.TakeAwayRouteDefaultValue
+      )
+    ) {
+      setSelectedTab(DafaultMenuRoutesValues.TakeAwayDefaultValue);
+      showToast(DafaultMenuRoutesValues.TakeAwayToastDefaultValue);
+    }
+  }, [location.search, location.pathname]);
+
+  const handleCallStaff = () => {
+    //TODO: placeholder only, need to be finalised
+    console.log("Call Staff clicked");
+  };
+
+  const showToast = (message: string) => {
+    toast(
+      <TopPopUpToast message={message} closeToast={() => toast.dismiss()} />,
+      { autoClose: 3000 }
+    );
+  };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <IoChevronBackCircleSharp
-        onClick={() => navigate(-1)}
-        className="absolute top-14 left-6 text-black text-4xl cursor-pointer z-50"
-        size={60}
+    <div className="flex flex-col items-center h-screen relative">
+      <NavBar />
+      <RestaurantContactCard
+        name="DemoData Sichuan Cuisine"
+        address="170 LiverPool ST, Hobart 7000"
+        tags={["Hot food", "Chinese food", "Crazy Tuesday"]}
+        onCallStaff={handleCallStaff}
       />
-      <h1 className="text-3xl mb-4">
-        This is menu page place holder, for testing QR feature purpose
-      </h1>
-      <div className="mb-4">Table Number: {tableNumber}</div>
-      <div className="mb-4">
-        <button
-          className={`px-4 py-2 ${BgGradientColour} text-white rounded m-2`}
-        >
-          Add Item 1
-        </button>
-        <button
-          className={`px-4 py-2 ${BgGradientColour} text-white rounded m-2`}
-        >
-          Add Item 2
-        </button>
-      </div>
-      <div>
-        <button
-          className={`px-4 py-2 ${BgGradientColour} text-white rounded m-2`}
-        >
-          Place Order
-        </button>
+      <div className="w-full mt-4">
+        {selectedTab === DafaultMenuRoutesValues.DineInDefaultValue && (
+          <>
+            <MenuTab tableNumber={tableNumber} selectedTab={selectedTab} />
+          </>
+        )}
+        {selectedTab === DafaultMenuRoutesValues.TakeAwayDefaultValue && (
+          <>
+            <MenuTab tableNumber={tableNumber} selectedTab={selectedTab} />
+          </>
+        )}
       </div>
       <BottomNavBar />
+      <ToastContainer />
     </div>
   );
 };
