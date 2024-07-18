@@ -1,6 +1,17 @@
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+### Git Repository
+
+Make sure the following Git Repository is cloned:
+
+1. EZPZOS.Core is on the same level of this project
+   ./EZPZOS.Web
+   ./EZPZOS.Core (Name this folder EZPZOS.Core.Web)
+2. You need to run "npm run build:Web" against EZPZOS.Core(.Web) project  
 
 ## Available Scripts
 

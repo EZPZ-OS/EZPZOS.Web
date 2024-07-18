@@ -50,9 +50,9 @@ module.exports = {
 				use: ["style-loader", "css-loader", "postcss-loader"],
 			},
 			{
-				test: /\.(png|svg|jpg|gif)$/,
+				test: /\.(png|svg|jpg|gif|ico|json)$/,
 				exclude: /node_modules/,
-				use: ["file-loader"],
+				use: ["file-loader?name=[name].[ext]"],
 			},
 		],
 	},
