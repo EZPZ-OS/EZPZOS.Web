@@ -8,7 +8,7 @@ const App: React.FC = () => (
     <BrowserRouter>
       <main className="">
         <AppRoutes />
-        <BottomNavBar isClient={true} />
+        <BottomNavBar isClient={false} />
       </main>
     </BrowserRouter>
     

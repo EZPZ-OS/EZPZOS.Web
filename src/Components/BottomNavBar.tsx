@@ -19,6 +19,9 @@ import TakeAwayIcon from "../Assets/Icons/BottomNavBarTakeAwayIcon.png"; // take
       - businessNavBar
       - clientNavBar
   
+  Necessarily invoked in App.tsx. 
+  Need extra attention with icon folder, all placeholders, Routes.tsx as they are closely related.
+
   Good luck with your codes.
 */
 
