@@ -1,7 +1,7 @@
 import React from "react";
-import WelcomeBackMessage from "./Components/WelcomBackMessage";
-import ContactForm from "./Components/ContactForm";
-import Policy from "./Components/Policy";
+import WelcomeBackMessage from "../../Components/LoginRelated/WelcomBackMessage";
+import ContactForm from "../../Components/LoginRelated/ContactForm";
+import Policy from "../../Components/LoginRelated/Policy";
 
 const LoginPage: React.FC = () => {
   return (
@@ -17,5 +17,4 @@ const LoginPage: React.FC = () => {
   );
 };
 
-export default LoginPage; 
-
+export default LoginPage;

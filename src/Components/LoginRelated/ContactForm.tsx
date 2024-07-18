@@ -1,5 +1,5 @@
 import React from "react";
-import GoogleIcon from "../../../image/GoogleIcon.png";
+import GoogleIcon from "../../Assets/Images/GoogleIcon.png";
 
 const ContactForm: React.FC<{ isLogin?: boolean }> = ({ isLogin }) => {
   return (
