@@ -30,14 +30,18 @@ const BottomNavBar: React.FC<BottomNavBarProps> = (
 
   const navigate = useNavigate();
 
-  console.log('here i am')
+  // console.log('here i am')
   return (
-    <div className="bg-[#D9D9D9] p-4 text-[#988B8B] w-full h-[88px] flex bottom-0 text-center">
-      <div className="top-[8px] w-[80%] left-[10%]  h-[51px] flex justify-between">
+    <div className="bg-[#D9D9D9] pt-[8px] text-[#988B8B] w-full h-[88px] flex bottom-0 text-center fixed justify-center px-[10%] ">
+      <div className=" w-full h-[51px] flex justify-between padding-0">
         {navBar.iconList.map((iconComponent, index) => (
-          <div key={index} className="flex-col" onClick={() => navigate(navBar.pathList[index])}>
-            {iconComponent}
-            <span>{navBar.wordList[index]}</span>
+          <div key={index} className="flex flex-col items-center cursor-pointer" onClick={() => navigate(navBar.pathList[index])}>
+            {/* here are two divs for each page: icon div + text span div. In the icon div, the flex items-center are to centralize the icon */}
+            <div className="h-[30px] flex items-center">  
+              {/* Here "cloneElement" is to pass the style of w-full h-full to the predefined react icon components*/}
+              {React.cloneElement(iconComponent, { className: 'h-full w-full' })}
+              </div>
+            <span className="h-[21px] ">{navBar.wordList[index]}</span>
           </div>
         ))}
       </div>
