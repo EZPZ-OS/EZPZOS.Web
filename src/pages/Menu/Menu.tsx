@@ -47,7 +47,7 @@ const Menu: React.FC = () => {
           Place Order
         </button>
       </div>
-      <BottomNavBar />
+      <BottomNavBar isClient={true}/>
     </div>
   );
 };

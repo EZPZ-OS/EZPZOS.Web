@@ -3,10 +3,10 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import QRScannerPage from "./pages/QR/QRScannerPage";
 import Menu from "./pages/Menu/Menu";
-import SignUpPage from "./pages/SignUp/SignUpPage";
+import SignUpPage from "./pages/signup/SignupPage";
 import Profile from './pages/Profile/Profile';
 import Kitchen from './pages/Kitchen/Kitchen';
-import TakeAway from './pages/TakeAway/TakeAway'
+
 
 
 const AppRoutes: React.FC = () => (
@@ -17,7 +17,7 @@ const AppRoutes: React.FC = () => (
     <Route path="menu" element={<Menu />} />
     <Route path="profile" element={<Profile />} />
     <Route path="kitchen" element={<Kitchen />} />
-    <Route path="takeaway" element={<TakeAway />} />
+    <Route path="takeaway" element={<Menu />} />
   </Routes>
 );
 
