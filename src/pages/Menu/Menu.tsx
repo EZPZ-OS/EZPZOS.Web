@@ -7,25 +7,37 @@ import "react-toastify/dist/ReactToastify.css";
 import NavBar from "../../Components/NavBar";
 import TopPopUpToast from "../../Components/MenuListRelated/TopPopUpToast";
 import MenuTab from "../../Components/MenuListRelated/MenuTab";
+import { DafaultMenuRoutesValues } from "ezpzos.core";
 
 const Menu: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [tableNumber, setTableNumber] = useState<string | null>(null);
-  const [selectedTab, setSelectedTab] = useState<string>("Dine in");
+  const [selectedTab, setSelectedTab] = useState<string>(
+    DafaultMenuRoutesValues.DineInDefaultValue
+  );
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
-    const tableNumber = params.get("tableNumber");
+    const tableNumber = params.get(
+      DafaultMenuRoutesValues.TableNumberDefaultValue
+    );
     setTableNumber(tableNumber);
 
-    //This is to control notification
-    if (location.pathname.includes("menu-dinein")) {
-      setSelectedTab("Dine in");
-      showToast("You are now viewing the Dine In menu");
-    } else if (location.pathname.includes("menu-takeaway")) {
-      setSelectedTab("Take away");
-      showToast("You are now viewing the Take Away menu");
+    if (
+      location.pathname.includes(
+        DafaultMenuRoutesValues.DineInRouteDefaultValue
+      )
+    ) {
+      setSelectedTab(DafaultMenuRoutesValues.DineInDefaultValue);
+      showToast(DafaultMenuRoutesValues.DineInToastDefaultValue);
+    } else if (
+      location.pathname.includes(
+        DafaultMenuRoutesValues.TakeAwayRouteDefaultValue
+      )
+    ) {
+      setSelectedTab(DafaultMenuRoutesValues.TakeAwayDefaultValue);
+      showToast(DafaultMenuRoutesValues.TakeAwayToastDefaultValue);
     }
   }, [location.search, location.pathname]);
 
@@ -50,12 +62,12 @@ const Menu: React.FC = () => {
         onCallStaff={handleCallStaff}
       />
       <div className="w-full mt-4">
-        {selectedTab === "Dine in" && (
+        {selectedTab === DafaultMenuRoutesValues.DineInDefaultValue && (
           <>
             <MenuTab tableNumber={tableNumber} selectedTab={selectedTab} />
           </>
         )}
-        {selectedTab === "Take away" && (
+        {selectedTab === DafaultMenuRoutesValues.TakeAwayDefaultValue && (
           <>
             <MenuTab tableNumber={tableNumber} selectedTab={selectedTab} />
           </>
