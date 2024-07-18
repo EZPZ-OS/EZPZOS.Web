@@ -1,6 +1,6 @@
 import React from "react";
 import WelcomeMessage from "../../Components/SignUpRelated/WelcomeMessage";
-import OptForm from "../../Components/OptForm";
+import OptForm from "../../Components/OptFormRelated/OptForm";
 import Policy from "../../Components/SignUpRelated/Policy";
 
 const OptPage: React.FC = () => {
