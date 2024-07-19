@@ -1,15 +1,20 @@
 import React from 'react'
 import { IoClose } from "react-icons/io5";
+/**
+ * this is the component of the sideBar
+ * @param props including sideBarVisible to make the sideBar visible and closeSidebar funtion to close the sideBar. 
+ * @returns 
+ */
 
 
-export default function Sidebar(props:any) {
+export default function Sidebar(props:{sideBarVisible: boolean, closeSidebar: ()=>void}) {
     const sideBarContent:string[]=['Home','Login/Profile','E-Recipts','Vouchers','Restuarant Detail','Book','Payment','Settings','Error','Help']
     const listItems=sideBarContent.map((content)=><li className='pl-7 py-4  border-b-2 '>{content}</li>) 
     const clickCloseSidebar =()=>{
         props.closeSidebar()
     }
   return (
-    <div className="fixed  w-full h-screen z-50 flex bg-black/[.5] text-[20px] text-[#574545]" style={{ display: props.sideBarVisible ? 'block' : 'none' }}>
+    <div className="  fixed w-full h-full z-50 flex bg-black/[.5] text-[20px] text-[#574545]" style={{ display: props.sideBarVisible ? 'block' : 'none' }}>
       <ul className="w-[278px] bg-white h-full " >
         <li className='bg-gradient-to-r from-[#c78d3f] to-[#b85572] text-white h-[107px] pl-6 pt-16'>EZPZ.OS</li>
         {listItems}
