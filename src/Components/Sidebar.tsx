@@ -1,5 +1,9 @@
 import React from 'react'
 import { IoClose } from "react-icons/io5";
+<<<<<<< HEAD
+=======
+import {SideBarContent} from '../Common/Constants'
+>>>>>>> d646489 (constantlise the value)
 /**
  * this is the component of the sideBar
  * @param props including sideBarVisible to make the sideBar visible and closeSidebar funtion to close the sideBar. 
@@ -8,8 +12,13 @@ import { IoClose } from "react-icons/io5";
 
 
 export default function Sidebar(props:{sideBarVisible: boolean, closeSidebar: ()=>void}) {
+<<<<<<< HEAD
     const sideBarContent:string[]=['Home','Login/Profile','E-Recipts','Vouchers','Restuarant Detail','Book','Payment','Settings','Error','Help']
     const listItems=sideBarContent.map((content)=><li className='pl-7 py-4  border-b-2 '>{content}</li>) 
+=======
+    
+    const listItems=SideBarContent.map((content:string)=><li className='pl-7 py-4  border-b-2 '>{content}</li>) 
+>>>>>>> d646489 (constantlise the value)
     const clickCloseSidebar =()=>{
         props.closeSidebar()
     }
