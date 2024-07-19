@@ -21,6 +21,12 @@ module.exports = {
 		new webpack.DefinePlugin({
 			"process.env": JSON.stringify(dotenv.config().parsed),
 		}),
+		new webpack.NormalModuleReplacementPlugin(/^node:/, (resource) => {
+			resource.request = resource.request.replace(/^node:/, "");
+		}),
+		new webpack.ProvidePlugin({
+			Buffer: ["buffer", "Buffer"],
+		}),
 	],
 	resolve: {
 		modules: [__dirname, "src", "node_modules"],
@@ -29,6 +35,7 @@ module.exports = {
 			url: require.resolve("url"),
 			fs: require.resolve("graceful-fs"),
 			buffer: require.resolve("buffer"),
+			Buffer: require.resolve("Buffer"),
 			timers: require.resolve("timers"),
 			events: false,
 			"node:stream": require.resolve("node:stream"),
