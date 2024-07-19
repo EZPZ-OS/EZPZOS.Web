@@ -1,12 +1,12 @@
 import React from "react";
 import NavBar from "../Components/NavBar";
 import Footer from "../Components/Footer";
-import ClientHomeComponent from "../Components/HomePageRelated/ClientHomeComponent";
-import BusinessHomeComponent from "../Components/HomePageRelated/BusinessHomeComponent";
+import ClientHomeComponent from "../Components/HomePageRelated/ClientHomePageRelated/ClientHomeComponent";
+import BusinessHomeComponent from "../Components/HomePageRelated/BusinessHomePageRelated/BusinessHomeComponent";
 
 const Home = () => {
 
-const ClientRole =false;
+const ClientRole =true;
 
   return (
     <div>
