@@ -13,8 +13,6 @@ module.exports = {
       },
       colors: {
         "primary-gray": "#E8E8E8",
-        'top-nav-lcl': '#f0ac78',
-        'top-nav-rcl': '#de8c8a',
       },
       fontSize: {
         lg: ["38px"],

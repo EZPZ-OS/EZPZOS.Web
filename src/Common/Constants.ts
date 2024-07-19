@@ -6,6 +6,6 @@ export const DafaultMenuRoutesValues = {
 	TakeAwayRouteDefaultValue: "menu-takeaway",
 	DineInToastDefaultValue: "You are now viewing the Dine In menu",
 	TakeAwayToastDefaultValue:"You are now viewing the Take Away menu",
-	TableNumberDefaultValue:"tableNumber",
-	
+	TableNumberDefaultValue:"tableNumber"
+
 }
