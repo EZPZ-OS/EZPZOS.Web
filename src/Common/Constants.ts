@@ -9,4 +9,3 @@ export const DafaultMenuRoutesValues = {
 	TableNumberDefaultValue:"tableNumber",
 	
 }
-export const SideBarContent:string[]=['Home','Login/Profile','E-Recipts','Vouchers','Restuarant Detail','Book','Payment','Settings','Error','Help']
