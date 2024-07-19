@@ -22,6 +22,6 @@ console.log(props.img)
 }
 
 
-export default HomePageButtons;
+export default ClientHomePageButtons;
 
 

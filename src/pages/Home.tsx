@@ -1,6 +1,4 @@
 import React from "react";
-import NavBar from "../Components/NavBar";
-import Footer from "../Components/Footer";
 import ClientHomeComponent from "../Components/HomePageRelated/ClientHomePageRelated/ClientHomeComponent";
 import { ClientHomePageValues } from "ezpzos.core";
 
