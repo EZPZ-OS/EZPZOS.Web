@@ -15,7 +15,7 @@ const DeleteMenu = (props: IProps) => {
     const deleteDishOpt = () => {
         // request backend api -> delete dish
 
-        // end request success 
+        // end request success   
         handleHideToast()
     }
 
