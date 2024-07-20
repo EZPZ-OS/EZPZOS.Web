@@ -8,6 +8,7 @@ import NavBar from "../../Components/NavBar";
 import TopPopUpToast from "../../Components/MenuList/TopPopUpToast";
 import MenuTab from "../../Components/MenuList/MenuTab";
 import { DafaultMenuRoutesValues } from "../../Common/Constants";
+import TopNav from "../../Components/TopNav";
 
 const Menu: React.FC = () => {
   const location = useLocation();
@@ -56,7 +57,7 @@ const Menu: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center h-screen relative">
-      <NavBar />
+      <TopNav />
       <RestaurantContactCard
         name="DemoData Sichuan Cuisine"
         address="170 LiverPool ST, Hobart 7000"
