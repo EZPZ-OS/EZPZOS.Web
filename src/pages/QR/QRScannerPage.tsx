@@ -129,7 +129,7 @@ const QRScannerPage: React.FC = () => {
         )}
       </div>
       <canvas ref={canvasRef} className="hidden"></canvas>
-      <BottomNavBar />
+      <BottomNavBar isClient={true}/>
     </div>
   );
 };

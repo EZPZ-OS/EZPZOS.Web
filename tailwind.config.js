@@ -11,6 +11,7 @@ module.exports = {
         "blue-gradient": "linear-gradient(to right, #BBDAFFF5, #FF993CF5)",
         "brown-gradient":
           "linear-gradient(to right, #826D5D, #EF7221, #FC4D4C)",
+        "nav-bar-gradient": "linear-gradient(to right, #c78d3f, #b85572)",
       },
       colors: {
         "primary-gray": "#E8E8E8",
