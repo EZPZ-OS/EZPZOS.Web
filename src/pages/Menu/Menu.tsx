@@ -61,6 +61,8 @@ const Menu: React.FC = () => {
         name="DemoData Sichuan Cuisine"
         address="170 LiverPool ST, Hobart 7000"
         tags={["Hot food", "Chinese food", "Crazy Tuesday"]}
+        phone={"0470 000 000"}
+        hours={["Mon-Fri: 9am - 10pm", "Sat-Sun: 10am - 11pm"]}
         onCallStaff={handleCallStaff}
       />
       <div className="w-full mt-4">

@@ -23,7 +23,7 @@ export default function Sidebar(props: {
       style={{ display: props.sideBarVisible ? "block" : "none" }}
     >
       <ul className="w-[278px] bg-white h-full ">
-        <li className="bg-nav-bar-gradient text-white h-[107px] pl-6 pt-16">
+        <li className="bg-side-bar-gradient text-white h-[107px] pl-6 pt-16">
           EZPZ.OS
         </li>
         {listItems}
