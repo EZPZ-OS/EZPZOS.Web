@@ -10,8 +10,8 @@ Make sure the following Git Repository is cloned:
 
 1. EZPZOS.Core is on the same level of this project
    ./EZPZOS.Web
-   ./EZPZOS.Core (Name this folder EZPZOS.Core.Web)
-2. You need to run "npm run build:Web" against EZPZOS.Core(.Web) project  
+   ./EZPZOS.Core
+2. You need to run "npm run build" against EZPZOS.Core project  
 
 ## Available Scripts
 
