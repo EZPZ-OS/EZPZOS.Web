@@ -4,7 +4,6 @@ import BottomNavBar from "../../Components/BottomNavBar";
 import RestaurantContactCard from "../../Components/MenuList/RestaurantContactCard";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import NavBar from "../../Components/NavBar";
 import TopPopUpToast from "../../Components/MenuList/TopPopUpToast";
 import MenuTab from "../../Components/MenuList/MenuTab";
 import { DafaultMenuRoutesValues } from "../../Common/Constants";
@@ -77,6 +76,7 @@ const Menu: React.FC = () => {
         )}
       </div>
       <ToastContainer />
+      <BottomNavBar isClient={true} />
     </div>
   );
 };

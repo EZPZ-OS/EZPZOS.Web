@@ -10,6 +10,7 @@ import Kitchen from "./pages/Kitchen/Kitchen";
 
 const AppRoutes: React.FC = () => (
   <Routes>
+    {/* Client Routes */}
     <Route path="/" element={<Home />} />
     <Route path="signup" element={<SignUpPage />} />
     <Route path="scan" element={<QRScannerPage />} />
@@ -22,6 +23,8 @@ const AppRoutes: React.FC = () => (
       element={<Menu />}
     />
     <Route path="profile" element={<Profile />} />
+
+    {/* Business Routes */}
     <Route path="kitchen" element={<Kitchen />} />
   </Routes>
 );
