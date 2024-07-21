@@ -4,11 +4,10 @@ import ClientHomePageButtons from "../ClientHomePageButtons";
 import { iconsProp } from "./ClientLoggedInComponent";
 
 
-
 const ClientNotLoggedInComponent:React.FC <iconsProp>=({icons=["DineInIcon.png","TakeawayIcon.png","BookingIcon.png"
 ]})=>{
 
-
+  
 
     return(
     

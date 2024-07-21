@@ -5,7 +5,6 @@ import BookingIcon from "../../Assets/Icons/BookingIcon.png"
 
 
 const ClientHomePageButtons =(icons:string[])=>{
-console.log(icons)
     return(
 
         <div>

@@ -5,9 +5,12 @@ import ClientAvatar from "../../../Assets/Icons/ClientAvatar.png";
 import LogoWithName from "../../../Assets/Images/LogoWithName.png";
 import HomePageNotification from "../HomePageNotification";
 import React, {useState} from 'react';
+import HomePageButtons from "../HomePageButtons";
 
 
+export interface notificationProps{
 
+}
 
 export interface iconsProp {
   icons?: string[];
@@ -17,7 +20,7 @@ const ClientLoggedInComponent: React.FC<iconsProp> = ({
 }) => {
 
 
-    const [notoficationList] = useState([
+    const notoficationList =[
         {
             title: 'Vouchers',
             content: 'You have unused vouchers!'
@@ -26,7 +29,18 @@ const ClientLoggedInComponent: React.FC<iconsProp> = ({
             title: 'Vouchers',
             content: 'You have unused vouchers!'
         }
-    ])
+    ]
+
+    const ClientHomePageButtonList = [
+      {
+          img: '../../Assets/Icons/TakeawayIcon.png',
+          title: 'TAKE AWAY'
+      },
+      {
+          img: '../../Assets/Icons/BookingIcon.png',
+          title: 'BOOK'
+      }
+  ]
 
 
     
@@ -40,20 +54,26 @@ const ClientLoggedInComponent: React.FC<iconsProp> = ({
       <p className="text-3xl font-black	mt-8 bg-gradient-to-r from-[#CDE1FF] to-[#E56923] text-transparent bg-clip-text">
         Hi @Username,
       </p>
-      {/* <p className='text-3xl font-bold bg-gradient-to-r from-[#CDE1FF] to-[#E56923] text-transparent bg-clip-text mt-7'>WELCOME BACK</p> */}
       <p className="text-sm font-bold bg-gradient-to-r from-[#FBFBFB] to-[#959595] text-transparent bg-clip-text mt-1">
         Would you like to...
       </p>
-      <div className="">
-        <ClientHomePageButtons {...(icons = icons)} />
+      <div className="flex">
+        {ClientHomePageButtonList.map((data,index)=>{
+          return <HomePageButtons key={index} img={data.img} title={data.title} />
+        })}
+        {/* <ClientHomePageButtons {...(icons = icons)} /> */}
       </div>
+
+      
       <div className='flex flex-col items-center w-4/5 mt-6'>
                 {
-                   notoficationList.map((item, index)=>{
-                        return <HomePageNotification  key={index} title={item.title} content={item.content}/>
+                   notoficationList.map((data, index)=>{
+                        return <HomePageNotification  key={index} title={data.title} content={data.content}/>
                     })
                 }
             </div>
+
+          
       <div>
         <img
           src={LogoWithName}
