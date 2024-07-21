@@ -6,7 +6,7 @@ import ClientNotLoggedInComponent from "./ClientNotLoggedInComponent";
 const ClientHomeComponent =()=>{
 
 
-    const isLoggedIn =false;
+    const isLoggedIn =true;
 
     return(
         <div>
