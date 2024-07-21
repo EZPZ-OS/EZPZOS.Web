@@ -76,7 +76,6 @@ const Menu: React.FC = () => {
           </>
         )}
       </div>
-      <BottomNavBar />
       <ToastContainer />
     </div>
   );
