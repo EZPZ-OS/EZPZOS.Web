@@ -1,6 +1,6 @@
 
+import TakawayIcon from "../../Assets/Icons/TakeawayIcon.png"
 import DineInIcon from "../../Assets/Icons/DineInIcon.png"
-import BookingIcon from "../../Assets/Icons/BookingIcon.png"
 
 
 
@@ -19,7 +19,7 @@ const BusinessHomePageButtons =()=>{
 
 
             <div className="flex flex-col items-center gap-2">
-                <img src={BookingIcon} className='w-[70px] h-[80px] ' alt="logo"/>
+                <img src={TakawayIcon} className='w-[70px] h-[80px] ' alt="logo"/>
                 <div className="text-white	">ADMIN</div>
 
             </div>
