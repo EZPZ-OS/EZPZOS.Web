@@ -48,6 +48,7 @@ const Menu: React.FC = () => {
 				tags={["Hot food", "Chinese food", "Crazy Tuesday"]}
 				phone={"0470 000 000"}
 				hours={["Mon-Fri: 9am - 10pm", "Sat-Sun: 10am - 11pm"]}
+				allergyInfo={"This is place holder"}
 				onCallStaff={handleCallStaff}
 			/>
 			<div className="w-full mt-4">
