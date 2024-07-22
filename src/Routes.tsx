@@ -8,6 +8,7 @@ import SignUpPage from "./pages/SignUp/SignupPage";
 import { DafaultMenuRoutesValues } from "../src/Common/Constants";
 import Profile from './pages/Profile/Profile';
 import Kitchen from './pages/Kitchen/Kitchen';
+import ClientCartPage from "./pages/ClientCart/ClientCartPage";
 
 
 
@@ -17,6 +18,7 @@ const AppRoutes: React.FC = () => (
       <Route path="opt" element={<OptPage />} />
       <Route path="signup" element={<SignUpPage />} />
     <Route path="scan" element={<QRScannerPage />} />
+      <Route path="clientcart" element={<ClientCartPage />} />
     <Route
       path={DafaultMenuRoutesValues.DineInRouteDefaultValue}
       element={<Menu />}
