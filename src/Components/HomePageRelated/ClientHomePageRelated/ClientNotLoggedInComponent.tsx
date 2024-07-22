@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Logo from "../../../Assets/Images/Logo.png"
-import { HomePageDataProp } from "./ClientLoggedInComponent";
+import { HomePageDataProp } from "../../../pages/Home";
 import HomePageButtons from "../HomePageButtons";
 const ClientNotLoggedInComponent:React.FC <HomePageDataProp>=({ data = {homepagelist:[
     
@@ -39,7 +39,7 @@ const ClientNotLoggedInComponent:React.FC <HomePageDataProp>=({ data = {homepage
         <div className="flex-col">
             <Link to="signup" >
             <button className="h-[50px] w-[370px] rounded-lg mt-14 text-[#FFFFFF] text-xl bg-gradient-to-r from-[#FFB682F5] via-[#F8A27AF5] to-[#F28C83F5]">
-             SIGN IN
+             LOG IN
                  </button>
             </Link>
             <div className="mt-4">

@@ -5,17 +5,10 @@ import LogoWithName from "../../../Assets/Images/LogoWithName.png";
 import HomePageNotification from "../HomePageNotification";
 import React, {useState} from 'react';
 import HomePageButtons from "../HomePageButtons";
+import { HomePageDataProp } from "../../../pages/Home";
 
 
 
-
-export interface HomePageDataProp {
-  data?: {
-    homepagelist:any[],
-    notificationlist:any[]
-  };
-
-}
 const ClientLoggedInComponent: React.FC<HomePageDataProp> = ({
    data = {
     homepagelist:[
@@ -45,12 +38,6 @@ const ClientLoggedInComponent: React.FC<HomePageDataProp> = ({
 
 }) => {
 
-
-
-
-
-
-    
   return (
     <div className="w-full flex flex-col justify-center items-center">
       <img

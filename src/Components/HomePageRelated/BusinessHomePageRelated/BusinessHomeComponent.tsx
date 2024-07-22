@@ -6,7 +6,7 @@ import BusinessNotLoggedInComponent from "./BusinessNotLoggedInComponent";
 const BusinessHomeComponent =()=>{
 
 
-    const isLoggedIn =true;
+    const isLoggedIn =false;
 
     return(
         <div>

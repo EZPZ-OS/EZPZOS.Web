@@ -3,10 +3,17 @@ import NavBar from "../Components/NavBar";
 import Footer from "../Components/Footer";
 import ClientHomeComponent from "../Components/HomePageRelated/ClientHomePageRelated/ClientHomeComponent";
 import BusinessHomeComponent from "../Components/HomePageRelated/BusinessHomePageRelated/BusinessHomeComponent";
+import BottomNavBar from "../Components/BottomNavBar";
+export interface HomePageDataProp {
+  data?: {
+    homepagelist:any[],
+    notificationlist:any[]
+  };
 
+}
 const Home = () => {
 
-const ClientRole =true;
+const ClientRole =false;
 
   return (
     <div>
