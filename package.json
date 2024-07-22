@@ -81,8 +81,5 @@
 	"fs": false,
 	"path": false,
 	"node:events": false
-},
-  "devDependencies": {
-    "tailwindcss": "^3.4.4"
-  }
+}
 }
