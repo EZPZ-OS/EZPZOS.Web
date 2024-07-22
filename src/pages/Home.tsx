@@ -1,16 +1,7 @@
 import React from "react";
-import NavBar from "../Components/NavBar";
-import Footer from "../Components/Footer";
-import BottomNavBar from "../Components/BottomNavBar";
 
 const Home = () => {
-  return (
-    <div>
-      <NavBar />
-      This is home page
-      <Footer />
-    </div>
-  );
+  return <div>This is home page</div>;
 };
 
 export default Home;

@@ -4,12 +4,12 @@ import OptPage from "./pages/OptPage/OptPage";
 import Home from "./pages/Home";
 import QRScannerPage from "./pages/QR/QRScannerPage";
 import Menu from "./pages/Menu/Menu";
-import SignUpPage from "./pages/SignUp/SignupPage";
 import { DafaultMenuRoutesValues } from "../src/Common/Constants";
-import Profile from './pages/Profile/Profile';
-import Kitchen from './pages/Kitchen/Kitchen';
+import Profile from "./pages/Profile/Profile";
+import Kitchen from "./pages/Kitchen/Kitchen";
+import LoginPage from "./pages/Login/LoginPage";
+import SignUpPage from "./pages/SignUp/SignupPage";
 import ClientCartPage from "./pages/ClientCart/ClientCartPage";
-
 
 
 const AppRoutes: React.FC = () => (
@@ -29,7 +29,9 @@ const AppRoutes: React.FC = () => (
     />
     <Route path="profile" element={<Profile />} />
     <Route path="kitchen" element={<Kitchen />} />
-    
+
+    <Route path="menu" element={<Menu />} />
+    <Route path="login" element={<LoginPage />} />
   </Routes>
 );
 
