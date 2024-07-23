@@ -5,7 +5,7 @@ import BottomNavBar from "../../Components/BottomNavBar";
 import { IoChevronBackCircleSharp } from "react-icons/io5";
 import ScanIcon from "../../Assets/Icons/ScanIcon.png";
 import { DafaultMenuRoutesValues } from "../../Common/Constants";
-
+import { LogLevel,User } from "ezpzos.core";
 const QRScannerPage: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -18,16 +18,21 @@ const QRScannerPage: React.FC = () => {
     const video = videoRef.current;
     const canvas = canvasRef.current;
     const context = canvas?.getContext("2d");
+    const user =  new User(); //TODO Testing purpose, to be removed
 
     if (!video || !canvas || !context) return;
 
     const handleLoadedMetadata = () => {
       video.play().catch((error) => {
+<<<<<<< .merge_file_T1ZkZn
         logger.Log(
           "handleLoadedMetadata",
           `Error playing video: ${error}`,
           LogLevel.ERROR
         );
+=======
+        console.error("Error playing video:", LogLevel.ERROR);
+>>>>>>> .merge_file_ytD2zK
       });
       requestAnimationFrame(tick);
     };
