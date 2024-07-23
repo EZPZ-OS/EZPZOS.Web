@@ -14,7 +14,10 @@ module.exports = {
 			},
 			colors: {
 				"primary-gray": "#E8E8E8",
-				"secondary-gray": "#EEEBEB"
+				"secondary-gray": "#EEEBEB",
+				"text": {
+					"dishpro-color": "#515151"
+				}
 			},
 			fontSize: {
 				lg: ["38px"]
