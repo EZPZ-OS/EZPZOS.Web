@@ -4,6 +4,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Istok+Web:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
 
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
+
+.slick-dots li{
+  width: 10px;
+  height: 10px;
+  background-color: #9F9E9E;
+}
+
 @layer utilities {
   /* Hide scrollbar for Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
