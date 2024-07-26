@@ -2,6 +2,10 @@
 module.exports = {
 	content: ["./src/**/*.{js,jsx,ts,tsx}", "./index.html"],
 	theme: {
+		boxShadow: {
+			'textarea-inset': 'inset 0 0 10px rgba(152, 139, 139, 1)',
+			'tag': '0 3px 4px rgba(81,81,81, .4)'
+		},
 		extend: {
 			backgroundImage: {
 				'hero-pattern': "url('./Assets/Images/MainPageBackgroundImage.png')",
