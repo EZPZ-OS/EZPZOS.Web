@@ -32,8 +32,8 @@ const DishProduct = () => {
     const [price, setPrice] = useState(0)
     const [isSpicy, setIsSpicy] = useState(true)
     const [options, setOptions] = useState([
-        {'Extra': [{'Add Sliced Beef': '1'}, {'Add Stir-fired Egg and Romato': '0'}]},
-        {'Noodle': [{'Add Flat Noodle' : '0'}]}
+        {'Extra': [{'title': 'Add Sliced Beef', 'value': true}, {'title': 'Add Stir-fired Egg and Romato', 'value': false}]},
+        {'Noodle': [{'title': 'Add Flat Noodle', 'value': false}]}
     ])
 
     useEffect(()=>{
@@ -61,13 +61,8 @@ const DishProduct = () => {
         let copyOptions = JSON.parse(JSON.stringify(options))
         let copyKey = Object.keys(copyOptions[key])[0]
         let targetVal = copyOptions[key][copyKey][valIndex]
-        // Object.values(targetVal)[0] = (Object.values(targetVal)[0] === '1' ? '0' : '1')
-        // Object.values(targetVal)[0] = '1'
-        Object.values(targetVal).push('0')
-        console.log('========', Object.values(targetVal))
-        // console.log('handleOptions$$$$$$$', copyOptions)
-        // debugger
-        // setOptions(copyOptions)
+        targetVal.value = !targetVal.value;
+        setOptions(copyOptions)
     }
 
     return (
@@ -114,13 +109,13 @@ const DishProduct = () => {
                                 <h2 className="text-text-dishpro-color font-bold">{Object.keys(item)} option:</h2>
                                 <div className="mt-1 text-text-dishpro-color">
                                     {
-                                        Object.values(item).map((optionVal,index)=>{
+                                        Object.values(item).map((optionItem,index)=>{
                                             return (
-                                                optionVal.map((val: string, valIndex: number)=>{
+                                                optionItem.map((optItem: any, optIndex: number)=>{
                                                     return (
-                                                        <div key={valIndex} className="h-7 flex flex-row items-center justify-normal" onClick={()=>handleOptions(key, valIndex)}>
-                                                            {Object.values(val)[0] === '1' ? <MdOutlineCheckBox /> : <MdOutlineCheckBoxOutlineBlank />}
-                                                            <span className="ml-2">{Object.keys(val)}-{Object.values(val)}</span>
+                                                        <div key={optIndex} className="h-7 flex flex-row items-center justify-normal" onClick={()=>handleOptions(key, optIndex)}>
+                                                            {optItem.value ? <MdOutlineCheckBox /> : <MdOutlineCheckBoxOutlineBlank />}
+                                                            <span className="ml-2">{optItem.title}</span>
                                                         </div>
                                                     )
                                                 })
