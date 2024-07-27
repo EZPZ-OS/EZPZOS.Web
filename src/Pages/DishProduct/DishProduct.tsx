@@ -37,7 +37,6 @@ const DishProduct = () => {
     ])
 
     useEffect(()=>{
-        console.log('====useEffect========')
         setPrice(proNum * singleDishPrice)
     }, [proNum])
 
@@ -75,7 +74,7 @@ const DishProduct = () => {
             </div>
             <div className="ml-5 mr-5 mt-[68px]">
                 {/* 轮播图部分 */}
-                <div className="w-full h-56">
+                <div className="w-full h-56 mt-7">
                     <Slider {...settings} className="w-full h-full">
                         <div className="w-full h-56">
                             <img src={demoImg01} className="w-full h-full"/>
