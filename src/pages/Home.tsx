@@ -1,32 +1,57 @@
 import React from "react";
-import NavBar from "../Components/NavBar";
-import Footer from "../Components/Footer";
+
 import ClientHomeComponent from "../Components/HomePageRelated/ClientHomePageRelated/ClientHomeComponent";
-import BusinessHomeComponent from "../Components/HomePageRelated/BusinessHomePageRelated/BusinessHomeComponent";
-import BottomNavBar from "../Components/BottomNavBar";
-export interface HomePageDataProp {
+
+
+export interface ClientHomePageDataProp {
   data?: {
-    homepagelist:any[],
-    notificationlist:any[]
+    isLoggedIn:Boolean,
+    homePageButtonList:any[],
+    notificationList:any[]
   };
 
 }
-const Home = () => {
+const Home:React.FC<ClientHomePageDataProp>=({ 
+  data = {
+  isLoggedIn:false,
+  homePageButtonList:[
+  {
+    img: 'DineInIcon.png',
+    title: 'DINE IN'
+},
+{
+    img: 'BookingIcon.png',
+    title: 'BOOK'
+},
+{
+    img: 'TakeawayIcon.png',
+    title: 'TAKE AWAY'
+}
+], notificationList:[
+{
+  title: 'Vouchers',
+  content: 'You have unused vouchers!'
+},
+{
+  title: 'Vouchers',
+  content: 'You have unused vouchers!'
+}
 
-const ClientRole =false;
+]
+}
+}
+)=>{
 
   return (
     <div>
 
-      {/* <NavBar /> */}
 
-      <div className="flex h-screen w-screen bg-hero-pattern bg-cover relative overflow-hidden">
+      <div className="flex h-screen w-screen bg-[url('./Assets/Images/MainPageBackgroundImage.png')] bg-cover relative overflow-hidden">
       <div className="h-screen w-screen bg-gradient-to-tl from-transparent from-0% via-[#33291f88] via-41%  to-[#000000ce] to-88%">
         <div className="absolute h-screen w-screen bg-gradient-to-tl from-transparent from-0% via-[#33291f88] via-41%  to-[#000000ce] to-88%">
 
-        
+        <ClientHomeComponent data={data} />
 
-        { ClientRole ? <ClientHomeComponent/>:<BusinessHomeComponent/>}
 
 
       
