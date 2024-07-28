@@ -2,6 +2,8 @@ import React from "react";
 import ClientHomeComponent from "../Components/HomePageRelated/ClientHomePageRelated/ClientHomeComponent";
 import { ClientHomePageValues } from "ezpzos.core";
 
+
+
 export interface ClientHomePageValuesProp {
 	ClientHomePageValues: {
 		IsLoggedIn: Boolean;
