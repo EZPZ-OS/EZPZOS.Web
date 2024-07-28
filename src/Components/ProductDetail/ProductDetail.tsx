@@ -25,7 +25,7 @@ const settings = {
     },
 }
 
-const DishProduct = () => {
+const ProductDetail = () => {
     console.log('render=======')
     const singleDishPrice = 22.0
     const [proNum, setProNum] = useState(1)
@@ -153,4 +153,4 @@ const DishProduct = () => {
     )
 }
 
-export default DishProduct
+export default ProductDetail
