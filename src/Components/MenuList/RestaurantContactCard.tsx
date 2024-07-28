@@ -4,7 +4,7 @@ import "react-tabs/style/react-tabs.css";
 import LogoWithBG from "../../Assets/Images/LogoWithBG.png";
 import { useNavigate } from "react-router-dom";
 import { IoChevronForward } from "react-icons/io5";
-import { DafaultMenuRoutesValues } from "../../Common/Constants";
+import { DafaultMenuRoutesValues } from "ezpzos.core";
 import RestaurantContactDetails from "./RestaurantContactDetails";
 
 interface RestaurantContactCardProps {

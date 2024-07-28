@@ -1,9 +1,12 @@
 import React from "react";
-import { GOOGLE_MAPS_API_KEY } from "../../Common/Constants";
+import { GOOGLE_MAPS_API_KEY } from "ezpzos.core";
 
 interface AddressOnGoogleMapProps {
 	address: string;
 }
+/**
+ * @param address - The tag list of tags {@link AddressOnGoogleMapProps.tags}
+ */
 
 const AddressOnGoogleMap: React.FC<AddressOnGoogleMapProps> = ({ address }) => {
 	const encodedAddress = encodeURIComponent(address);

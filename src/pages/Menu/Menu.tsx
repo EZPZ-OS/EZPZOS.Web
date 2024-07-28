@@ -6,7 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import TopPopUpToast from "../../Components/MenuList/TopPopUpToast";
 import MenuTab from "../../Components/MenuList/MenuTab";
-import { DafaultMenuRoutesValues, DefaultRestaurantDetails } from "../../Common/Constants";
+import { DafaultMenuRoutesValues, DefaultRestaurantDetails } from "ezpzos.core";
 import TopNav from "../../Components/TopNav";
 
 const Menu: React.FC = () => {
