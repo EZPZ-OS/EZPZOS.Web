@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../index.css";
 import { AiOutlineScan } from "react-icons/ai";
-import { FiAlignJustify } from "react-icons/fi";
+import { FiMenu } from "react-icons/fi";
 import { IoSearch } from "react-icons/io5";
 import Sidebar from "./Sidebar";
 import { Link } from "react-router-dom";
@@ -29,7 +29,7 @@ export default function TopNav() {
                     IoSearch is the icon of searching
                 */}
         <div className=" w-2/4 flex text-5xl flex-row-reverse text-white mt-14">
-          <FiAlignJustify
+          <FiMenu
             className="mr-3"
             onClick={toogleSidebar}
             style={{ display: sideBarVisible ? "none" : "block" }}
