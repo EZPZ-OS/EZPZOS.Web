@@ -1,9 +1,63 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FaArrowLeft } from "react-icons/fa";
-import { MdArrowForwardIos } from "react-icons/md";
+
+import DishItem from '../../Components/DishItem/DishItem';
 import Dish from '../../Assets/Images/Dish.png'
 
 const DishList = () => {
+    const [availableDish, setAvailableDish] = useState([
+        {
+            "id": 1,
+            "dishName": "Stewed beef with potatos 01",
+            "dishImg": Dish,
+            "tags": ["No.1 ordered"],
+            "desc": "This is the description. This is the description.This is the description.",
+            "price": 17.5
+        },
+        {
+            "id": 2,
+            "dishName": "Stewed beef with potatos 02",
+            "dishImg": Dish,
+            "tags": ["No.1 ordered"],
+            "desc": "This is the description. This is the description.This is the description.",
+            "price": 20.5
+        },
+        {
+            "id": 3,
+            "dishName": "Stewed beef with potatos 03",
+            "dishImg": Dish,
+            "tags": ["No.1 ordered"],
+            "desc": "This is the description. This is the description.This is the description.",
+            "price": 25.5
+        }
+    ])
+
+    const [notAvailableDish, setNotAvailableDish] = useState([
+        {
+            "id": 4,
+            "dishName": "Stewed beef with potatos 01",
+            "dishImg": Dish,
+            "tags": ["No.1 ordered"],
+            "desc": "This is the description. This is the description.This is the description.",
+            "price": 17.5
+        },
+        {
+            "id": 5,
+            "dishName": "Stewed beef with potatos 02",
+            "dishImg": Dish,
+            "tags": ["No.1 ordered"],
+            "desc": "This is the description. This is the description.This is the description.",
+            "price": 20.5
+        },
+        {
+            "id": 6,
+            "dishName": "Stewed beef with potatos 03",
+            "dishImg": Dish,
+            "tags": ["No.1 ordered"],
+            "desc": "This is the description. This is the description.This is the description.",
+            "price": 25.5
+        }
+    ])
 
     const handleGoBack = () => {
         // go back
@@ -24,72 +78,36 @@ const DishList = () => {
                 <span className="absolute right-[20px] top-[32px] leading-9 bg-orange-500 text-white text-base px-2 rounded" onClick={handleAddDish}>Add New</span>
             </div>
             <div className="h-[calc(100vh+185px)] ml-7 mr-7">
-                <h2 className="leading-6 text-gray-500 font-bold text-xl">Available</h2>
-                <ul className="mt-3">
-                    <li className="h-28 mb-2 rounded-lg flex items-center" onClick={handleDishDetail}>
-                        <img className="w-28 h-28 rounded-lg" src={Dish} alt="dish_img"/>
-                        <div className="flex-1 flex-row ml-2">
-                            <h3 className="font-bold text-base leading-none mt-1 mb-1">Stewed beef with potatos</h3>
-                            <span className="h-[15px] text-sm rounded-md bg-gradient-to-r from-[#a72353b3] to-[#DC4200] opacity-90 px-2 py-1 text-white">No.1 ordered</span>
-                            <div className="leading-none mt-1 mb-1 text-gray-500 mr-3 text-ellipsis overflow-hidden line-clamp-2">This is the description. This is the description.This is the description.</div>
-                            <span className="font-bold text-gray-600">$17.5</span>
-                        </div>
-                        <MdArrowForwardIos />
-                    </li>
-                    <li className="h-28 mb-2 rounded-lg flex items-center">
-                        <img className="w-28 h-28 rounded-lg" src={Dish} alt="dish_img"/>
-                        <div className="flex-1 flex-row ml-2">
-                            <h3 className="font-bold text-base leading-none mt-1 mb-1">Stewed beef with potatos</h3>
-                            <span className="h-[15px] text-sm rounded-md bg-gradient-to-r from-[#a72353b3] to-[#DC4200] opacity-90 px-2 py-1 text-white">No.1 ordered</span>
-                            <div className="leading-none mt-1 mb-1 text-gray-500 mr-3 text-ellipsis overflow-hidden line-clamp-2">This is the description. This is the description.This is the description.</div>
-                            <span className="font-bold text-gray-600">$17.5</span>
-                        </div>
-                        <MdArrowForwardIos />
-                    </li>
-                    <li className="h-28 mb-2 rounded-lg flex items-center">
-                        <img className="w-28 h-28 rounded-lg" src={Dish} alt="dish_img"/>
-                        <div className="flex-1 flex-row ml-2">
-                            <h3 className="font-bold text-base leading-none mt-1 mb-1">Stewed beef with potatos</h3>
-                            <span className="h-[15px] text-sm rounded-md bg-gradient-to-r from-[#a72353b3] to-[#DC4200] opacity-90 px-2 py-1 text-white">No.1 ordered</span>
-                            <div className="leading-none mt-1 mb-1 text-gray-500 mr-3 text-ellipsis overflow-hidden line-clamp-2">This is the description. This is the description.This is the description.</div>
-                            <span className="font-bold text-gray-600">$17.5</span>
-                        </div>
-                        <MdArrowForwardIos />
-                    </li>
-                </ul>
-                <h2 className="leading-6 text-gray-500 font-bold text-xl">Unavailable</h2>
-                <ul className="mt-3">
-                    <li className="h-28 mb-2 rounded-lg flex items-center">
-                        <img className="w-28 h-28 rounded-lg" src={Dish} alt="dish_img"/>
-                        <div className="flex-1 flex-row ml-2">
-                            <h3 className="font-bold text-base leading-none mt-1 mb-1">Stewed beef with potatos</h3>
-                            <span className="h-[15px] text-sm rounded-md bg-gradient-to-r from-[#a72353b3] to-[#DC4200] opacity-90 px-2 py-1 text-white">No.1 ordered</span>
-                            <div className="leading-none mt-1 mb-1 text-gray-500 mr-3 text-ellipsis overflow-hidden line-clamp-2">This is the description. This is the description.This is the description.</div>
-                            <span className="font-bold text-gray-600">$17.5</span>
-                        </div>
-                        <MdArrowForwardIos />
-                    </li>
-                    <li className="h-28 mb-2 rounded-lg flex items-center">
-                        <img className="w-28 h-28 rounded-lg" src={Dish} alt="dish_img"/>
-                        <div className="flex-1 flex-row ml-2">
-                            <h3 className="font-bold text-base leading-none mt-1 mb-1">Stewed beef with potatos</h3>
-                            <span className="h-[15px] text-sm rounded-md bg-gradient-to-r from-[#a72353b3] to-[#DC4200] opacity-90 px-2 py-1 text-white">No.1 ordered</span>
-                            <div className="leading-none mt-1 mb-1 text-gray-500 mr-3 text-ellipsis overflow-hidden line-clamp-2">This is the description. This is the description.This is the description.</div>
-                            <span className="font-bold text-gray-600">$17.5</span>
-                        </div>
-                        <MdArrowForwardIos />
-                    </li>
-                    <li className="h-28 mb-2 rounded-lg flex items-center">
-                        <img className="w-28 h-28 rounded-lg" src={Dish} alt="dish_img"/>
-                        <div className="flex-1 flex-row ml-2">
-                            <h3 className="font-bold text-base leading-none mt-1 mb-1">Stewed beef with potatos</h3>
-                            <span className="h-[15px] text-sm rounded-md bg-gradient-to-r from-[#a72353b3] to-[#DC4200] opacity-90 px-2 py-1 text-white">No.1 ordered</span>
-                            <div className="leading-none mt-1 mb-1 text-gray-500 mr-3 text-ellipsis overflow-hidden line-clamp-2">This is the description. This is the description.This is the description.</div>
-                            <span className="font-bold text-gray-600">$17.5</span>
-                        </div>
-                        <MdArrowForwardIos />
-                    </li>
-                </ul>
+                {availableDish.length ? (
+                    <>
+                        <h2 className="leading-6 text-gray-500 font-bold text-xl">Available</h2>
+                        <section className="mt-3">
+                            {
+                                availableDish.map((item, index)=>{
+                                    return (
+                                        <DishItem key={index} dishDetail={item} handleDishDetail={handleDishDetail}/>
+                                    )
+                                })
+                            }
+                        </section>
+                    </>
+                ) : ''}
+                {
+                    notAvailableDish.length ? (
+                        <>
+                            <h2 className="leading-6 text-gray-500 font-bold text-xl">Unavailable</h2>
+                            <section className="mt-3">
+                                {
+                                    notAvailableDish.map((item, index)=>{
+                                        return (
+                                            <DishItem key={index} dishDetail={item} handleDishDetail={handleDishDetail}/>
+                                        )
+                                    })
+                                }
+                            </section>
+                        </>
+                    ) : ''
+                }
             </div>
         </div>
     )
