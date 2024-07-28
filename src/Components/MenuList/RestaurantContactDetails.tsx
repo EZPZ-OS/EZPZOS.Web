@@ -50,7 +50,7 @@ const RestaurantContactDetails: React.FC<RestaurantContactDetailsProps> = ({
 				setTimeout(() => setCopySuccess(""), 2000); // Clear the message after 2 seconds
 			},
 			() => {
-				setCopySuccess("Failed to copy address.");
+				setCopySuccess("Failed to copy address, try again.");
 			}
 		);
 	};
@@ -59,7 +59,7 @@ const RestaurantContactDetails: React.FC<RestaurantContactDetailsProps> = ({
 		<div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-end z-50">
 			<div className="bg-white w-full max-w-md h-[740px] rounded-t-lg">
 				<div className="relative">
-					<AddressOnGoogleMap />
+					<AddressOnGoogleMap address={address} />
 					<button onClick={onClose} className="absolute top-2 right-2 black">
 						<IoCloseOutline size={50} className="drop-shadow-md m-4" />
 					</button>

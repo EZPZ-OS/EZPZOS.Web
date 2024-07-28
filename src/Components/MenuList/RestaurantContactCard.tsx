@@ -21,6 +21,9 @@ interface RestaurantContactCardProps {
  * @param name is the name of the business {@link RestaurantContactCardProps.name}
  * @param address is the address of the business {@link RestaurantContactCardProps.address}
  * @param tags is an array of tags[] {@link RestaurantContactCardProps.tags}
+ * @param phone - The contact phone number of the business {@link RestaurantContactCardProps.phone}
+ * @param hours - An array of business hours {@link RestaurantContactCardProps.hours}
+ * @param allergyInfo - A string of allergyInfo {@link RestaurantContactCardProps.tags}
  * @param onCallStaff is the callback function for "call staff" button {@link RestaurantContactCardProps.onCallStaff}
  */
 

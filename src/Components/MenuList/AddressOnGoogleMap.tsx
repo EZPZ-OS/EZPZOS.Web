@@ -1,11 +1,19 @@
 import React from "react";
+import { GOOGLE_MAPS_API_KEY } from "../../Common/Constants";
 
-const AddressOnGoogleMap = () => {
-  return (
-    <div className="h-[230px] bg-nav-bar-gradient w-full max-w-md rounded-t-lg">
-      <p className="p-4"> this is google map func place holder</p>
-    </div>
-  );
+interface AddressOnGoogleMapProps {
+	address: string;
+}
+
+const AddressOnGoogleMap: React.FC<AddressOnGoogleMapProps> = ({ address }) => {
+	const encodedAddress = encodeURIComponent(address);
+	const mapUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${encodedAddress}&zoom=18&size=600x300&markers=color:red%7C${encodedAddress}&key=${GOOGLE_MAPS_API_KEY}`;
+
+	return (
+		<div className="h-[230px] w-full max-w-md rounded-t-lg overflow-hidden">
+			<img src={mapUrl} alt={`Map showing location of ${address}`} className="w-full h-full object-cover" />
+		</div>
+	);
 };
 
 export default AddressOnGoogleMap;
