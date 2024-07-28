@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import OptPage from "./pages/OptPage/OptPage";
+import OptPage from "./pages/OTPPage/OTPPage";
 import Home from "./pages/Home";
 import QRScannerPage from "./pages/QR/QRScannerPage";
 import Menu from "./pages/Menu/Menu";
@@ -15,6 +15,7 @@ const AppRoutes: React.FC = () => (
 		{/* Client Routes */}
 		<Route path="/" element={<Home />} />
 		<Route path="signup" element={<SignUpPage />} />
+		<Route path="otp" element={<OTPPage />} />
 		<Route path="scan" element={<QRScannerPage />} />
 		<Route path={DafaultMenuRoutesValues.DineInRouteDefaultValue} element={<Menu />} />
 		<Route path={DafaultMenuRoutesValues.TakeAwayRouteDefaultValue} element={<Menu />} />
