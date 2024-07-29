@@ -4,7 +4,7 @@ import { LoginSignupDataProp } from "../../Pages/LoginOrSignup/LoginOrSignup";
 const WelcomeMessage=(data:LoginSignupDataProp)=> {
   const isLogin = data.isLogin
   return (
-        <div className="mt-[90px] ml-[22px]">
+        <div className="mt-[80px] ml-[22px]">
          <p className="text-lg font-bold bg-gradient-to-r from-[#CDE1FF] to-[#E56923] inline-block text-transparent bg-clip-text">
            {isLogin ? "Welcome Back" : "Join Us Today"}
           </p>
