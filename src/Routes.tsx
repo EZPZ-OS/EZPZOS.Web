@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import OptPage from "./pages/OTPPage/OTPPage";
+import OTPPage from "./pages/OTPPage/OTPPage";
 import Home from "./pages/Home";
 import QRScannerPage from "./pages/QR/QRScannerPage";
 import Menu from "./pages/Menu/Menu";
