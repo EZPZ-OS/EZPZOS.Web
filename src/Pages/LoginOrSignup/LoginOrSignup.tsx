@@ -1,7 +1,7 @@
 import React from "react";
-import WelcomeMessage from "../../Components/SignUp/WelcomeMessage";
-import ContactForm from "../../Components/SignUp/ContactForm";
-import Policy from "../../Components/SignUp/Policy";
+import WelcomeMessage from "../../Components/LoginOrSignup/WelcomeMessage";
+import ContactForm from "../../Components/LoginOrSignup/ContactForm";
+import Policy from "../../Components/LoginOrSignup/Policy";
 
 export interface LoginSignupDataProp{
        isLogin:Boolean
