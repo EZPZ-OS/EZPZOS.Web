@@ -31,6 +31,9 @@ jobs:
     - name: Install dependencies
       run: npm install
 
+    - name: Install additional dependencies
+      run: npm install --save buffer graceful-fs timers url
+
     - name: Build
       run: npm run build
 
