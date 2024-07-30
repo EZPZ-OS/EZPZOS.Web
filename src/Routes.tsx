@@ -21,6 +21,7 @@ const AppRoutes: React.FC = () => (
 		<Route path={DafaultMenuRoutesValues.DineInRouteDefaultValue} element={<Menu />} />
 		<Route path={DafaultMenuRoutesValues.TakeAwayRouteDefaultValue} element={<Menu />} />
 		<Route path="profile" element={<Profile />} />
+        <Route path="clientcart" element={<ClientCartPage/>} />
 		{/* Business Routes */}
 		<Route path="kitchen" element={<Kitchen />} />
 	</Routes>
