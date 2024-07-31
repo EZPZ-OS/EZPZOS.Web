@@ -8,6 +8,7 @@ import TopPopUpToast from "../../Components/MenuList/TopPopUpToast";
 import MenuTab from "../../Components/MenuList/MenuTab";
 import { DafaultMenuRoutesValues, DefaultRestaurantDetails } from "ezpzos.core";
 import TopNav from "../../Components/TopNav";
+import MenuHotSaleCard from "../../Components/MenuList/MenuHotSaleCard";
 
 const Menu: React.FC = () => {
 	const location = useLocation();
@@ -63,6 +64,7 @@ const Menu: React.FC = () => {
 					</>
 				)}
 			</div>
+			<MenuHotSaleCard />
 			<ToastContainer />
 			<BottomNavBar isClient={true} />
 		</div>
