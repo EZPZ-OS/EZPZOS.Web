@@ -13,6 +13,7 @@ export interface LoginSignupDataProp{
 const LoginSignupPage: React.FC <LoginSignupDataProp>=({ 
        isLogin=true
 })=> {
+  
     return (
       <div className="flex h-screen w-screen bg-hero-pattern bg-cover relative overflow-hidden">
         <div className="h-screen w-screen bg-gradient-to-tl from-transparent from-0% via-[#33291f88] via-41% to-[#000000ce] to-88%">
@@ -25,9 +26,13 @@ const LoginSignupPage: React.FC <LoginSignupDataProp>=({
           
                 </div>
                 </Link>
-
+                
+        {/*This is WelcomeMessage session, it decides what to show on main title when the customer try to login/sign up respectfully*/}
           <WelcomeMessage isLogin={isLogin} />
+        
+        {/*This is ContactForm session, it decides what to show on main title when the customer try to login/sign up respectfully*/}
             <ContactForm isLogin={isLogin} />
+          {/*This is Policy session, it shows [*/}
             <Policy />
           </div>
         </div>
