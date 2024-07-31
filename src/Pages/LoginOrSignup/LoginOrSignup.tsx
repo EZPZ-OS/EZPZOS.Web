@@ -5,6 +5,8 @@ import Policy from "../../Components/LoginOrSignup/Policy";
 import { RiCloseLargeLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
+//pass a "isLogin" mock state into LoginOrSignup Page, check if the customer is login or signup
+
 export interface LoginSignupDataProp{
        isLogin:Boolean
 
@@ -22,7 +24,7 @@ const LoginSignupPage: React.FC <LoginSignupDataProp>=({
             
           <Link to={"/"}>
           <div className="flex w-full justify-end	"> 
-            <RiCloseLargeLine  className="absolute mr-0 text-white text-[35px]  mt-10 mr-[20px] "/>
+            <RiCloseLargeLine  className="absolute  text-white text-[35px]  mt-10 mr-[20px] "/>
           
                 </div>
                 </Link>
@@ -30,9 +32,9 @@ const LoginSignupPage: React.FC <LoginSignupDataProp>=({
         {/*This is WelcomeMessage session, it decides what to show on main title when the customer try to login/sign up respectfully*/}
           <WelcomeMessage isLogin={isLogin} />
         
-        {/*This is ContactForm session, it decides what to show on main title when the customer try to login/sign up respectfully*/}
+        {/*This is ContactForm session, it contains input boxes for user to enter its phone number, or choose the google login.*/}
             <ContactForm isLogin={isLogin} />
-          {/*This is Policy session, it shows [*/}
+          {/*This is Policy session*/}
             <Policy />
           </div>
         </div>
