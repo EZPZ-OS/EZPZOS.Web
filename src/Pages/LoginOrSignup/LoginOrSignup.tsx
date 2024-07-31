@@ -5,12 +5,16 @@ import Policy from "../../Components/LoginOrSignup/Policy";
 import { RiCloseLargeLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
-//pass a "isLogin" mock state into LoginOrSignup Page, check if the customer is login or signup
 
+/**
+ * This interface defining the properties for the LoginSignupDataProp
+ * @param isLogin pass a "isLogin" mock boolean value into LoginOrSignup Page, check if the customer is login or not(!login===signup)
+ */
 export interface LoginSignupDataProp{
        isLogin:Boolean
 
 }
+
 
 const LoginSignupPage: React.FC <LoginSignupDataProp>=({ 
        isLogin=true

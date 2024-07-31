@@ -1,8 +1,9 @@
 import { LoginSignupDataProp } from "../../Pages/LoginOrSignup/LoginOrSignup";
 import {DefaultLoginSignupValues} from "ezpzos.core";
 
-
-
+/**
+ * @param data pass a "isLogin" mock boolean value into LoginOrSignup Page, check if the customer is login or not(!login===signup)
+ */
 const WelcomeMessage=(data:LoginSignupDataProp)=> {
 
   const isLogin = data.isLogin
