@@ -35,7 +35,7 @@ module.exports = {
 			url: require.resolve("url"),
 			fs: require.resolve("graceful-fs"),
 			buffer: require.resolve("buffer"),
-			timers: require.resolve("timers-browserify"),
+			timers: require.resolve("timers"),
 			events: false,
 			stream: false,
 		},
