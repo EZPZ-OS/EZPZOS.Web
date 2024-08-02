@@ -11,7 +11,7 @@ pipeline{
         //         }
         //     }
         // }
-        stage{
+        stage("Build npm"){
             steps{
                 script{
                     sh '''
