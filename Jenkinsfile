@@ -16,7 +16,7 @@ pipeline{
                 script{
                     sh '''
                     npm i
-                    npm build
+                    npm run build
                     '''
                 }
             }
