@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "ezpzos.core": ["node_modules/ezpzos.core"]
+    },
     "target": "es5",
     "lib": [
       "dom",
@@ -19,7 +23,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "types": ["@testing-library/jest-dom"]
   },
   "include": [
     "src"
