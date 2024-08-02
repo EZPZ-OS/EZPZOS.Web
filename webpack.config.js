@@ -36,8 +36,8 @@ module.exports = {
 			fs: require.resolve("graceful-fs"),
 			buffer: require.resolve("buffer"),
 			timers: require.resolve("timers-browserify"),
-			events: require.resolve("events/"),
-			stream: require.resolve("stream-browserify"),
+			events: false,
+			stream: false,
 		},
 	},
 	module: {
