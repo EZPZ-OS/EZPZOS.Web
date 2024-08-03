@@ -7,7 +7,7 @@ import { DafaultMenuRoutesValues } from "ezpzos.core";
 import Profile from "./pages/Profile/Profile";
 import Kitchen from "./pages/Kitchen/Kitchen";
 import LoginPage from "./pages/Login/LoginPage";
-import SignUpPage from "./pages/SignUp/SignupPage";
+import SignUpPage from "./pages/signup/SignupPage";
 
 const AppRoutes: React.FC = () => (
 	<Routes>
