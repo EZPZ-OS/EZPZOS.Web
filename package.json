@@ -8,7 +8,6 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/google.maps": "^3.55.12",
     "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.101",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@types/react-router-dom": "^5.3.3",
@@ -24,7 +23,6 @@
     "react-scripts": "^5.0.1",
     "react-tabs": "^6.0.2",
     "react-toastify": "^10.0.5",
-    "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -32,7 +30,8 @@
     "build": "webpack --config webpack.config.js --mode development",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "tscheck": "tsc"
+    "tscheck": "tsc",
+    "debug": "node --inspect -r ts-node/register ./src/index.tsx"
   },
   "eslintConfig": {
     "extends": [
@@ -54,6 +53,7 @@
     "@babel/helper-module-transforms": "7.19.6",
     "@babel/preset-env": "7.24.8",
     "@babel/preset-react": "7.24.7",
+    "@types/node": "^22.1.0",
     "babel-loader": "9.1.3",
     "css-loader": "7.1.2",
     "file-loader": "6.2.0",
@@ -62,8 +62,10 @@
     "react-dom": "18.3.1",
     "style-loader": "4.0.0",
     "tailwindcss": "^3.4.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4",
     "webpack": "5.93.0",
-    "webpack-cli": "5.1.4",
+    "webpack-cli": "^5.1.4",
     "webpack-dev-server": "5.0.4"
   },
   "browser": {

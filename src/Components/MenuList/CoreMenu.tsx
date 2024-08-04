@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {CoreMenuDishCard} from './CoreMenu/CoreMenuDishCard'
 import DishImg from "../../Assets/Images/dish.png"; // home
+import CoreMenuHorizontalScroll from './CoreMenu/CoreMenuHorizontalScroll';
 
 interface CoreMenuProps {
     isDining: boolean;
@@ -29,12 +30,17 @@ const CoreMenu : React.FC<CoreMenuProps> = ({isDining})=>{
         price: 17.5,
     };
 
+    const cates = ['Popular Dishes', 'En','ées', 'Entrées','Entrées', 'Entrées','Entrées']
+
+    const [currentActive, setActiveCategory] = useState('Popular Dishes')
+
     return (
         <div className='w-full'>
             <div>
                  {/* // TODO: horizontal scroll bar. */}
                  {/* // TODO: Tie the dishes up with the category.  display in this way  dishes[barActiveCategory]. 注意子(barActiveCategory)传父,再 给下面的list子用 */}
                  Here is horizontal scroll bar placeholder.
+                 <CoreMenuHorizontalScroll categories={cates} currentActive={currentActive} changeActive={setActiveCategory}/>
             </div>
             
             <div className='w-full flex flex-col items-center'>

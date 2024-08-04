@@ -9,7 +9,7 @@ import React from 'react';
 export const AddButton : React.FC = ()=>{
     
     return(
-        <button className='mt-0 pt-0 flex items-center justify-center w-[33px] h-[33px] text-white text-4xl bg-gradient-to-r from-orange-500 to-red-600 rounded-full '>
+        <button className='flex items-center justify-center w-[33px] h-[33px] text-white text-4xl bg-gradient-to-r from-orange-500 to-red-600 rounded-full '>
             +
         </button>
     )

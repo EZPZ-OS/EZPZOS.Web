@@ -30,7 +30,7 @@ export const CoreMenuDishCard : React.FC<CoreMenuDishProps> = ({name, hasSpecial
 
     // console.log(name);
     return (
-        <div className='flex w-9/10 h-[130px] justify-between items-stretch mt-[9px]'> 
+        <div className='w-9/10 flex h-[130px] justify-between items-stretch mt-[9px]'> 
             {/* img */}
             <img src={imgPath} alt={name} className='w-[120px] h-full top-0 left-0 gap-0 rounded-[8px] '/>
             
