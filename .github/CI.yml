@@ -1,12 +1,13 @@
 name: Deploy
 on:
   push:
-    branches: [main]
+    branches: [ main ]
   pull_request:
-    branches: [main]
+    branches: [ main ]
     
 
 job:
+  runs-on: ubuntu-latest
   steps:
     - name: Setup node
       uses: actions/setup-node@v4
