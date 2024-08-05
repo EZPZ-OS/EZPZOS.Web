@@ -1,8 +1,34 @@
 
-# Devops Instructions
+# Devops information
 This **Devops** branch is the main branch for Devops team for aws UAT environment. There is another branch called devops-prod for the aws production environment. 
 
 This **Devops** branch is used for merging from the main branch as long as developers generate a new version on the main branch and it will generate a CI/CD job to AWS UAT environment. 
+
+## Devops deploy instruction
+Make sure the following Git Repository is cloned:
+
+1. EZPZOS.Core is on the same level of this project\
+    ./EZPZOS.Web\
+    ./EZPZOS.Core
+2. Make sure EZPZOS.Core is reinstall the dependencies. 
+
+For EZPZOS.Web , you need run npm clear and install to reinstall the dependencies: 
+```console
+npm ci 
+```
+
+Type run build sciprt of `webpack.config.js`
+```
+npm run build
+```
+
+Runs the app in the development mode. 
+```
+run start
+```
+Open [http://localhost:8080](http://localhost:8080) to view it in the browser.
+
+ 
 
 
 
@@ -12,12 +38,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ### Git Repository
 
-Make sure the following Git Repository is cloned:
-
-1. EZPZOS.Core is on the same level of this project
-   ./EZPZOS.Web
-   ./EZPZOS.Core
-2. You need to run "npm run build" against EZPZOS.Core project  
 
 
 ## Available Scripts
@@ -27,8 +47,6 @@ In the project directory, you can run:
 ### `npm start`
 
 Runs the app in the development mode.\
-Open [http://localhost:8080](http://localhost:8080) to view it in the browser.
-
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
