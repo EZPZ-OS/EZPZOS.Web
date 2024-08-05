@@ -12,6 +12,16 @@ export interface BusienssPageValuesProp {
 		};
 	};
 }
+
+/**
+ * This interface defining the properties for the BusinessHomePageValues
+ * @param DefaultBusinessHomePageValues is an object to store BusienssHomePageMockData values.
+ * @param BusienssHomePageMockData is an object to store mock data including Mock IsLogin boolean value, Mock HomePageButtonList and Mock NotificationList.
+ * @param IsLoggedIn is a boolean to decide if the user is logged in or not.
+ * @param HomePageButtonList is an array to store a list of mock data of Img url and button Title of homepage button,
+ * @param NotificationList is an array to store a list of mock data of notification Title and Content,
+ */
+
 const BusinessHome: React.FC<BusienssPageValuesProp> = ({}) => {
 	return (
 		<div>
