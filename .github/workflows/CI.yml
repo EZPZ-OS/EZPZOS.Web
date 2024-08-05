@@ -6,9 +6,10 @@ on:
     branches: [ main ]
     
 
-job:
-  runs-on: ubuntu-latest
-  steps:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
     - name: Setup node
       uses: actions/setup-node@v4
       with:
