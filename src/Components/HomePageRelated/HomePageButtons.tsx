@@ -5,12 +5,11 @@ const HomePageButtons = (props: any) => {
 				<div className="flex flex-col items-center gap-2 ">
 					<img
 						src={require(`../../Assets/Icons/${props.img}`)}
-						className="w-[70px] h-[80px]
-                   "
+						className="w-[70px] h-[80px]"
 						alt="logo"
 					/>
 
-					<div className="text-white	">{props.title}</div>
+					<div className="text-white">{props.title}</div>
 				</div>
 			</div>
 		</div>
