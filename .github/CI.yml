@@ -1,8 +1,11 @@
 name: Deploy
 on:
   push:
-    branches:
-    - main
+    branches: [main]
+  pull_request:
+    branches: [main]
+    
+
 job:
   steps:
     - name: Setup node
