@@ -9,7 +9,6 @@ import Kitchen from "./pages/Kitchen/Kitchen";
 import LoginSignupPage from "./Pages/LoginOrSignup/LoginOrSignup";
 import OTPPage from "./pages/OTPPage/OTPPage";
 import BusinessHome from "./Pages/Kitchen/BuisnessHome";
-
 const AppRoutes: React.FC = () => (
 	<Routes>
 		<Route path="/" element={<Home />} />
@@ -23,7 +22,7 @@ const AppRoutes: React.FC = () => (
 		<Route path="profile" element={<Profile />} />
 
 		{/* Business Routes */}
-		<Route path="business" element={<BusinessHome />} />
+		<Route path="businesshome" element={<BusinessHome />} />
 		
 	</Routes>
 );

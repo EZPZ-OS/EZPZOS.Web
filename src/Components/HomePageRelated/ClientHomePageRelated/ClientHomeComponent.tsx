@@ -37,6 +37,7 @@ const ClientHomeComponent = (data: ClientHomePageValuesProp) => {
 		</div>
 	);
 
+	console.log(DefaultHomePageValues.LoggedInOpening[0]);
 	const BottomLogo = (
 		<div>
 			<img src={LogoWithName} className="mt-24" alt="logo" />

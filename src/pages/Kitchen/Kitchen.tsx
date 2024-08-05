@@ -1,4 +1,1 @@
-const Kitchen=()=>{
-
-	
-}
+const Kitchen = () => {};
