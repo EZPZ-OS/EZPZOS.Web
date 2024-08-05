@@ -1,4 +1,10 @@
 
+# Devops Instructions
+This **Devops** branch is the main branch for Devops team for aws UAT environment. There is another branch called devops-prod for the aws production environment. 
+
+This **Devops** branch is used for merging from the main branch as long as developers generate a new version on the main branch and it will generate a CI/CD job to AWS UAT environment. 
+
+
 
 # Getting Started with Create React App
 
@@ -13,6 +19,7 @@ Make sure the following Git Repository is cloned:
    ./EZPZOS.Core
 2. You need to run "npm run build" against EZPZOS.Core project  
 
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -20,7 +27,7 @@ In the project directory, you can run:
 ### `npm start`
 
 Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open [http://localhost:8080](http://localhost:8080) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
