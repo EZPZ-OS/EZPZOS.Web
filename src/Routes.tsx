@@ -8,8 +8,7 @@ import Profile from "./pages/Profile/Profile";
 import Kitchen from "./pages/Kitchen/Kitchen";
 import LoginSignupPage from "./Pages/LoginOrSignup/LoginOrSignup";
 import OTPPage from "./pages/OTPPage/OTPPage";
-
-
+import BusinessHome from "./Pages/Kitchen/BuisnessHome";
 const AppRoutes: React.FC = () => (
 	<Routes>
 		<Route path="/" element={<Home />} />
@@ -21,7 +20,10 @@ const AppRoutes: React.FC = () => (
 		<Route path={DafaultMenuRoutesValues.DineInRouteDefaultValue} element={<Menu />} />
 		<Route path={DafaultMenuRoutesValues.TakeAwayRouteDefaultValue} element={<Menu />} />
 		<Route path="profile" element={<Profile />} />
-		<Route path="kitchen" element={<Kitchen />} />
+
+		{/* Business Routes */}
+		<Route path="businesshome" element={<BusinessHome />} />
+		
 	</Routes>
 );
 
