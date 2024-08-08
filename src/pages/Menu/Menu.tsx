@@ -11,6 +11,7 @@ import TopNav from "../../Components/TopNav";
 
 const Menu: React.FC = () => {
 	const location = useLocation();
+	DefaultRestaurantDetails
 	const navigate = useNavigate();
 	const [tableNumber, setTableNumber] = useState<string | null>(null);
 	const [selectedTab, setSelectedTab] = useState<string>(DafaultMenuRoutesValues.DineInDefaultValue);
