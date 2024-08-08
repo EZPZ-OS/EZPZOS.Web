@@ -1,7 +1,6 @@
 import React,{ useState }from 'react'
 import HotSalesCard from './HotSalesCard'
-import { FaChevronRight } from "react-icons/fa";
-import { FaChevronLeft } from "react-icons/fa";
+import { FaChevronLeft,FaChevronRight } from "react-icons/fa";
 /**
  * This is the component of the hotsales, with child component HotSalesCard.
  * Card picture is imported from Images, may need modification later.
@@ -14,13 +13,7 @@ import { FaChevronLeft } from "react-icons/fa";
 export default function HotSales() {
   const [currentLocation,setCurrentLocation] =useState(0)
   const cardsMoveToogle =()=>{
-    if(currentLocation===0){
-      setCurrentLocation(currentLocation+480)
-    }
-    else{
-      setCurrentLocation(0)
-    }
-    
+    currentLocation===0?setCurrentLocation(currentLocation+480):setCurrentLocation(0)
   }
   return (
       <div className="hotSales_text h-[270px] bg-gradient-to-b from-[#FBA96E] to-[#FFCECE78] relative">
@@ -31,7 +24,7 @@ export default function HotSales() {
           <FaChevronLeft className="gradient-icon text-[#d17461] text-[30px]"  />
         </div>
         <span className="font-bold text-[20px]/[30px] ml-[17px]">Hot Sale</span>
-        <span className="text-[14px]/[21px] text-[#4D4D4D] ml-[17px]">80% ccustomer has ordered</span>
+        <span className="text-[14px]/[21px] text-[#4D4D4D] ml-[17px]">80% customer has ordered</span>
         <div className="pl-[10px] mt-[15px] flex w-[1000px] transform transition-transform duration-1000 ]" style={{ transform: `translateX(-${currentLocation}px)` }}>
         <HotSalesCard rank={1} dishName="Stewed beef with potato" like_pc={98} like_qty={1002} price={17.2}/>
         <HotSalesCard rank={2} dishName="Stewed beef with pasta" like_pc={95} like_qty={992} price={25}/>
