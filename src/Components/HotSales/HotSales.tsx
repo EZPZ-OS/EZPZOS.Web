@@ -1,23 +1,28 @@
-import React,{ useState }from 'react'
-import HotSalesCard from './HotSalesCard'
-import { FaChevronLeft,FaChevronRight } from "react-icons/fa";
+import React, { useState } from "react";
+import HotSalesCard from "./HotSalesCard";
+import { FaChevronRight } from "react-icons/fa";
+import { FaChevronLeft } from "react-icons/fa";
 /**
  * This is the component of the hotsales, with child component HotSalesCard.
  * Card picture is imported from Images, may need modification later.
  * Currently , the maximum number of cards is 6 ,which means  at most 6 cards can be added in the hotsales.
  * The function of right button is done and left button is also added.
  * When the card is moved to rightmost/leftmost side, the right/left button is invisible.
- * @returns 
+ * @returns
  */
 
 export default function HotSales() {
-  const [currentLocation,setCurrentLocation] =useState(0)
-  const cardsMoveToogle =()=>{
-    currentLocation===0?setCurrentLocation(currentLocation+480):setCurrentLocation(0)
-  }
-  return (
-      <div className="hotSales_text h-[270px] bg-gradient-to-b from-[#FBA96E] to-[#FFCECE78] relative">
-        <div className='absolute size-[46px] top-[110px] right-[14px] z-50 bg-[#FFF3F3] rounded-full flex justify-center items-center ' style={{display:currentLocation!==0?'none':'flex'}}  onClick={cardsMoveToogle}>
+	const [currentLocation, setCurrentLocation] = useState(0);
+	const cardsMoveToogle = () => {
+		if (currentLocation === 0) {
+			setCurrentLocation(currentLocation + 480);
+		} else {
+			setCurrentLocation(0);
+		}
+	};
+	return (
+		<div className="hotSales_text h-[270px] bg-gradient-to-b from-[#FBA96E] to-[#FFCECE78] relative">
+			<div className='absolute size-[46px] top-[110px] right-[14px] z-50 bg-[#FFF3F3] rounded-full flex justify-center items-center ' style={{display:currentLocation!==0?'none':'flex'}}  onClick={cardsMoveToogle}>
           <FaChevronRight className="gradient-icon text-[#d17461] text-[30px]"  />
         </div>
         <div className='absolute size-[46px] top-[110px] left-[14px] z-50 bg-[#FFF3F3] rounded-full flex justify-center items-center ' style={{display:currentLocation!==0?'flex':'none'}}  onClick={cardsMoveToogle}>
@@ -34,9 +39,108 @@ export default function HotSales() {
         <HotSalesCard rank={6} dishName="Stewed beef with pasta" like_pc={95} like_qty={992} price={25}/>
         
         </div>
-        
-    </div>
-  )
+
+			{/* <div className="flex flex-col m-auto p-auto">
+				<div
+					className="absolute size-[46px] top-[110px] right-[14px] z-50 bg-[#FFF3F3] rounded-full flex justify-center items-center "
+					style={{ display: currentLocation !== 0 ? "none" : "flex" }}
+					onClick={cardsMoveToogle}
+				>
+					<FaChevronRight className="gradient-icon text-[#d17461] text-[30px]" />
+				</div>
+				<div
+					className="absolute size-[46px] top-[110px] left-[14px] z-50 bg-[#FFF3F3] rounded-full flex justify-center items-center "
+					style={{ display: currentLocation !== 0 ? "flex" : "none" }}
+					onClick={cardsMoveToogle}
+				>
+					<FaChevronLeft className="gradient-icon text-[#d17461] text-[30px]" />
+				</div>
+				<div className="flex overflow-x-scroll pb-10 no-scrollbar hide-scroll-bar">
+					<div className="flex flex-nowrap mt-10 lg:ml-40 md:ml-10 ml-2 mr-6">
+						<div className="inline-block px-1">
+							<HotSalesCard
+								rank={1}
+								dishName="Stewed beef with potato"
+								like_pc={98}
+								like_qty={1002}
+								price={17.2}
+							/>
+						</div>
+						<div className="inline-block px-1">
+							<HotSalesCard
+								rank={1}
+								dishName="Stewed beef with potato"
+								like_pc={98}
+								like_qty={1002}
+								price={17.2}
+							/>
+						</div>
+						<div className="inline-block px-1">
+							<HotSalesCard
+								rank={1}
+								dishName="Stewed beef with potato"
+								like_pc={98}
+								like_qty={1002}
+								price={17.2}
+							/>
+						</div>
+						<div className="inline-block px-1">
+							<HotSalesCard
+								rank={1}
+								dishName="Stewed beef with potato"
+								like_pc={98}
+								like_qty={1002}
+								price={17.2}
+							/>
+						</div>
+						<div className="inline-block px-1">
+							<HotSalesCard
+								rank={1}
+								dishName="Stewed beef with potato"
+								like_pc={98}
+								like_qty={1002}
+								price={17.2}
+							/>
+						</div>
+						<div className="inline-block px-1">
+							<HotSalesCard
+								rank={1}
+								dishName="Stewed beef with potato"
+								like_pc={98}
+								like_qty={1002}
+								price={17.2}
+							/>
+						</div>
+						<div className="inline-block px-1">
+							<HotSalesCard
+								rank={1}
+								dishName="Stewed beef with potato"
+								like_pc={98}
+								like_qty={1002}
+								price={17.2}
+							/>
+						</div>
+						<div className="inline-block px-1">
+							<HotSalesCard
+								rank={1}
+								dishName="Stewed beef with potato"
+								like_pc={98}
+								like_qty={1002}
+								price={17.2}
+							/>
+						</div>
+					</div>
+				</div>
+			</div> */}
+			<style>
+				{/* .hide-scroll-bar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
-
-
+.hide-scroll-bar::-webkit-scrollbar {
+  display: none;
+} */}
+			</style>
+		</div>
+	);
+}

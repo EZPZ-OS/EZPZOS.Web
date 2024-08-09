@@ -1,5 +1,5 @@
 import React from 'react'
-import dishImg from '../../Assets/Images/dish.jpeg'
+import dishImg from '../../Assets/Images/dish.png'
 import { LuThumbsUp } from "react-icons/lu";
 import { FaPlus } from "react-icons/fa";
 /**
