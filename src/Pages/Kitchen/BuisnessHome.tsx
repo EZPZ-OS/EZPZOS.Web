@@ -3,9 +3,9 @@ import React from "react";
 import BusinessHomeComponent from "../../Components/HomePageRelated/BusinessHomePageRelated/BusinessHomeComponent";
 import { BusinessHomePageValues } from "ezpzos.core";
 
-export interface BusienssPageValuesProp {
+export interface BusinessPageValuesProp {
 	BusinessHomePageValues: {
-			IsLoggedIn: Boolean;
+			IsLoggedIn: boolean;
 			HomePageButtonList: any[];
 			NotificationList: any[];
 	};
@@ -19,7 +19,7 @@ export interface BusienssPageValuesProp {
  * @param NotificationList is an array to store a list of mock data of notification Title and Content,
  */
 
-const BusinessHome: React.FC<BusienssPageValuesProp> = ({}) => {
+const BusinessHome: React.FC<BusinessPageValuesProp> = ({}) => {
 	return (
 		<div>
 			<div className="flex h-screen w-screen bg-[url('./Assets/Images/MainPageBackgroundImage.png')] bg-cover relative overflow-hidden">
