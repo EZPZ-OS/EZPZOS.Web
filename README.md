@@ -12,6 +12,7 @@ Make sure the following Git Repository is cloned:
     ./EZPZOS.Core
 2. Make sure EZPZOS.Core is reinstall the dependencies. 
 
+Before building web, you NEED to run build EZPZOS.CORE.
 For EZPZOS.Web , you need run npm clear and install to reinstall the dependencies: 
 ```console
 npm ci 
