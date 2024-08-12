@@ -25,20 +25,20 @@ const dish2 = {
 
 
 const categoryToDishes = {
-    'Popular Dishes':[dish1,dish2],
-    'En':[dish2,dish1],
-    'ées':[dish1,dish2],
-    'one':[dish1,dish2],
-    'two':[dish2,dish1],
-    'three':[dish1,dish2],
-    'four':[dish2,dish1],
-    'five':[dish1,dish2],
-    'six':[dish2,dish1],
-    'someRandom':[dish1,dish2],
-    'placeholer':[dish2,dish1]
+    '1Popular Dishes':[dish1,dish2],
+    '2En':[dish2,dish1],
+    '3ées':[dish1,dish2],
+    '4one':[dish1,dish2],
+    '5two':[dish2,dish1],
+    '6three':[dish1,dish2],
+    '7four':[dish2,dish1],
+    '8five':[dish1,dish2],
+    '9six':[dish2,dish1],
+    '9someRandom':[dish1,dish2],
+    '9placeholer':[dish2,dish1]
 }
 
-const cates = Object.keys(categoryToDishes)
+const cates = Object.keys(categoryToDishes).sort()
 
 export default categoryToDishes
 export {cates}
