@@ -1,42 +1,44 @@
 /**
  * @author: Harrison
  */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {CoreMenuDishCard} from './CoreMenu/CoreMenuDishCard'
-import DishImg from "../../Assets/Images/dish.png"; // home
 import CoreMenuHorizontalScroll from './CoreMenu/CoreMenuHorizontalScroll';
+import categoryToDishes, {cates} from './MockCoreMenuData/MockCoreMenuData'
 
 interface CoreMenuProps {
     isDining: boolean;
 }
 
+interface CoreMenuDishProps {
+    name: string,
+    hasSpecialTag: boolean,
+    description: string,
+    tag: string | null,
+    imgPath: string,
+    price: number
+}
+
+interface categoryToDishes {
+    categories: Array<string>,
+    currentActive: string,
+    changeActive: (newActive: string) => void
+    sortCategories: (newActive: Array<string>) => void
+}
 
 
+
+// ! Mock data is imported from './MockCoreMenuData/MockCoreMenuData.js'
 
 const CoreMenu : React.FC<CoreMenuProps> = ({isDining})=>{ 
-
-    const dish1 = {
-        name: "Stewed beef with potatoes",
-        hasSpecialTag: false,
-        description: "This is the description. This is the description.",
-        tag: null,
-        imgPath: DishImg,
-        price: 17.5,
-    };
-
-    const dish2 = {
-        name: "Stewed beef with potatoes",
-        hasSpecialTag: true,
-        description: "This is the description. This is the description.",
-        tag: 'No.1 ordered',
-        imgPath: DishImg,
-        price: 17.5,
-    };
-
-    const cates = ['Popular Dishes', 'En','ées', 'one','two', 'three','four','five','six','someRandom', 'placeholder']
+    
+    // ? useEffect() ?
 
     const [currentActive, setActiveCategory] = useState('Popular Dishes')
     const [currentCategories, setCurrentCategories] = useState(cates)
+    
+    const dishes = categoryToDishes[currentActive as keyof typeof categoryToDishes]
+
 
     return (
         <div className='w-full'>
@@ -48,9 +50,9 @@ const CoreMenu : React.FC<CoreMenuProps> = ({isDining})=>{
             </div>
             
             <div className='w-full flex flex-col items-center'>
-                {/* // TODO: dish list. Shoule change with the horizontal bar */}
-                <CoreMenuDishCard {...dish1}/>
-                <CoreMenuDishCard {...dish2}/>
+                {Array.isArray(dishes) && dishes.map((dish: CoreMenuDishProps, index: number)=>(
+                    <CoreMenuDishCard key={index} {...dish}/>
+                ))}
             </div>
 
         </div>
