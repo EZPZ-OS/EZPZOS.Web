@@ -1,3 +1,6 @@
+/**
+ * @author: Harrison
+ */
 import React from 'react';
 
 /**
@@ -7,7 +10,7 @@ import React from 'react';
  */
 
 export const AddButton : React.FC = ()=>{
-    
+    // TODO: add router to dish detail page
     return(
         <button className='flex items-center justify-center w-[33px] h-[33px] text-white text-4xl bg-gradient-to-r from-orange-500 to-red-600 rounded-full '>
             +

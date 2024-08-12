@@ -1,3 +1,6 @@
+/**
+ * @author: Harrison
+ */
 import React from "react";
 import { useNavigate } from "react-router-dom";
 // import { RiHome2Line } from "react-icons/ri"; // discarded home icon

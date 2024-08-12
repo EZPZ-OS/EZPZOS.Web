@@ -1,3 +1,6 @@
+/**
+ * @author: Harrison
+ */
 import React, { useState } from 'react';
 import {CoreMenuDishCard} from './CoreMenu/CoreMenuDishCard'
 import DishImg from "../../Assets/Images/dish.png"; // home
@@ -30,9 +33,10 @@ const CoreMenu : React.FC<CoreMenuProps> = ({isDining})=>{
         price: 17.5,
     };
 
-    const cates = ['Popular Dishes', 'En','ées', 'Entrées','Entrées', 'Entrées','Entrées']
+    const cates = ['Popular Dishes', 'En','ées', 'one','two', 'three','four','five','six','someRandom', 'placeholder']
 
     const [currentActive, setActiveCategory] = useState('Popular Dishes')
+    const [currentCategories, setCurrentCategories] = useState(cates)
 
     return (
         <div className='w-full'>
@@ -40,7 +44,7 @@ const CoreMenu : React.FC<CoreMenuProps> = ({isDining})=>{
                  {/* // TODO: horizontal scroll bar. */}
                  {/* // TODO: Tie the dishes up with the category.  display in this way  dishes[barActiveCategory]. 注意子(barActiveCategory)传父,再 给下面的list子用 */}
                  Here is horizontal scroll bar placeholder.
-                 <CoreMenuHorizontalScroll categories={cates} currentActive={currentActive} changeActive={setActiveCategory}/>
+                 <CoreMenuHorizontalScroll categories={currentCategories} currentActive={currentActive} changeActive={setActiveCategory} sortCategories={setCurrentCategories}/>
             </div>
             
             <div className='w-full flex flex-col items-center'>
