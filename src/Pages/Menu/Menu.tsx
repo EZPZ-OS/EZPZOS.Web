@@ -6,28 +6,28 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import TopPopUpToast from "../../Components/MenuList/TopPopUpToast";
 import MenuTab from "../../Components/MenuList/MenuTab";
-import { DafaultMenuRoutesValues, DefaultRestaurantDetails } from "ezpzos.core";
+import { DefaultMenuRoutesValues, DefaultRestaurantDetails } from "ezpzos.core";
 import TopNav from "../../Components/TopNav";
 
 const Menu: React.FC = () => {
 	const location = useLocation();
-	DefaultRestaurantDetails
+	DefaultRestaurantDetails;
 	const navigate = useNavigate();
 	const [tableNumber, setTableNumber] = useState<string | null>(null);
-	const [selectedTab, setSelectedTab] = useState<string>(DafaultMenuRoutesValues.DineInDefaultValue);
+	const [selectedTab, setSelectedTab] = useState<string>(DefaultMenuRoutesValues.DineInDefaultValue);
 
 	//to extract the tablenumber from /scan page
 	useEffect(() => {
 		const params = new URLSearchParams(location.search);
-		const tableNumber = params.get(DafaultMenuRoutesValues.TableNumberDefaultValue);
+		const tableNumber = params.get(DefaultMenuRoutesValues.TableNumberDefaultValue);
 		setTableNumber(tableNumber);
 
-		if (location.pathname.includes(DafaultMenuRoutesValues.DineInRouteDefaultValue)) {
-			setSelectedTab(DafaultMenuRoutesValues.DineInDefaultValue);
-			showToast(DafaultMenuRoutesValues.DineInToastDefaultValue);
-		} else if (location.pathname.includes(DafaultMenuRoutesValues.TakeAwayRouteDefaultValue)) {
-			setSelectedTab(DafaultMenuRoutesValues.TakeAwayDefaultValue);
-			showToast(DafaultMenuRoutesValues.TakeAwayToastDefaultValue);
+		if (location.pathname.includes(DefaultMenuRoutesValues.DineInRouteDefaultValue)) {
+			setSelectedTab(DefaultMenuRoutesValues.DineInDefaultValue);
+			showToast(DefaultMenuRoutesValues.DineInToastDefaultValue);
+		} else if (location.pathname.includes(DefaultMenuRoutesValues.TakeAwayRouteDefaultValue)) {
+			setSelectedTab(DefaultMenuRoutesValues.TakeAwayDefaultValue);
+			showToast(DefaultMenuRoutesValues.TakeAwayToastDefaultValue);
 		}
 	}, [location.search, location.pathname]);
 
@@ -53,12 +53,12 @@ const Menu: React.FC = () => {
 				onCallStaff={handleCallStaff}
 			/>
 			<div className="w-full mt-4">
-				{selectedTab === DafaultMenuRoutesValues.DineInDefaultValue && (
+				{selectedTab === DefaultMenuRoutesValues.DineInDefaultValue && (
 					<>
 						<MenuTab tableNumber={tableNumber} selectedTab={selectedTab} />
 					</>
 				)}
-				{selectedTab === DafaultMenuRoutesValues.TakeAwayDefaultValue && (
+				{selectedTab === DefaultMenuRoutesValues.TakeAwayDefaultValue && (
 					<>
 						<MenuTab tableNumber={tableNumber} selectedTab={selectedTab} />
 					</>
