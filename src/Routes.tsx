@@ -8,6 +8,8 @@ import Profile from "./pages/Profile/Profile";
 import Kitchen from "./pages/Kitchen/Kitchen";
 import LoginPage from "./pages/Login/LoginPage";
 import SignUpPage from "./pages/SignUp/SignupPage";
+import DishDetail from "./Components/MenuList/DishDetail"
+
 
 const AppRoutes: React.FC = () => (
 	<Routes>
@@ -18,6 +20,7 @@ const AppRoutes: React.FC = () => (
 		<Route path={DafaultMenuRoutesValues.DineInRouteDefaultValue} element={<Menu />} />
 		<Route path={DafaultMenuRoutesValues.TakeAwayRouteDefaultValue} element={<Menu />} />
 		<Route path="profile" element={<Profile />} />
+		<Route path="dishDetail" element={<DishDetail />} />
 
 		{/* Business Routes */}
 		<Route path="kitchen" element={<Kitchen />} />

@@ -12,6 +12,9 @@ const dish1 = {
     tag: null,
     imgPath: DishImg,
     price: 17.5,
+    // ! This path field is just a placeholder for dish detail card. For more info, please read the comment of the file:
+    // !      'src/Components/MenuList/DishDetail.tsx'
+    dishDetailPath: '../DishDetail' 
 };
 
 const dish2 = {
@@ -21,6 +24,7 @@ const dish2 = {
     tag: 'No.1 ordered',
     imgPath: DishImg2,
     price: 17.5,
+    dishDetailPath: '../DishDetail'
 };
 
 

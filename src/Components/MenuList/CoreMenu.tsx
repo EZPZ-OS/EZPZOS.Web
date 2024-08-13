@@ -16,7 +16,8 @@ interface CoreMenuDishProps {
     description: string,
     tag: string | null,
     imgPath: string,
-    price: number
+    price: number,
+    dishDetailPath: string //'./a/path/to/dish/detail/card'
 }
 
 interface categoryToDishes {
@@ -43,10 +44,7 @@ const CoreMenu : React.FC<CoreMenuProps> = ({isDining})=>{
     return (
         <div className='w-full'>
             <div>
-                 {/* // TODO: horizontal scroll bar. */}
-                 {/* // TODO: Tie the dishes up with the category.  display in this way  dishes[barActiveCategory]. 注意子(barActiveCategory)传父,再 给下面的list子用 */}
-                 Here is horizontal scroll bar placeholder.
-                 <CoreMenuHorizontalScroll categories={currentCategories} currentActive={currentActive} changeActive={setActiveCategory} sortCategories={setCurrentCategories}/>
+                <CoreMenuHorizontalScroll categories={currentCategories} currentActive={currentActive} changeActive={setActiveCategory} sortCategories={setCurrentCategories}/>
             </div>
             
             <div className='w-full flex flex-col items-center'>

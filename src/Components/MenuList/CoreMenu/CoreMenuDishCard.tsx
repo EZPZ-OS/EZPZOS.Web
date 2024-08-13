@@ -14,7 +14,8 @@ interface CoreMenuDishProps {
     description: string,
     tag: string | null,
     imgPath: string,
-    price: number
+    price: number,
+    dishDetailPath: string  //'./a/path/to/dish/detail/card'
 }
 
 /**
@@ -29,7 +30,7 @@ interface CoreMenuDishProps {
  * @returns 
  */
 
-export const CoreMenuDishCard : React.FC<CoreMenuDishProps> = ({name, hasSpecialTag, tag,description, imgPath, price})=>{
+export const CoreMenuDishCard : React.FC<CoreMenuDishProps> = ({name, hasSpecialTag, tag,description, imgPath, price, dishDetailPath})=>{
 
     // console.log(name);
     return (
@@ -51,7 +52,7 @@ export const CoreMenuDishCard : React.FC<CoreMenuDishProps> = ({name, hasSpecial
                 {/* price + button */}
                 <div className='flex justify-between items-center w-full h-[33px]'>
                     <span className=''>{`$${price}`}</span>
-                    <AddButton /> 
+                    <AddButton dishDetailPath={dishDetailPath}  /> 
                 </div>
             </div>
         </div>
