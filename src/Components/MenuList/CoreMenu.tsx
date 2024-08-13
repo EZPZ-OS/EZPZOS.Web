@@ -34,7 +34,7 @@ const CoreMenu : React.FC<CoreMenuProps> = ({isDining})=>{
     
     // ? useEffect() ?
 
-    const [currentActive, setActiveCategory] = useState('Popular Dishes')
+    const [currentActive, setActiveCategory] = useState(cates[0])
     const [currentCategories, setCurrentCategories] = useState(cates)
     
     const dishes = categoryToDishes[currentActive as keyof typeof categoryToDishes]
