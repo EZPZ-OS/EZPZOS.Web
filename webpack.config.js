@@ -30,7 +30,7 @@ module.exports = {
 	],
 	resolve: {
 		modules: [__dirname, "src", "node_modules"],
-		extensions: ["*", ".js", ".jsx", ".tsx", ".ts"],
+		extensions: [".*", ".js", ".jsx", ".tsx", ".ts"],
 		fallback: {
 			url: require.resolve("url"),
 			fs: require.resolve("graceful-fs"),
