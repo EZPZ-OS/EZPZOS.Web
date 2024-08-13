@@ -45,7 +45,8 @@ export const CoreMenuDishCard : React.FC<CoreMenuDishProps> = ({name, hasSpecial
                 
                 {/* hasSpecialTag ? tag : null */}
                 {hasSpecialTag? <p className='bg-gradient-to-r from-pink-500 to-orange-500 text-white px-[3px] py-[1px] text-[14px] rounded-[2px] h-[18px] leading-[18px]'>{tag}</p>
-                : null}
+                : <div className='h-[18px] leading-[18px]'> </div>}
+        
                 
                 {/* description */}
                 <p className='text-sm font-normal leading-[21px] text-left'>{description} </p>
