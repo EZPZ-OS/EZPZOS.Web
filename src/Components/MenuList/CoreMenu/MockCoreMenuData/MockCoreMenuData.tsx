@@ -2,8 +2,8 @@
  * @author: Harrison
  */
 import React from 'react'
-import DishImg from "../../../Assets/Images/dish.png";
-import DishImg2 from "../../../Assets/Images/dish2.png";
+import DishImg from "../../../../Assets/Images/dish.png";
+import DishImg2 from "../../../../Assets/Images/dish2.png";
 
 const dish1 = {
     name: "Stewed beef with potatoes",

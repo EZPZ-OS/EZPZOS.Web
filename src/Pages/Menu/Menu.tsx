@@ -9,7 +9,7 @@ import MenuTab from "../../Components/MenuList/MenuTab";
 import { DefaultMenuRoutesValues, DefaultRestaurantDetails } from "ezpzos.core";
 import TopNav from "../../Components/TopNav";
 import MenuHotSaleCard from "../../Components/MenuList/MenuHotSaleCard";
-import CoreMenu from '../../Components/MenuList/CoreMenu'
+import CoreMenu from '../../Components/MenuList/CoreMenu/CoreMenu'
 
 const Menu: React.FC = () => {
 	const location = useLocation();

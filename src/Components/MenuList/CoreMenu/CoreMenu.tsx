@@ -2,9 +2,9 @@
  * @author: Harrison
  */
 import React, { useEffect, useState } from 'react';
-import {CoreMenuDishCard} from './CoreMenu/CoreMenuDishCard/CoreMenuDishCard'
-import CoreMenuHorizontalScroll from './CoreMenu/CoreMenuHorizontalScroll/CoreMenuHorizontalScroll';
-import categoryToDishes, {cates} from './CoreMenu/MockCoreMenuData/MockCoreMenuData'
+import {CoreMenuDishCard} from './CoreMenuDishCard/CoreMenuDishCard'
+import CoreMenuHorizontalScroll from './CoreMenuHorizontalScroll/CoreMenuHorizontalScroll';
+import categoryToDishes, {cates} from './MockCoreMenuData/MockCoreMenuData'
 
 interface CoreMenuProps {
     isDining: boolean;
