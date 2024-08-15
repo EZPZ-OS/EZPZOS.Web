@@ -8,6 +8,7 @@ import Profile from "./Pages/Profile/Profile";
 import LoginSignupPage from "./Pages/LoginOrSignup/LoginOrSignup";
 import OTPPage from "./Pages/OTPPage/OTPPage";
 import BusinessHome from "./Pages/Kitchen/BuisnessHome";
+import PastOrder from "./Pages/PastOrder/PastOrder";
 const AppRoutes: React.FC = () => (
 	<Routes>
 		<Route path="/" element={<Home />} />
@@ -19,6 +20,7 @@ const AppRoutes: React.FC = () => (
 		<Route path={DefaultMenuRoutesValues.DineInRouteDefaultValue} element={<Menu />} />
 		<Route path={DefaultMenuRoutesValues.TakeAwayRouteDefaultValue} element={<Menu />} />
 		<Route path="profile" element={<Profile />} />
+		<Route path="pastorder" element={<PastOrder />} />
 
 		{/* Business Routes */}
 		<Route path="businesshome" element={<BusinessHome BusinessHomePageValues={{IsLoggedIn:true, HomePageButtonList:[],NotificationList:[]}}/>} />
