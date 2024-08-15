@@ -2,6 +2,8 @@ import React from 'react'
 import dishImg from '../../Assets/Images/dish.png'
 import { LuThumbsUp } from "react-icons/lu";
 import { FaPlus } from "react-icons/fa";
+import { DefaultHotSaleValues } from "ezpzos.core";
+
 /**
  * This is the HotSalesCard component,including properties of each card which is listed below.
  * 
@@ -17,7 +19,7 @@ export default function HotSalesCard(props:{rank:number,dishName:string,like_pc:
   return (
     <div className="w-[146px] h-[205px] bg-white rounded-[7px] relative ml-[5px]">
       <div className="w-[48px] h-[21px] bg-[#fbe6bb] rounded-tl-[7px] rounded-br-[7px] flex justify-center items-center absolute">
-        <span className='text-[14px]/[21px] '>TOP{props.rank}</span>
+        <span className='text-[14px]/[21px] '>{DefaultHotSaleValues.DefaultTag}{props.rank}</span>
       </div>
       <div className="ml-[5px]">
       <div className="w-[135px] h-[110px]   pt-[5px] text-[#4D4D4D] text-[14px] leading-[21px]">
