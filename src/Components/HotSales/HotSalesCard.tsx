@@ -25,7 +25,7 @@ export default function HotSalesCard(props:{rank:number,dishName:string,like_pc:
       <div className="w-[135px] h-[110px]   pt-[5px] text-[#4D4D4D] text-[14px] leading-[21px]">
         <img src={dishImg} alt="this is the pictuire of hot sales" className='w-[135px] h-[110px]'/>
         <div className="  leading-[14px] mt-[5px] font-bold">{props.dishName}</div>
-        <div className=" font-semibold"><LuThumbsUp className=" inline-block"/><span className="ml-[5px]">{props.like_pc}%({props.like_qty})</span></div>
+        <div className=" font-normal"><LuThumbsUp className=" inline-block"/><span className="ml-[5px]">{props.like_pc}%({props.like_qty})</span></div>
         <div className=''>${props.price}</div>
         <div className='absolute right-[5px] bottom-[5px] w-[30px] h-[30px] bg-gradient-to-t from-[#cd4e23] to-[#f29d50] rounded-full flex justify-center items-center'><FaPlus className="text-white text-[20px]"/></div>
       </div>
