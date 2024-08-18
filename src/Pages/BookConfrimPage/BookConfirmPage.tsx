@@ -7,13 +7,43 @@ import Switch from 'react-switch'
 import { DefaultBookConfirmationValues, BookConfirmInfo } from "ezpzos.core";
 
 const BookConfirmPage = () => {
+    const [phoneNumber, setPhoneNumber] = useState('')
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [notesValue, setNotesValue] = useState('')
+
     const [textUpdateVal, setTextUpdateVal] = useState(true)
     const [receiveOfferVal, setReceiveOfferVal] = useState(true)
+
+    const handlePhoneNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const { value } = event.target;
+        if (/^[0-9]$/.test(value)) {
+            setPhoneNumber(value)
+		}
+    }
+
+    const handleFirstName = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const { value } = event.target;
+        setFirstName(value);
+    }
+    const handleLastName = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const { value } = event.target;
+        setLastName(value);
+    }
+    const handleNotes = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const { value } = event.target;
+        setNotesValue(value);
+    }
+
     const handleTextUpdateChange = (checked: boolean) => {
         setTextUpdateVal(checked)
     }
     const handleReceiveOfferChange = (checked: boolean) => {
         setReceiveOfferVal(checked)
+    }
+
+    const handleContinue = () => {
+        // request api
     }
 
     return (
@@ -48,23 +78,23 @@ const BookConfirmPage = () => {
                     <h2 className="font-bold">{DefaultBookConfirmationValues.PhoneText}</h2>
                     <div className="flex flex-row bg-[#D7D7D7] rounded-md">
                         <span className="w-16 h-8 leading-8 text-center bg-[#C0C0C0] color-[#422626] rounded-md">{DefaultBookConfirmationValues.CodeText}</span>
-                        <input className="h-8 bg-[#D7D7D7] px-2 outline-transparent" placeholder={DefaultBookConfirmationValues.PhonePlaceHolder} />
+                        <input className="h-8 bg-[#D7D7D7] px-2 outline-transparent" placeholder={DefaultBookConfirmationValues.PhonePlaceHolder} onChange={event => handlePhoneNumber(event)}/>
                     </div>
                 </section>
                 <section className="ml-4 mr-4 mt-3 flex flex-column justify-between">
                     <div className="flex flex-col">
                         <h2 className="font-bold">{DefaultBookConfirmationValues.FirstNameText}</h2>
-                        <input className="h-8 bg-[#D7D7D7] outline-transparent rounded-md"/>
+                        <input className="h-8 bg-[#D7D7D7] outline-transparent rounded-md" onChange={event => handleFirstName(event)}/>
                     </div>
                     <div className="flex flex-col">
                         <h2 className="font-bold">{DefaultBookConfirmationValues.LastNameText}</h2>
-                        <input className="h-8 bg-[#D7D7D7] outline-transparent rounded-md"/>
+                        <input className="h-8 bg-[#D7D7D7] outline-transparent rounded-md" onChange={event => handleLastName(event)}/>
                     </div>
                 </section>
                 <section className="ml-4 mr-4 mt-3">
                     <div className="flex flex-col">
                         <h2 className="font-bold">{DefaultBookConfirmationValues.NotesText}</h2>
-                        <textarea className="h-8 bg-[#D7D7D7] outline-transparent rounded-md px-1"></textarea>
+                        <textarea className="h-8 bg-[#D7D7D7] outline-transparent rounded-md px-1" onChange={event => handleNotes(event)}></textarea>
                     </div>
                 </section>
                 <section className="ml-4 mr-4 mt-3 flex flex-row justify-between items-center">
@@ -76,7 +106,7 @@ const BookConfirmPage = () => {
                     <Switch onChange={handleReceiveOfferChange} checked={receiveOfferVal} uncheckedIcon={false} checkedIcon={false} width={45} height={19} onColor={'#EF9D52'} offHandleColor={'#D9D9D9'}/>
                 </section>
                 <section className="w-[calc(100%_-_30px)] m-auto mt-3 h-1 bg-[#E2DEDE]"></section>
-                <section className="w-[288px] h-10 leading-10 text-white text-center bg-orange-gradient m-auto mt-4 mb-4 rounded-xl">{DefaultBookConfirmationValues.BtnText}</section>
+                <section className="w-[288px] h-10 leading-10 text-white text-center bg-orange-gradient m-auto mt-4 mb-4 rounded-xl" onClick={handleContinue}>{DefaultBookConfirmationValues.BtnText}</section>
             </div>
         </div>
     )

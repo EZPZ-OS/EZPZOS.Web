@@ -9,11 +9,9 @@ import LoginSignupPage from "./Pages/LoginOrSignup/LoginOrSignup";
 import OTPPage from "./Pages/OTPPage/OTPPage";
 import BusinessHome from "./Pages/Kitchen/BuisnessHome";
 import PastOrder from "./Pages/PastOrder/PastOrder";
-import BookConfirmPage from "./pages/BookConfrimPage/BookConfirmPage";
 const AppRoutes: React.FC = () => (
 	<Routes>
-		{/* <Route path="/" element={<Home />} /> */}
-		<Route path="/" element={<BookConfirmPage />} />
+		<Route path="/" element={<Home />} />
 		<Route path="signup" element={<LoginSignupPage  isLogin={false}  />} />
 		<Route path="login" element={<LoginSignupPage isLogin={true} />} />
 		<Route path="otp" element={<OTPPage />} />
