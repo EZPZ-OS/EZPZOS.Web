@@ -51,7 +51,7 @@ const UserSignupForm: React.FC<UserSignupFormProps> = ({otpToken }) => {
 			}
 		} catch (error: any) {
 			// Handle errors that occur during the request
-			type StatusCodes = 401 | 403 | 409 | 500;
+			type StatusCodes = 401 | 403 | 404 | 409 | 422 | 500;
 			const status = error.response?.status as StatusCodes | undefined;
 
 			// Handle error message depending on the status code
