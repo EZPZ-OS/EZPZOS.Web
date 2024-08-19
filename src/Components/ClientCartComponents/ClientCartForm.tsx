@@ -3,7 +3,7 @@ import {Link, useNavigate} from "react-router-dom";
 import {AiOutlineDelete, AiOutlineGift} from "react-icons/ai";
 import { IoAddOutline } from "react-icons/io5";
 import { GrNext } from "react-icons/gr";
-import {ClientCartDemoData, Cuisine, DemoVoucher} from "./ClientCartDemoData";
+import {ClientCartDemoData, Cuisine, DemoVoucher} from "ezpzos.core"
 
 const ClientCartForm: React.FC = () => {
     const [cuisines, setCuisines] = useState<Cuisine[]>(ClientCartDemoData);
