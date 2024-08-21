@@ -10,6 +10,7 @@ import OTPPage from "./Pages/OTPPage/OTPPage";
 import BusinessHome from "./Pages/Kitchen/BuisnessHome";
 import ClientCartPage from "./Pages/ClientCart/ClientCartPage";
 import PastOrder from "./Pages/PastOrder/PastOrder";
+
 const AppRoutes: React.FC = () => (
 	<Routes>
 		<Route path="/" element={<Home />} />

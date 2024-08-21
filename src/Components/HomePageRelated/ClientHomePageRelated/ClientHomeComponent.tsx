@@ -1,4 +1,4 @@
-import { ClientHomePageValuesProp } from "../../../pages/Home";
+import { ClientHomePageValuesProp } from "../../../Pages/Home";
 import { DefaultHomePageValues } from "ezpzos.core";
 import Logo from "../../../Assets/Images/Logo.png";
 import ClientAvatar from "../../../Assets/Icons/ClientAvatar.png";
@@ -54,7 +54,7 @@ const ClientHomeComponent = (data: ClientHomePageValuesProp) => {
 
 	const notLoggedInSignInButton = (
 		<div className="flex-col">
-			<Link to="signup">
+			<Link to="login">
 				<button className="h-[50px] w-[370px] rounded-lg mt-14 text-[#FFFFFF] text-xl bg-gradient-to-r from-[#FFB682F5] via-[#F8A27AF5] to-[#F28C83F5]">
 					{DefaultHomePageValues.NotLoggedInSignInButton.SignInButtonDefualtValue}
 				</button>
@@ -63,8 +63,8 @@ const ClientHomeComponent = (data: ClientHomePageValuesProp) => {
 				<span className=" text-[#dcdcdcbb] ">
 					{DefaultHomePageValues.NotLoggedInSignInButton.OfferSignUpDefaultValue}
 				</span>
-				<Link to="" className="font-bold text-[#dcdcdcbb] ">
-					{DefaultHomePageValues.NotLoggedInSignInButton.SignUpButtonDefualtValue}
+				<Link to="signup" className="font-bold text-[#dcdcdcbb] ">
+					{DefaultHomePageValues.NotLoggedInSignInButton.SignUpButtonDefaultValue}
 				</Link>
 			</div>
 		</div>
