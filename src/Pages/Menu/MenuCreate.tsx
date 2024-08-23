@@ -121,7 +121,7 @@ const MenuCreate: React.FC = () => {
           <div>
             <label className="block text-gray-700">{DefaultMenuCreateValues.Labels.DishPrice}</label>
             <input
-              type="text"
+              type="number"
               className="w-full px-3 py-2 border border-gray-300 rounded bg-gray-100"
               value={dishPrice}
               onChange={(e) => setDishPrice(e.target.value)}
