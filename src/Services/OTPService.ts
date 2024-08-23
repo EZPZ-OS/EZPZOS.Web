@@ -1,5 +1,5 @@
-import apiClient from "../../Utils/axiosConfig";
-import { LogHandler, LogLevel } from "ezpzos.core";
+import apiClient from "../Utils/axiosConfig";
+import { LogHandler, LogLevel, OTPType } from "ezpzos.core";
 
 const logger = new LogHandler("OTPService.tsx");
 
@@ -25,13 +25,14 @@ export const handleSendOTP = async (mobileNumber: string | null) => {
 export const handleCompleteOTP = async (
 	mobileNumber: string | null,
 	otp: string,
-	onComplete: (otpToken: string, exp: number) => void
+	otpType: OTPType | null,
+	onComplete: (otpToken: string, exp: number, otpTarget: OTPType) => void
 ) => {
 	try {
-		const response = await apiClient.post("/otp/verify-otp", { mobile: mobileNumber, otp });
+		const response = await apiClient.post("/otp/verify-otp", { mobile: mobileNumber, otp, otpType });
 		if (response.status === 200) {
-			const { otpToken, exp } = response.data;
-			onComplete(otpToken, exp); // Pass the token and jwt exp back to the caller
+			const { otpToken, exp, otpTarget } = response.data;
+			onComplete(otpToken, exp, otpTarget); // Pass the token, jwt exp and otpTarget back to the caller
 		} else if (response.status === 400) {
 			logger.Log("OTPService", "Failed to verify OTP", LogLevel.WARN);
 			throw new Error("Invalid or expired OTP. Please try again.");

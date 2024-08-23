@@ -1,14 +1,16 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoCloseOutline } from "react-icons/io5";
-import { handleSendOTP, handleCompleteOTP } from "./OTPService";
+import { handleSendOTP, handleCompleteOTP } from "../../Services/OTPService";
+import { OTPType } from "ezpzos.core";
 
 interface OTPFormProps {
-	MobileNumber?: string | null;
-	onComplete: (otpToken: string, exp: number) => void;
+	MobileNumber: string | null;
+	otpType: OTPType | null;
+	onComplete: (otpToken: string, exp: number, otpTarget: OTPType) => void;
 }
 
-const OTPForm: React.FC<OTPFormProps> = ({ MobileNumber, onComplete }) => {
+const OTPForm: React.FC<OTPFormProps> = ({ MobileNumber, otpType, onComplete }) => {
 	const navigate = useNavigate();
 	const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
 	const [pin, setPin] = useState<string[]>(Array(6).fill(""));
@@ -56,8 +58,7 @@ const OTPForm: React.FC<OTPFormProps> = ({ MobileNumber, onComplete }) => {
 	const onCompleteOTP = async () => {
 		try {
 			const otp = pin.join("");
-			await handleCompleteOTP(MobileNumber || "", otp, onComplete);
-			console.log("otp pin", { otp });
+			await handleCompleteOTP(MobileNumber || "", otp, otpType, onComplete);
 		} catch (error) {
 			if (error instanceof Error) {
 				setErrorMessage(error.message);

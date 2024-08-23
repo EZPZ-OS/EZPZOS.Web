@@ -1,24 +1,33 @@
-import { DefaultLoginSignupValues } from "ezpzos.core";
+import { DefaultLoginSignupValues, OTPType } from "ezpzos.core";
 import { useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../../Store";
+import { useSelector, useDispatch } from "react-redux";
+import { login } from "../../Store/AuthSlice";
+import { RootState } from "../../Store/Store";
 import { useNavigate } from "react-router-dom";
 import { PhoneNumberNormalizer, LogHandler, LogLevel } from "ezpzos.core";
+import { AuthService } from "../../Services/AuthService";
 import AlertTag from "../AlertTag";
-import apiClient from "../../Utils/axiosConfig";
+
+/**
+ * This interface defining the properties for the UserSignupFormProp
+ * @param otpToken pass the otpToken from LoginOrSignup page received from otpPage after mobile verification to indicate the success
+ * @param otpTarget pass the otpTarget from LoginOrSignup page received from otpPage to indicate either the otp is for signup/login
+ */
 
 interface UserSignupFormProps {
 	otpToken?: string | null;
+	otpTarget: OTPType | null;
 }
 
 const logger = new LogHandler("UserSignupForm.tsx");
 
-const UserSignupForm: React.FC<UserSignupFormProps> = ({otpToken }) => {
+const UserSignupForm: React.FC<UserSignupFormProps> = ({ otpToken, otpTarget }) => {
 	const [username, setUsername] = useState<string>("");
 	const [email, setEmail] = useState<string>("");
 	const [showSuccess, setShowSuccess] = useState<boolean>(false); // State to manage the success alert
 	const [showError, setShowError] = useState<{ visible: boolean; message?: string }>({ visible: false }); // State to manage the error alert
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	//Select the mobileNumber saved in Redux authState to display in the input field
 	const mobileNumber = useSelector((state: RootState) => state.auth.mobileNumber);
@@ -31,38 +40,28 @@ const UserSignupForm: React.FC<UserSignupFormProps> = ({otpToken }) => {
 	const handleSubmit = async (event: React.FormEvent) => {
 		event.preventDefault(); // Prevent the default form submission behavior
 
-		//submit user's detail to backend API to create a new user
-		try {
-			const response = await apiClient.post(`/auth/signup?token=${otpToken}`, {
-				username,
-				email,
-				mobile: normalizedMobile
-			});
-			if (response.status === 201) {
-				const { token: newToken } = response.data;
-				// Save the token to localStorage
-				localStorage.setItem("authToken", newToken);
-				logger.Log("signup", "User created successfully", LogLevel.INFO);
-				setShowSuccess(true); //show the success message
-				setTimeout(() => {
-					setShowSuccess(false);
-					navigate("/"); // Navigate to home after the success message is hidden
-				}, 3000);
-			}
-		} catch (error: any) {
-			// Handle errors that occur during the request
-			type StatusCodes = 401 | 403 | 404 | 409 | 422 | 500;
-			const status = error.response?.status as StatusCodes | undefined;
+		const result = await AuthService.signupRequest(otpToken, username, email, normalizedMobile, otpTarget);
 
-			// Handle error message depending on the status code
-			const errorMessage =
-				DefaultLoginSignupValues.UserSignupFormDefaultValue.ErrorMessages[status as StatusCodes] ||
-				DefaultLoginSignupValues.UserSignupFormDefaultValue.ErrorMessages.default;
-
-			logger.Log("signup", errorMessage, LogLevel.ERROR);
-
-			//show error message in the alert tag
-			setShowError({ visible: true, message: errorMessage });
+		if (result.success && result.token) {
+			logger.Log("Signup", "Created user successfully", LogLevel.INFO);
+			// Dispatch the token to activate login state in Redux
+			dispatch(login(result.token)); 
+			setShowSuccess(true); // Show the success message
+			setTimeout(() => {
+				setShowSuccess(false);
+				navigate("/"); // Navigate to home after the success message is hidden
+			}, 3000);
+		} else if (result) {
+			// Show error message in the alert tag
+			setShowError({ visible: true, message: result.message || "An error occurred." });
+			setTimeout(() => {
+				setShowError({ visible: false });
+				navigate("/"); // Navigate to home after the error message is hidden
+			}, 3000);
+		} else {
+			// Handle unexpected undefined result
+			logger.Log("Signup", "An unexpected error occurred.", LogLevel.ERROR);
+			setShowError({ visible: true, message: "An unexpected error occurred." });
 			setTimeout(() => {
 				setShowError({ visible: false });
 				navigate("/"); // Navigate to home after the error message is hidden
