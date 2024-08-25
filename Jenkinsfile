@@ -22,6 +22,26 @@ pipeline {
                 }
             }
         }
+        stage('Package') {
+            steps {
+                script {
+                    docker.image('node:18').inside("-v /tmp/jenkins/workspace:/tmp/jenkins/workspace:rw,z") {
+                        echo "Cloning core repository with credentials..."
+                        dir('../EZPZOS.Core') {
+                            git branch: 'main', credentialsId: "${GIT_CREDENTIALS_ID}", url: "${CORE_REPO_URL}"
+                            sh 'npm install'
+                            sh 'npm run build'
+                        }
+                        
+                        echo "Building the React app..."
+                        sh 'npm install Buffer'
+                        sh 'npm install'
+                        sh 'npm run build'
+                        sh 'ls -la'
+                    }
+                }
+            }
+        }
         stage('Upload to UAT S3') {
             steps {
                 script {
