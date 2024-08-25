@@ -1,6 +1,5 @@
 pipeline {
     agent { label 'amazon-linux' }
-
     environment {
         UAT_BUCKET = 'uat-neo-s3-well-sponge'
         PROD_BUCKET = 'prd-neo-s3-active-pangolin'
@@ -9,7 +8,6 @@ pipeline {
         UAT_AWS_CREDENTIALS_ID = 'uat-aws-jenkins-user-credentials' // Jenkins中配置的AWS凭证ID
         PROD_AWS_CREDENTIALS_ID = 'prod-aws-jenkins-user-credentials' // Jenkins中配置的AWS凭证ID
     }
-
     stages {
         stage('Print Agent Info') {
             steps {
