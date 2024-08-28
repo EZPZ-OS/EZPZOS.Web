@@ -4,10 +4,10 @@ import WelcomeMessage from "../../Components/LoginOrSignup/WelcomeMessage";
 import ContactForm from "../../Components/LoginOrSignup/ContactForm";
 import Policy from "../../Components/LoginOrSignup/Policy";
 import UserSignupForm from "../../Components/LoginOrSignup/UserSignupForm";
-import { setOTPVerified } from "../../Components/Auth/AuthSlice";
+import { setOTPVerified } from "../../Store/AuthSlice";
 import { RiCloseLargeLine } from "react-icons/ri";
 import { Link, useLocation } from "react-router-dom";
-import { RootState } from "../../Store";
+import { RootState } from "../../Store/Store";
 import { LogHandler, LogLevel } from "ezpzos.core";
 
 /**
@@ -23,6 +23,9 @@ const logger = new LogHandler("LoginOrSignup.tsx");
 const LoginSignupPage: React.FC<LoginSignupDataProp> = ({ isLogin }) => {
 	// isOTPVerified is the state to control what content to be rendered in the components
 	const isOTPVerified = useSelector((state: RootState) => state.auth.isOTPVerified);
+	// get otpTarget from Redux to pass it to backend for verification
+	const otpTarget = useSelector((state: RootState) => state.auth.otpTarget);
+
 	const dispatch = useDispatch();
 	const location = useLocation();
 	const [otpToken, setOtpToken] = useState<string | null>(null);
@@ -43,7 +46,7 @@ const LoginSignupPage: React.FC<LoginSignupDataProp> = ({ isLogin }) => {
 				if (expValue > currentTime) {
 					// Token is valid
 					logger.Log("LoginOrSignup", "Token is valid", LogLevel.INFO);
-					setOtpToken(otpToken)
+					setOtpToken(otpToken);
 					dispatch(setOTPVerified(true));
 				} else {
 					// Token has expired
@@ -79,7 +82,11 @@ const LoginSignupPage: React.FC<LoginSignupDataProp> = ({ isLogin }) => {
 					{/* This is ContactForm session, it contains input boxes for user to enter its phone number, or choose the google login. */}
 					{/* If isOTPVerified = true, users will be directed UserSignupForm to fill in more info for signup, otherwise will render ContactForm component */}
 					{/* UserSignupForm accepts two props: token and exp from jwt for authentication when submitting signup details */}
-					{isOTPVerified ? <UserSignupForm otpToken={otpToken}/> : <ContactForm isLogin={isLogin} />}
+					{isOTPVerified ? (
+						<UserSignupForm otpToken={otpToken} otpTarget={otpTarget} />
+					) : (
+						<ContactForm isLogin={isLogin} />
+					)}
 					{/*This is Policy session*/}
 					<Policy />
 				</div>
