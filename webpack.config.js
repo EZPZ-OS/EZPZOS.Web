@@ -38,7 +38,6 @@ module.exports = {
 			url: require.resolve("url"),
 			fs: require.resolve("graceful-fs"),
 			buffer: require.resolve("buffer"),
-			Buffer: require.resolve("Buffer"),
 			timers: require.resolve("timers"),
 			events: false,
 			"node:stream": require.resolve("node:stream"),

@@ -2,7 +2,6 @@ import axios from "axios";
 import { DefaultPortNumber } from "ezpzos.core";
 import { store, RootState } from "../Store/Store";
 import { logout } from "../Store/AuthSlice";
-import { useSelector } from "react-redux";
 
 // Create an Axios instance with a base URL
 const apiClient = axios.create({
