@@ -1,13 +1,15 @@
 pipeline {
     agent { label 'amazon-linux' }
+
     environment {
         UAT_BUCKET = 'uat-neo-s3-well-sponge'
         PROD_BUCKET = 'prd-neo-s3-active-pangolin'
-        CORE_REPO_URL = 'https://github.com/EZPZ-OS/EZPZOS.Core'  // 核心依赖仓库URL
+        CORE_REPO_URL = 'https://github.com/EZPZ-OS/EZPZOS.Core.git'  // 核心依赖仓库URL
         GIT_CREDENTIALS_ID = 'git-credentials' // Jenkins中配置的git凭证ID
         UAT_AWS_CREDENTIALS_ID = 'uat-aws-jenkins-user-credentials' // Jenkins中配置的AWS凭证ID
         PROD_AWS_CREDENTIALS_ID = 'prod-aws-jenkins-user-credentials' // Jenkins中配置的AWS凭证ID
     }
+
     stages {
         stage('Print Agent Info') {
             steps {
@@ -20,6 +22,7 @@ pipeline {
                 }
             }
         }
+        
         stage('Package') {
             steps {
                 script {
@@ -44,12 +47,14 @@ pipeline {
             steps {
                 script {
                     withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: "${UAT_AWS_CREDENTIALS_ID}"]]) {
-                        sh "docker run \
-                        -e AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} \
-                    -e AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} \
-                        -v /tmp/jenkins/workspace/EZPZOS.Web/dist:/dist \
-                        amazon/aws-cli:latest \
-                        s3 sync --delete /dist/ s3://${UAT_BUCKET}/"
+                        sh """ 
+                        docker run \
+                            -e AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} \
+                            -e AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} \
+                            -v \$(pwd):/workdir \
+                            amazon/aws-cli:latest \
+                            s3 sync --delete --exclude "env/**" /workdir/dist/ s3://${UAT_BUCKET}/
+                        """
                     }
                 }
             }
@@ -61,12 +66,14 @@ pipeline {
                         input message: 'Do you want to proceed with uploading to Prod S3?', ok: 'Yes, proceed'
                     }
                     withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: "${PROD_AWS_CREDENTIALS_ID}"]]) {
-                        sh "docker run \
-                        -e AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} \
-                        -e AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} \
-                        -v /tmp/jenkins/workspace/EZPZOS.Web/dist:/dist \
-                        amazon/aws-cli:latest \
-                        s3 sync --delete /dist/ s3://${PROD_BUCKET}/"
+                        sh """
+                        docker run \
+                            -e AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} \
+                            -e AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} \
+                            -v /tmp/jenkins/workspace/EZPZOS.Web/dist:/dist \
+                            amazon/aws-cli:latest \
+                            s3 sync --delete  --exclude "env/**" /dist/ s3://${PROD_BUCKET}/
+                        """
                     }
                 }
             }
