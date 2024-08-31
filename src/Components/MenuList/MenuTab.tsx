@@ -1,5 +1,5 @@
 import React from "react";
-
+import HotSales from "../HotSales/HotSales";
 // Define the interface for the props
 interface MenuTabProps {
   tableNumber: string | null;
@@ -14,6 +14,7 @@ interface MenuTabProps {
 const MenuTab: React.FC<MenuTabProps> = ({ tableNumber, selectedTab }) => {
   return (
     <div>
+      <HotSales/>
       <h1 className="text-3xl mb-4">
         This is menu page placeholder, for testing purpose
       </h1>
