@@ -1,5 +1,5 @@
 import apiClient from "../Utils/axiosConfig";
-import { DefaultLoginSignupValues, LogHandler, LogLevel, OTPType } from "ezpzos.core";
+import { DefaultLoginSignupValues, LogHandler, LogLevel, OTPType, User } from "ezpzos.core";
 
 const logger = new LogHandler("AuthService");
 
@@ -11,7 +11,7 @@ export const AuthService = {
 		email: string,
 		mobile: string,
 		otpTarget: OTPType | null
-	): Promise<{ success: boolean; message?: string; token?: string }> => {
+	): Promise<{ success: boolean; message?: string; token?: string; user?: User }> => {
 		try {
 			const response = await apiClient.post(`/auth/signup?token=${otpToken}`, {
 				username,
@@ -20,9 +20,9 @@ export const AuthService = {
 				otpTarget
 			});
 			if (response.status === 201) {
-				const { token: JWTToken } = response.data;
+				const { token: JWTToken, user } = response.data;
 				logger.Log("signup", "User created successfully", LogLevel.INFO);
-				return { success: true, token:JWTToken };
+				return { success: true, token: JWTToken, user };
 			} else {
 				return {
 					success: false,
@@ -51,14 +51,14 @@ export const AuthService = {
 		mobile: string | null,
 		otpToken: string | null | undefined,
 		otpTarget: OTPType
-	): Promise<{ success: boolean; message?: string; token?: string }> => {
+	): Promise<{ success: boolean; message?: string; token?: string; user?: User }> => {
 		try {
 			const response = await apiClient.post("/auth/login", { mobile, otpToken, otpTarget });
 			// Check if the response contains the token and store it in localStorage
 			if (response.status === 200 && response.data.token) {
-				const { token: JWTToken } = response.data;
+				const { token: JWTToken, user } = response.data;
 				logger.Log("loginByMobile", "User login successfully", LogLevel.INFO);
-				return { success: true, token: JWTToken };
+				return { success: true, token: JWTToken, user };
 			} else {
 				return {
 					success: false,
