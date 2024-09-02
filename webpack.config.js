@@ -40,7 +40,6 @@ module.exports = {
 			timers: require.resolve("timers"),
 			events: false,
 			"node:stream": require.resolve("node:stream"),
-			buffer: require.resolve("buffer"),
 			stream: false,
 		},
 	},
