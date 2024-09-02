@@ -5,7 +5,7 @@ import VouchersIcon from "../../Assets/Icons/VouchersIcon.png";
 import { IoChevronForwardSharp } from "react-icons/io5";
 
 /**
- * This is the component of user profile page, it display the main section of user basic info and option list.
+ * This is the component of user profile page, it displays the main section of user basic info and option list.
  * @param avatar and @param username is the user information received from database when user logged in to be retrieved from Redux for display.
  */
 
