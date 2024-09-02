@@ -10,7 +10,8 @@ module.exports = {
 				"brown-gradient": "linear-gradient(to right, #826D5D, #EF7221, #FC4D4C)",
 				"side-bar-gradient": "linear-gradient(to right, #c78d3f, #b85572)",
 				"nav-bar-gradient": "linear-gradient(to right, #FBA96E, #EB8787)",
-				"gradient-border": "linear-gradient(to right, #ED897F 40%, #FF9900 100%)"
+				"gradient-border": "linear-gradient(to right, #ED897F 40%, #FF9900 100%)",
+				"grey-gradient": "linear-gradient(to bottom, #D3D4D4, #FFFFFF)"
 			},
 			colors: {
 				"primary-gray": "#E8E8E8",
