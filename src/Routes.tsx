@@ -11,6 +11,7 @@ import ClientCartPage from "./Pages/ClientCart/ClientCartPage";
 import BusinessHome from "./Pages/Kitchen/BusinessHome";
 import PastOrder from "./Pages/PastOrder/PastOrder";
 import MenuCreate from "./Pages/Menu/MenuCreate";
+import BusinessProfilePage from "./Pages/BusinessProfile/BusinessProfilePage";
 
 const AppRoutes: React.FC = () => (
 	<Routes>
@@ -29,7 +30,8 @@ const AppRoutes: React.FC = () => (
 		{/* Business Routes */}
 		<Route path="businesshome" element={<BusinessHome BusinessHomePageValues={{IsLoggedIn:true, HomePageButtonList:[],NotificationList:[]}}/>} />
 		<Route path="menucreate" element={<MenuCreate />} />
-		
+		<Route path="businessprofile" element={<BusinessProfilePage />} />
+
 	</Routes>
 );
 
