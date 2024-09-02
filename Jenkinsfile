@@ -63,7 +63,7 @@ pipeline {
             steps {
                 script {
                     timeout(time: 10, unit: 'MINUTES') {
-                        input message: 'Do you want to proceed with uploading to Prod S3?', ok: 'Yes, proceed'
+                        //input message: 'Do you want to proceed with uploading to Prod S3?', ok: 'Yes, proceed'
                     }
                     withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: "${PROD_AWS_CREDENTIALS_ID}"]]) {
                         sh """
