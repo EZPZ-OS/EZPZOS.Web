@@ -35,7 +35,7 @@ pipeline {
                         }
                         
                         echo "Building the React app..."
-                        sh 'npm install Buffer'
+                        sh 'npm install buffer --save'
                         sh 'npm install'
                         sh 'npm run build'
                         sh 'ls -la'
