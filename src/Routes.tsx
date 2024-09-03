@@ -10,6 +10,7 @@ import OTPPage from "./Pages/OTPPage/OTPPage";
 import BusinessHome from "./Pages/Kitchen/BusinessHome";
 import PastOrder from "./Pages/PastOrder/PastOrder";
 import MenuCreate from "./Pages/Menu/MenuCreate";
+import PersonalInfo from "./Pages/Profile/PersonalInfo";
 
 const AppRoutes: React.FC = () => (
 	<Routes>
@@ -22,6 +23,7 @@ const AppRoutes: React.FC = () => (
 		<Route path={DefaultMenuRoutesValues.DineInRouteDefaultValue} element={<Menu />} />
 		<Route path={DefaultMenuRoutesValues.TakeAwayRouteDefaultValue} element={<Menu />} />
 		<Route path="profile" element={<Profile />} />
+		<Route path="profile/info" element={<PersonalInfo />} />
 		<Route path="pastorder" element={<PastOrder />} />
 
 		{/* Business Routes */}
