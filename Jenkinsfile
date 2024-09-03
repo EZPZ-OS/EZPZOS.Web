@@ -70,9 +70,9 @@ pipeline {
                         docker run \
                             -e AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} \
                             -e AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} \
-                            -v /tmp/jenkins/workspace/EZPZOS.Web/dist:/dist \
+                            -v \$(pwd):/workdir \
                             amazon/aws-cli:latest \
-                            s3 sync --delete  --exclude "env/**" /dist/ s3://${PROD_BUCKET}/
+                            s3 sync --delete  --exclude "env/**" /workdir/dist/ s3://${PROD_BUCKET}/
                         """
                     }
                 }
