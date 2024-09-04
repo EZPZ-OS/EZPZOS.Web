@@ -1,9 +1,5 @@
 import apiClient from "../Utils/axiosConfig";
 import { DefaultLoginSignupValues, LogHandler, LogLevel, OTPType, User } from "ezpzos.core";
-import { store } from "../Store/Store";
-import { login, logout } from "../Store/AuthSlice";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 
 const logger = new LogHandler("AuthService");
 
@@ -85,44 +81,4 @@ export const AuthService = {
 			return { success: false, message: errorMessage };
 		}
 	},
-	// Validate token
-	validateToken: async (): Promise<boolean> => {
-		try {
-			const authToken = localStorage.getItem("authToken");
-			const savedUser = localStorage.getItem("user");
-
-			if (!authToken || !savedUser) {
-				store.dispatch(logout());
-				return false;
-			}
-
-			// Validate the token by making a request to the backend
-			await apiClient.get("/auth/validate-token", {
-				headers: {
-					Authorization: `Bearer ${authToken}`
-				}
-			});
-
-			// If successful, dispatch the login action with the existing token and user data
-			const user: User = JSON.parse(savedUser);
-			store.dispatch(login({ token: authToken, user }));
-
-			return true;
-		} catch (error: any) {
-			// If token is invalid or expired, log the user out
-			store.dispatch(logout());
-			return false;
-		}
-	}
-};
-
-// AuthChecker component
-export const AuthChecker = () => {
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        AuthService.validateToken();
-    }, [dispatch]);
-
-    return null;
-};
+}
