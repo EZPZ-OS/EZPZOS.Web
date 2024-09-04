@@ -3,6 +3,7 @@ import ClientAvatar from "../../Assets/Icons/ClientAvatar.png";
 import OrdersIcon from "../../Assets/Icons/OrdersIcon.png";
 import VouchersIcon from "../../Assets/Icons/VouchersIcon.png";
 import { IoChevronForwardSharp } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
 /**
  * This is the component of user profile page, it displays the main section of user basic info and option list.
@@ -10,11 +11,15 @@ import { IoChevronForwardSharp } from "react-icons/io5";
  */
 
 interface UserDashboardProps {
-	avatar: string | null;
-	username: string | null;
+	avatar: string | null | undefined;
+	username: string | null | undefined;
 }
 
 const UserDashboard: React.FC<UserDashboardProps> = ({ avatar, username }) => {
+	const navigate = useNavigate();
+	const handleClick = () => {
+		navigate("/profile/info");
+	};
 	return (
 		<div className="bg-gradient-to-b from-[#D3D4D4] h-[702px] w-screen font-lato relative">
 			{/* TODO: Change the img src to user.avatar when user avatar is fully setup in backend*/}
@@ -26,7 +31,12 @@ const UserDashboard: React.FC<UserDashboardProps> = ({ avatar, username }) => {
 			<div className="flex flex-col items-center mt-[50px]">
 				<p className="font-bold text-xl py-3 relative">
 					{username}
-					<IoChevronForwardSharp className="absolute mb-[5px] ml-[5px] text-3xl -right-[35px] top-[11.5px]" />
+					<button
+						onClick={handleClick}
+						className="absolute mb-[5px] ml-[5px] text-3xl -right-[35px] top-[11.5px]"
+					>
+						<IoChevronForwardSharp />
+					</button>
 				</p>
 				<div
 					className="bg-[#F3F3F3] w-[374px] h-[560px] rounded-3xl"

@@ -15,12 +15,11 @@ import AlertTag from "../../Components/AlertTag";
 const Profile: React.FC = () => {
     let user = useSelector((state: RootState) => state.auth.user);
     const navigate = useNavigate();
-    const [showAlert, setShowAlert] = useState(false);
+    const [showAlert, setShowAlert] = useState<boolean>(false);
 
     useEffect(() => {
         if (!user) {
             setShowAlert(true);
-
             const timer = setTimeout(() => {
                 navigate("/");
             }, 3000);
