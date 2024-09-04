@@ -4,7 +4,7 @@ import "react-tabs/style/react-tabs.css";
 import LogoWithBG from "../../Assets/Images/LogoWithBG.png";
 import { useNavigate } from "react-router-dom";
 import { IoChevronForward } from "react-icons/io5";
-import { DafaultMenuRoutesValues } from "ezpzos.core";
+import { DefaultMenuRoutesValues } from "ezpzos.core";
 import RestaurantContactDetails from "./RestaurantContactDetails";
 
 interface RestaurantContactCardProps {
@@ -42,8 +42,8 @@ const RestaurantContactCard: React.FC<RestaurantContactCardProps> = ({
 	const handleSelect = (index: number) => {
 		const tabName =
 			index === 0
-				? DafaultMenuRoutesValues.DineInRouteDefaultValue
-				: DafaultMenuRoutesValues.TakeAwayRouteDefaultValue;
+				? DefaultMenuRoutesValues.DineInRouteDefaultValue
+				: DefaultMenuRoutesValues.TakeAwayRouteDefaultValue;
 		navigate(`/${tabName}`);
 	};
 
@@ -93,13 +93,13 @@ const RestaurantContactCard: React.FC<RestaurantContactCardProps> = ({
 								className="w-[120px] list-none py-1 px-1 cursor-pointer text-[#5C3434] bg-primary-gray border-2 rounded-3xl border-primary-gbg-primary-gray transition-colors duration-300"
 								selectedClassName="bg-white text-[#5C3434] border-primary-gray bg-primary-gray"
 							>
-								{DafaultMenuRoutesValues.DineInDefaultValue}
+								{DefaultMenuRoutesValues.DineInDefaultValue}
 							</Tab>
 							<Tab
 								className="w-[120px] list-none py-1 px-1 cursor-pointer text-[#5C3434] bg-primary-gray border-2 rounded-3xl border-primary-gbg-primary-gray transition-colors duration-300"
 								selectedClassName="bg-white text-[#5C3434] border-primary-gray bg-primary-gray"
 							>
-								{DafaultMenuRoutesValues.TakeAwayDefaultValue}
+								{DefaultMenuRoutesValues.TakeAwayDefaultValue}
 							</Tab>
 						</TabList>
 					</Tabs>

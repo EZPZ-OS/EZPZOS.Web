@@ -7,20 +7,26 @@ import { DafaultMenuRoutesValues } from "ezpzos.core";
 import Profile from "./pages/Profile/Profile";
 import Kitchen from "./pages/Kitchen/Kitchen";
 import LoginPage from "./pages/Login/LoginPage";
-import SignUpPage from "./pages/signup/SignupPage";
+import SignUpPage from "./pages/SignUp/SignupPage";
 
 const AppRoutes: React.FC = () => (
 	<Routes>
-		{/* Client Routes */}
 		<Route path="/" element={<Home />} />
-		<Route path="signup" element={<SignUpPage />} />
+		<Route path="signup" element={<LoginSignupPage isLogin={false} />} />
+		<Route path="login" element={<LoginSignupPage isLogin={true} />} />
+		<Route path="otp" element={<OTPPage />} />
+
 		<Route path="scan" element={<QRScannerPage />} />
-		<Route path={DafaultMenuRoutesValues.DineInRouteDefaultValue} element={<Menu />} />
-		<Route path={DafaultMenuRoutesValues.TakeAwayRouteDefaultValue} element={<Menu />} />
+		<Route path={DefaultMenuRoutesValues.DineInRouteDefaultValue} element={<Menu />} />
+		<Route path={DefaultMenuRoutesValues.TakeAwayRouteDefaultValue} element={<Menu />} />
 		<Route path="profile" element={<Profile />} />
+		<Route path="pastorder" element={<PastOrder />} />
 
 		{/* Business Routes */}
-		<Route path="kitchen" element={<Kitchen />} />
+		<Route path="businesshome" element={<BusinessHome BusinessHomePageValues={{ IsLoggedIn: true, HomePageButtonList: [], NotificationList: [] }} />} />
+		<Route path="menucreate" element={<MenuCreate />} />
+
+
 	</Routes>
 );
 
