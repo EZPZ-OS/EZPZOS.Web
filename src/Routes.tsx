@@ -25,7 +25,7 @@ const AppRoutes: React.FC = () => (
 		<Route path="pastorder" element={<PastOrder />} />
 
 		{/* Business Routes */}
-		<Route path="businesshome" element={<BusinessHome BusinessHomePageValues={{ IsLoggedIn: true, HomePageButtonList: [], NotificationList: [] }} />} />
+		<Route path="businesshome" element={<BusinessHome BusinessHomePageValues={{IsLoggedIn:true, HomePageButtonList:[], NotificationList:[]}}/>} />
 		<Route path="menucreate" element={<MenuCreate />} />
 
 
