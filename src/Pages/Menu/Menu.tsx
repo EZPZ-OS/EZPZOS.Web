@@ -9,6 +9,8 @@ import MenuTab from "../../Components/MenuList/MenuTab";
 import { DefaultMenuRoutesValues, DefaultRestaurantDetails } from "ezpzos.core";
 import TopNav from "../../Components/TopNav";
 
+import handleSendBooking
+
 const Menu: React.FC = () => {
 	const location = useLocation();
 	DefaultRestaurantDetails;
@@ -18,6 +20,12 @@ const Menu: React.FC = () => {
 
 	//to extract the tablenumber from /scan page
 	useEffect(() => {
+		const handleSendBookingRequest = async () => {
+			handleSendBooking(cai, price, shuliang);
+		}
+		handleSendBookingRequest();
+		
+
 		const params = new URLSearchParams(location.search);
 		const tableNumber = params.get(DefaultMenuRoutesValues.TableNumberDefaultValue);
 		setTableNumber(tableNumber);
