@@ -1,13 +1,15 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import QRScannerPage from "./pages/QR/QRScannerPage";
-import Menu from "./pages/Menu/Menu";
-import { DafaultMenuRoutesValues } from "ezpzos.core";
-import Profile from "./pages/Profile/Profile";
-import Kitchen from "./pages/Kitchen/Kitchen";
-import LoginPage from "./pages/Login/LoginPage";
-import SignUpPage from "./pages/SignUp/SignupPage";
+import Home from "./Pages/Home";
+import QRScannerPage from "./Pages/QR/QRScannerPage";
+import Menu from "./Pages/Menu/Menu";
+import { DefaultMenuRoutesValues } from "ezpzos.core";
+import Profile from "./Pages/Profile/Profile";
+import LoginSignupPage from "./Pages/LoginOrSignup/LoginOrSignup";
+import OTPPage from "./Pages/OTPPage/OTPPage";
+import BusinessHome from "./Pages/Kitchen/BusinessHome";
+import PastOrder from "./Pages/PastOrder/PastOrder";
+import MenuCreate from "./Pages/Menu/MenuCreate";
 
 const AppRoutes: React.FC = () => (
 	<Routes>
