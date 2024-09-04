@@ -14,7 +14,7 @@ import MenuCreate from "./Pages/Menu/MenuCreate";
 const AppRoutes: React.FC = () => (
 	<Routes>
 		<Route path="/" element={<Home />} />
-		<Route path="signup" element={<LoginSignupPage isLogin={false} />} />
+		<Route path="signup" element={<LoginSignupPage  isLogin={false}  />} />
 		<Route path="login" element={<LoginSignupPage isLogin={true} />} />
 		<Route path="otp" element={<OTPPage />} />
 
