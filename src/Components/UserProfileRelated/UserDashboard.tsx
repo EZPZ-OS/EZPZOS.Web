@@ -7,12 +7,12 @@ import { useNavigate } from "react-router-dom";
 
 /**
  * This is the component of user profile page, it displays the main section of user basic info and option list.
- * @param avatar and @param username is the user information received from database when user logged in to be retrieved from Redux for display.
+ * @param avatar and @param username are the user information received from database when user logged in to be retrieved from Redux for display.
  */
 
 interface UserDashboardProps {
-	avatar: string | null | undefined;
-	username: string | null | undefined;
+	avatar: string | null;
+	username: string | null;
 }
 
 const UserDashboard: React.FC<UserDashboardProps> = ({ avatar, username }) => {

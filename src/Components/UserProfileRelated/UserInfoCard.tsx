@@ -5,7 +5,12 @@ import { logout } from "../../Store/AuthSlice";
 import AlertTag from "../AlertTag";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react"
+import { useState } from "react";
+
+/**
+ * This is the component of user profile page, it displays the main section of user basic info and option list.
+ * @param avatar, @param username, @param phone and @param email are the user information received from database when user logged in to be retrieved from Redux for display.
+ */
 
 interface UserInfoCardProps {
 	avatar: string | null | undefined;
@@ -16,15 +21,16 @@ interface UserInfoCardProps {
 
 const UserInfoCard: React.FC<UserInfoCardProps> = ({ avatar, username, phone, email }) => {
 	const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const [showAlert, setShowAlert] = useState<boolean>(false);
-    const handleLogout = () => {
-        dispatch(logout());
-        setShowAlert(true);
-        setTimeout(() => {
-            navigate('/'); 
-        }, 3000);
-    }
+	const navigate = useNavigate();
+	const [showAlert, setShowAlert] = useState<boolean>(false);
+	//show successfully logged out message and direct to home page after logout
+	const handleLogout = () => {
+		dispatch(logout());
+		setShowAlert(true);
+		setTimeout(() => {
+			navigate("/");
+		}, 3000);
+	};
 
 	return (
 		<div
@@ -72,10 +78,8 @@ const UserInfoCard: React.FC<UserInfoCardProps> = ({ avatar, username, phone, em
 					{DefaultPersonalInfoPageValues.LogOutButton}
 				</button>
 			</div>
-            {/* Conditionally Render AlertTag if showAlert is true */}
-            {showAlert && (
-                <AlertTag alertMessage="User logged out successfully." isError={false} />
-            )}
+			{/* Conditionally Render AlertTag if showAlert is true */}
+			{showAlert && <AlertTag alertMessage="User logged out successfully." isError={false} />}
 		</div>
 	);
 };
