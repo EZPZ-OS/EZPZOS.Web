@@ -5,7 +5,7 @@ import { login, setUser } from "../../Store/AuthSlice";
 import { RootState } from "../../Store/Store";
 import { useNavigate } from "react-router-dom";
 import { PhoneNumberNormalizer, LogHandler, LogLevel } from "ezpzos.core";
-import { AuthService } from "../../Services/AuthService";
+import { AuthService } from "../../Services/PublicService";
 import AlertTag from "../AlertTag";
 
 /**

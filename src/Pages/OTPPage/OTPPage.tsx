@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { LogLevel, LogHandler, DefaultLoginSignupValues, OTPType } from "ezpzos.core";
 import OTPForm from "../../Components/OTP/OTPForm";
 import AlertTag from "../../Components/AlertTag";
-import { AuthService } from "../../Services/AuthService";
+import { AuthService } from "../../Services/PublicService";
 
 const logger = new LogHandler("OTPPage.tsx");
 
