@@ -1,4 +1,4 @@
-import { DefaultClientProfilePageValues } from "ezpzos.core";
+import { DefaultClientProfilePageValues, DefaultRoutesValues } from "ezpzos.core";
 import ClientAvatar from "../../Assets/Icons/ClientAvatar.png";
 import OrdersIcon from "../../Assets/Icons/OrdersIcon.png";
 import VouchersIcon from "../../Assets/Icons/VouchersIcon.png";
@@ -18,7 +18,7 @@ interface UserDashboardProps {
 const UserDashboard: React.FC<UserDashboardProps> = ({ avatar, username }) => {
 	const navigate = useNavigate();
 	const handleClick = () => {
-		navigate("/profile/info");
+		navigate(`/${DefaultRoutesValues.UserRoutes.UserInfo}`);
 	};
 	return (
 		<div className="bg-gradient-to-b from-[#D3D4D4] h-[702px] w-screen font-lato relative">
