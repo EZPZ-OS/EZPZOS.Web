@@ -2,34 +2,39 @@ import ClientAvatar from "../../Assets/Icons/ClientAvatar.png";
 import { MdOutlineEdit } from "react-icons/md";
 import { DefaultPersonalInfoPageValues } from "ezpzos.core";
 import { logout } from "../../Store/AuthSlice";
-import AlertTag from "../AlertTag";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 
 /**
- * This is the component of user profile page, it displays the main section of user basic info and option list.
- * @param avatar, @param username, @param phone and @param email are the user information received from database when user logged in to be retrieved from Redux for display.
+ * This component represents the user profile card in the Personal Info page.
+ * It displays key user details such as avatar, username, phone, and email, and allows the user to log out.
+ *
+ * @param avatar - The user's avatar image, retrieved from the Redux store.
+ * @param username - The username of the logged-in user, retrieved from the Redux store.
+ * @param phone - The user's phone number, retrieved from the Redux store.
+ * @param email - The user's email address, retrieved from the Redux store.
+ * @param onLogout - A function passed down from the parent (`PersonalInfo`) component that notifies the parent when the user logs out. 
+ * This allows the parent to manage logout-related side effects (e.g., displaying a "User logged out successfully" message).
+ *
+ * TODO:
+ * - Replace the placeholder avatar with the actual avatar once the backend is fully integrated.
+ * - Create the functionality for edit button to update user information after backend is fully integrated.
  */
 
 interface UserInfoCardProps {
-	avatar: string | null | undefined;
-	username: string | null | undefined;
-	phone: string | null | undefined;
-	email: string | null | undefined;
+	avatar: string | null;
+	username: string | null;
+	phone: string | null;
+	email: string | null;
+    onLogout: () => void;
 }
 
-const UserInfoCard: React.FC<UserInfoCardProps> = ({ avatar, username, phone, email }) => {
+const UserInfoCard: React.FC<UserInfoCardProps> = ({ avatar, username, phone, email, onLogout }) => {
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
-	const [showAlert, setShowAlert] = useState<boolean>(false);
+
 	//show successfully logged out message and direct to home page after logout
 	const handleLogout = () => {
 		dispatch(logout());
-		setShowAlert(true);
-		setTimeout(() => {
-			navigate("/");
-		}, 3000);
+        onLogout(); // Notify parent that the user has logged out
 	};
 
 	return (
@@ -78,8 +83,6 @@ const UserInfoCard: React.FC<UserInfoCardProps> = ({ avatar, username, phone, em
 					{DefaultPersonalInfoPageValues.LogOutButton}
 				</button>
 			</div>
-			{/* Conditionally Render AlertTag if showAlert is true */}
-			{showAlert && <AlertTag alertMessage="User logged out successfully." isError={false} />}
 		</div>
 	);
 };
