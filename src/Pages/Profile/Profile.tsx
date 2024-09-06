@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import TopNav from "../../Components/TopNav";
 import BottomNavBar from "../../Components/BottomNavBar";
 import UserDashboard from "../../Components/UserProfileRelated/UserDashboard";
 import { useSelector } from "react-redux";
 import { RootState } from "../../Store/Store";
-import { useNavigate } from "react-router-dom";
+import useAuthCheck from "../../Hooks/useAuthCheck";
 import AlertTag from "../../Components/AlertTag";
 
 /**
@@ -13,38 +13,30 @@ import AlertTag from "../../Components/AlertTag";
  */
 
 const Profile: React.FC = () => {
-    let user = useSelector((state: RootState) => state.auth.user);
-    const navigate = useNavigate();
-    const [showAlert, setShowAlert] = useState(false);
+	let user = useSelector((state: RootState) => state.auth.user);
+	const isAuthenticated = useAuthCheck();
+	const [showAlert, setShowAlert] = useState<boolean>(false);
 
-    useEffect(() => {
-        if (!user) {
-            setShowAlert(true);
+	// Effect to manage the alert visibility
+	useEffect(() => {
+		if (!isAuthenticated) {
+			setShowAlert(true); // Show alert immediately when the user is not authenticated
+		}
+	}, [isAuthenticated]);
 
-            const timer = setTimeout(() => {
-                navigate("/");
-            }, 3000);
+	return (
+		<div>
+            {/* Conditionally Render AlertTag if showAlert is true */}
+			{showAlert && <AlertTag alertMessage={"Please login first."} isError={true}/>}
+			{isAuthenticated && (
+				<div className="flex flex-col items-center">
+					<TopNav hideSearch={true} /> {/* Pass hideSearch prop to hide the search icon */}
+					<UserDashboard avatar={user!.Avatar} username={user!.Username} />
+					<BottomNavBar isClient={true} />
+				</div>
+			)}
+		</div>
+	);
+};
 
-            // Cleanup the timeout if the component unmounts before the timeout triggers
-            return () => clearTimeout(timer);
-        }
-    }, [user, navigate]);
-
-    if (!user) {
-        return (
-            <div className="flex flex-col items-center">
-                {showAlert && <AlertTag alertMessage="User not logged in" isError={true} />}
-            </div>
-        );
-    }
-    return(
-        <div className="flex flex-col items-center">
-            <TopNav hideSearch={true}/> {/* Pass hideSearch prop to hide the search icon */}
-            <UserDashboard avatar = {user.Avatar} username = {user.Username}/>
-            <BottomNavBar isClient={true}/>
-        </div>
-    )
-}
-
-
-export default Profile
+export default Profile;
