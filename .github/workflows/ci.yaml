@@ -3,7 +3,7 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - main
+      - chris-ci-test
     paths:
       - '**/*'
 
@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: EZPZ-OS/EZPZOS.Core
-          ref: main
+          ref: chris-ci-test
 
       - name: Set up environment with GitHub Token
         env:
@@ -46,7 +46,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: EZPZ-OS/EZPZOS.Web
-          ref: main
+          ref: chris-ci-test
 
       - name: Set up environment with GitHub Token
         env:
@@ -74,7 +74,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: EZPZ-OS/EZPZOS.Express
-          ref: main
+          ref: chris-ci-test
 
       - name: Set up environment with GitHub Token
         env:
