@@ -6,7 +6,7 @@ on:
       - chris-ci-test
   pull_request:
     branches:
-      - main
+      - chris-ci-test
 
 jobs:
   build-Core:
