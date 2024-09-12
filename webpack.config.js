@@ -13,6 +13,9 @@ module.exports = {
 	},
 	devServer: {
 		historyApiFallback: true,
+		static: {
+			directory: path.join(__dirname, "public"), // Serve static files from "public"
+		},
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
@@ -34,8 +37,12 @@ module.exports = {
 		fallback: {
 			url: require.resolve("url"),
 			fs: require.resolve("graceful-fs"),
+<<<<<<< HEAD
 			//buffer: require.resolve("buffer"),
 			//Buffer: require.resolve("Buffer"),
+=======
+			buffer: require.resolve("buffer"),
+>>>>>>> main
 			timers: require.resolve("timers"),
 			events: false,
 			"node:stream": require.resolve("node:stream"),
@@ -68,8 +75,11 @@ module.exports = {
 			},
 			{
 				test: /\.(png|svg|jpg|gif|ico|json)$/,
+				type: "asset/resource", // Use Webpack 5 asset module
 				exclude: /node_modules/,
-				use: ["file-loader?name=[name].[ext]"],
+				generator: {
+					filename: "images/[name][ext][query]",
+				},
 			},
 		],
 	},
