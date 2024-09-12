@@ -4,8 +4,9 @@ on:
   push:
     branches:
       - chris-ci-test
-    paths:
-      - '**/*'
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build-Core:
