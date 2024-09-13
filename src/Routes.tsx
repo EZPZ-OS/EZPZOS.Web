@@ -11,6 +11,7 @@ import BusinessHome from "./Pages/Kitchen/BusinessHome";
 import PastOrder from "./Pages/PastOrder/PastOrder";
 import MenuCreate from "./Pages/Menu/MenuCreate";
 import PersonalInfo from "./Pages/Profile/PersonalInfo";
+import BookPage from "./Components/BookPage/BookPage";
 
 const AppRoutes: React.FC = () => (
 	<Routes>
@@ -30,7 +31,8 @@ const AppRoutes: React.FC = () => (
 		<Route path={DefaultRoutesValues.BusinessRoutes.Home} element={<BusinessHome BusinessHomePageValues={{IsLoggedIn:true, HomePageButtonList:[],NotificationList:[]}}/>} />
 		<Route path={DefaultRoutesValues.BusinessRoutes.CreateMenu} element={<MenuCreate />} />
 
-		
+		{/* Book Routes*/}
+		<Route path={DefaultRoutesValues.BookRoutes.Book} element={<BookPage />}/>
 	</Routes>
 );
 

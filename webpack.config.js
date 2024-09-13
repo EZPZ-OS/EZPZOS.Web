@@ -69,6 +69,16 @@ module.exports = {
 				use: ["style-loader", "css-loader", "postcss-loader"],
 			},
 			{
+				test: /\.css$/,
+				include: path.resolve(__dirname, "./node_modules/swiper"),
+				use: ["style-loader", "css-loader", "postcss-loader"],
+			},
+			{
+				test: /\.css$/,
+				include: path.resolve(__dirname, "./node_modules/react-calendar/dist/Calendar.css"),
+				use: ["style-loader", "css-loader", "postcss-loader"],
+			},
+			{
 				test: /\.(png|svg|jpg|gif|ico|json)$/,
 				type: "asset/resource", // Use Webpack 5 asset module
 				exclude: /node_modules/,
