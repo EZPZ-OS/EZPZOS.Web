@@ -5,7 +5,7 @@ import UserDashboard from "../../Components/UserProfileRelated/UserDashboard";
 import { useSelector } from "react-redux";
 import { RootState } from "../../Store/Store";
 import useAuthCheck from "../../Hooks/useAuthCheck";
-import AlertTag from "../../Components/AlertTag";
+import { useAlertTag } from "../../Hooks/useAlertTag";
 
 /**
  * This is the client profile page.
@@ -15,19 +15,21 @@ import AlertTag from "../../Components/AlertTag";
 const Profile: React.FC = () => {
 	let user = useSelector((state: RootState) => state.auth.user);
 	const isAuthenticated = useAuthCheck();
-	const [showAlert, setShowAlert] = useState<boolean>(false);
 
-	// Effect to manage the alert visibility
+	// Effect to manage the alert and navigation
 	useEffect(() => {
 		if (!isAuthenticated) {
-			setShowAlert(true); // Show alert immediately when the user is not authenticated
+			// Use useAlertTag to show the alert and navigate to login page
+			useAlertTag({
+				alertMessage: "Please login first.",
+				isError: true,
+				navigateTo: "/login", // Navigate to login page if not authenticated
+			});
 		}
 	}, [isAuthenticated]);
 
 	return (
 		<div>
-            {/* Conditionally Render AlertTag if showAlert is true */}
-			{showAlert && <AlertTag alertMessage={"Please login first."} isError={true}/>}
 			{isAuthenticated && (
 				<div className="flex flex-col items-center">
 					<TopNav hideSearch={true} /> {/* Pass hideSearch prop to hide the search icon */}

@@ -80,8 +80,8 @@ const ContactForm: React.FC<ContactFormProps> = ({ isLogin }) => {
 			</div>
 			<button className="h-[50px] w-[370px] rounded-lg mt-16 text-[#FFFFFF] text-xl bg-gradient-to-r from-[#FFB682F5] via-[#F8A27AF5] to-[#F28C83F5]">
 				{isLogin
-					? DefaultLoginSignupValues.ContactFormDefaultValue.SigninDefaultValue
-					: DefaultLoginSignupValues.ContactFormDefaultValue.SignupDefaultValue}
+					? DefaultLoginSignupValues.ContactFormDefaultValue.SignupDefaultValue
+					: DefaultLoginSignupValues.ContactFormDefaultValue.SigninDefaultValue}
 			</button>
 		</div>
 	);
