@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import TopNav from "../../Components/TopNav";
 import BottomNavBar from "../../Components/BottomNavBar";
 import UserDashboard from "../../Components/UserProfileRelated/UserDashboard";
 import { useSelector } from "react-redux";
 import { RootState } from "../../Store/Store";
 import useAuthCheck from "../../Hooks/useAuthCheck";
-import { useAlertTag } from "../../Hooks/useAlertTag";
 
 /**
  * This is the client profile page.
@@ -14,19 +13,7 @@ import { useAlertTag } from "../../Hooks/useAlertTag";
 
 const Profile: React.FC = () => {
 	let user = useSelector((state: RootState) => state.auth.user);
-	const isAuthenticated = useAuthCheck();
-
-	// Effect to manage the alert and navigation
-	useEffect(() => {
-		if (!isAuthenticated) {
-			// Use useAlertTag to show the alert and navigate to login page
-			useAlertTag({
-				alertMessage: "Please login first.",
-				isError: true,
-				navigateTo: "/login", // Navigate to login page if not authenticated
-			});
-		}
-	}, [isAuthenticated]);
+	const isAuthenticated = useAuthCheck(); 
 
 	return (
 		<div>

@@ -2,6 +2,27 @@ import { useState, useEffect } from "react";
 import { IoCheckmark, IoClose } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * useAlertTag hook
+ * 
+ * This hook displays an alert message with customizable styles based on whether it's an error or success message. It automatically hides the alert after a given timeout and optionally navigates to a different route once the alert disappears.
+ * 
+ * @param {string} alertMessage - The message to display inside the alert. When undefined, the alert is not shown.
+ * @param {boolean} [isError=false] - Determines if the alert should be styled as an error. Defaults to `false` (success alert).
+ * @param {number} [timeout=3000] - The duration (in milliseconds) for which the alert is visible before automatically hiding. Defaults to `3000` (3 seconds).
+ * @param {string} [navigateTo] - The optional route to navigate to after the alert is hidden. If not provided, no navigation occurs.
+ * 
+ * @example
+ * const alert = useAlertTag({
+ *    alertMessage: "Operation successful!",
+ *    isError: false,
+ *    timeout: 3000,
+ *    navigateTo: "/dashboard",
+ * });
+ * 
+ * @returns {JSX.Element | null} - Returns the AlertTag component if visible, otherwise null.
+ */
+
 interface AlertTagProps {
 	alertMessage: string | undefined;
 	isError?: boolean;

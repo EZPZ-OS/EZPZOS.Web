@@ -1,25 +1,34 @@
+import { useAlertTag } from './useAlertTag';
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../Store/Store";
 import { DefaultRoutesValues } from "ezpzos.core";
 
+/**
+ * useAuthCheck Hook
+ * 
+ * This hook checks if the user is authenticated (logged in) by looking at the Redux state.
+ * If the user is not logged in, it shows an alert message using `useAlertTag` and navigates to the login page after a delay.
+ * 
+ * @returns {boolean} - Returns the current authentication status (true if logged in, false if not).
+ */
 function useAuthCheck() {
 	const navigate = useNavigate();
-	const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn); // Using useSelector to get login status
+	const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn); // Get login status from Redux
 
-    useEffect(() => {
-        if (!isLoggedIn) {
-          // Delay the navigation to give time for the alertTag to show
-			const timeout = setTimeout(() => {
-				navigate(`/${DefaultRoutesValues.AuthRoutes.Login}`);
-			}, 3000); // 3 seconds delay before redirecting to login
+	useEffect(() => {
+		if (!isLoggedIn) {
+			// Show alert and navigate to login page after the alert is hidden
+			useAlertTag({
+				alertMessage: "Please login first.",
+				isError: true,
+				navigateTo: `/${DefaultRoutesValues.AuthRoutes.Login}`, // Navigate to the login page
+			});
+		}
+	}, [isLoggedIn, navigate]);
 
-			// Cleanup timeout if component unmounts or effect re-runs
-			return () => clearTimeout(timeout);
-        }
-      }, [isLoggedIn, navigate]);
-      return isLoggedIn;
-    }
+	return isLoggedIn;
+}
 
 export default useAuthCheck;
