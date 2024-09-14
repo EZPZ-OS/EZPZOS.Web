@@ -3,16 +3,9 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { login, setUser } from "../../Store/AuthSlice";
 import { RootState } from "../../Store/Store";
-import { useNavigate } from "react-router-dom";
 import { PhoneNumberNormalizer, LogHandler, LogLevel } from "ezpzos.core";
 import { AuthService } from "../../Services/PublicService";
 import { useAlertTag } from "../../Hooks/useAlertTag";
-
-/**
- * This interface defining the properties for the UserSignupFormProp
- * @param otpToken pass the otpToken from LoginOrSignup page received from otpPage after mobile verification to indicate the success
- * @param otpTarget pass the otpTarget from LoginOrSignup page received from otpPage to indicate either the otp is for signup/login
- */
 
 interface UserSignupFormProps {
 	otpToken?: string | null;
@@ -24,47 +17,51 @@ const logger = new LogHandler("UserSignupForm.tsx");
 const UserSignupForm: React.FC<UserSignupFormProps> = ({ otpToken, otpTarget }) => {
 	const [username, setUsername] = useState<string>("");
 	const [email, setEmail] = useState<string>("");
-	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
-	//Select the mobileNumber saved in Redux authState to display in the input field
+	// Select the mobileNumber saved in Redux authState to display in the input field
 	const mobileNumber = useSelector((state: RootState) => state.auth.mobileNumber);
 
-	//Normalize the phone number to make sure userMobile's format is consistent (+614xxxxxxxx)
+	// Normalize the phone number to make sure userMobile's format is consistent (+614xxxxxxxx)
 	const normalizer = new PhoneNumberNormalizer(mobileNumber || "");
 	const normalizedMobile = normalizer.normalize();
 
-	//Handle form submission
+	// Call useAlertTag at the top level of the component
+	const { triggerAlert } = useAlertTag({ timeout: 3000 });
+
+	// Handle form submission
 	const handleSubmit = async (event: React.FormEvent) => {
-		event.preventDefault(); // Prevent the default form submission behavior
+		event.preventDefault(); // Prevent default form submission behavior
 
-		const result = await AuthService.signupRequest(otpToken, username, email, normalizedMobile, otpTarget);
+		try {
+			const result = await AuthService.signupRequest(otpToken, username, email, normalizedMobile, otpTarget);
 
-		if (result.success && result.token && result.user) {
-			logger.Log("Signup", "Created user successfully", LogLevel.INFO);
-			// Dispatch the token to activate login state in Redux
-			dispatch(login({ token: result.token, user: result.user }));
-			// Dispatch user to save in Redux for frontend to use user info
-			dispatch(setUser(result.user));
-			// Show success message and navigate after 3 seconds
-			useAlertTag({
-				alertMessage: DefaultLoginSignupValues.UserSignupFormDefaultValue.UserCreatedMessage,
-				navigateTo: "/" // Navigate to home after the alert
-			});
-		} else if (result) {
-			// Show error message and navigate after 3 seconds
-			useAlertTag({
-				alertMessage: result.message || "An error occurred.",
+			if (result.success && result.token && result.user) {
+				logger.Log("Signup", "Created user successfully", LogLevel.INFO);
+				// Dispatch the token to activate login state in Redux
+				dispatch(login({ token: result.token, user: result.user }));
+				// Dispatch user to save in Redux for frontend to use user info
+				dispatch(setUser(result.user));
+				// Trigger success alert and navigate to home page
+				triggerAlert({
+					message: DefaultLoginSignupValues.UserSignupFormDefaultValue.UserCreatedMessage,
+					navigateTo: "/",
+				});
+			} else if (result) {
+				// Trigger error alert and navigate to home page
+				triggerAlert({
+					message: result.message || "An error occurred.",
+					isError: true,
+					navigateTo: "/",
+				});
+			}
+		} catch (error) {
+			// Handle unexpected errors
+			logger.Log("Signup", `An unexpected error occurred: ${error}`, LogLevel.ERROR);
+			triggerAlert({
+				message: "An unexpected error occurred.",
 				isError: true,
-				navigateTo: "/" // Navigate to home after the error alert
-			});
-		} else {
-			// Handle unexpected undefined result
-			logger.Log("Signup", "An unexpected error occurred.", LogLevel.ERROR);
-			useAlertTag({
-				alertMessage: "An unexpected error occurred.",
-				isError: true,
-				navigateTo: "/" // Navigate to home after the error alert
+				navigateTo: "/",
 			});
 		}
 	};

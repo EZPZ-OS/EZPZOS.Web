@@ -9,41 +9,33 @@ import useAuthCheck from "../../Hooks/useAuthCheck";
 import { useAlertTag } from "../../Hooks/useAlertTag";
 import UserInfoCard from "../../Components/UserProfileRelated/UserInfoCard";
 
-/**
- * This PersonalInfo page is responsible for displaying and managing the user's personal information.
- * It so far includes:
- * 
- * - Fetching the user's authentication status using `useAuthCheck`.
- * - Displaying user details such as avatar, username, phone number, and email, along with an option to log out.
- * - Handling both intentional logouts (via the "Logout" button) and unintentional session terminations (when the user is unauthenticated).
- * - Showing appropriate alert messages like "Please login first" or "User logged out successfully" based on user actions.
- * 
- * This component conditionally renders content based on whether the user is authenticated or not and communicates with child components like `UserInfoCard`.
- */
-
 const PersonalInfo: React.FC = () => {
 	let user = useSelector((state: RootState) => state.auth.user);
 	const isAuthenticated = useAuthCheck();
 	const [isLogout, setIsLogout] = useState<boolean>(false); // Track if the user logged out intentionally
 
-	// Effect to manage the alert and navigation
+	// Call useAlertTag at the top level of the component
+	const { triggerAlert } = useAlertTag({ timeout: 3000 });
+
+	// Effect to manage the alert and navigation for unauthenticated users
 	useEffect(() => {
 		if (!isAuthenticated && !isLogout) {
-			// Show "Please login first" alert and navigate to login page
-			useAlertTag({
-				alertMessage: "Please login first.",
+			// Trigger the alert when user is not authenticated and hasn't logged out intentionally
+			triggerAlert({
+				message: "Please login first.",
 				isError: true,
-				navigateTo: "/login",
+				navigateTo: "/login", // Navigate to login page
 			});
 		}
-	}, [isAuthenticated, isLogout]);
+	}, [isAuthenticated, isLogout, triggerAlert]);
 
 	// Handle the logout action
 	const handleLogout = () => {
 		setIsLogout(true); // Mark as logged out
-		// Show "User logged out successfully" alert and navigate to home page
-		useAlertTag({
-			alertMessage: "User logged out successfully.",
+		// Trigger alert and navigate to home page
+		triggerAlert({
+			message: "User logged out successfully.",
+			isError: false,
 			navigateTo: "/",
 		});
 	};
