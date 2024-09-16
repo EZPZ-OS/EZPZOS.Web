@@ -19,7 +19,7 @@ jobs:
       - name: Checkout Web repository
         uses: actions/checkout@v4
         with:
-          repository: EZPZ-OS/EZPZOS.Web
+          repository: EZPZOS.Web
           ref: chris-ci-test
 
       - name: Set up environment with GitHub Token
