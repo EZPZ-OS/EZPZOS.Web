@@ -37,7 +37,7 @@ jobs:
 
       # Step 4: Install dependencies and build Web (after Core is built)
       - name: Install and build Web
-        working-directory: ./EZPZOS.Web
+        # working-directory: ./EZPZOS.Web
         run: |
           npm install
           npm run build
