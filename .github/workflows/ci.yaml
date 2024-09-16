@@ -35,7 +35,12 @@ jobs:
           npm install
           npm run build
 
-      # Step 4: Install dependencies and build Web (after Core is built)
+      # Step 4: List Web node_modules to verify Core is linked
+      - name: Verify ezpzos.core in node_modules
+        working-directory: ./EZPZOS.Web
+        run: ls -l node_modules | grep ezpzos.core
+
+      # Step 5: Install dependencies and build Web (after Core is built)
       - name: Install and build Web
         # working-directory: ./EZPZOS.Web
         run: |
