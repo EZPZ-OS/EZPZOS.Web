@@ -6,14 +6,14 @@ import { Link } from "react-router-dom";
 import Logo from "../../../Assets/Images/Logo.png";
 import HomePageButtons from "../HomePageButtons";
 import HomePageNotification from "../HomePageNotification";
-import { BusienssPageValuesProp } from "../../../Pages/Kitchen/BuisnessHome";
+import { BusinessPageValuesProp } from "../../../Pages/Kitchen/BusinessHome";
 
 /**
  * @param isLoggedIn is a variable to store login status data that passed from EZPZ.CORE BusienssPageValuesProp constant,
  * @param data pass a DefaultBusinessHomePageValues mock data  into Business Home Component.
  */
 
-const BusinessHomeComponent = (data: BusienssPageValuesProp) => {
+const BusinessHomeComponent = (data: BusinessPageValuesProp) => {
 	const isLoggedIn = data.BusinessHomePageValues.IsLoggedIn
 	const loggedInLogo = <img src={BusinessAvatar} className="w-[110px] h-[110px] mt-32" alt="logo" />;
 	const loggedInOpening = (

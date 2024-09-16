@@ -1,19 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import GoogleIcon from "../../Assets/Images/GoogleIcon.png";
-import { LoginSignupDataProp } from "../../Pages/LoginOrSignup/LoginOrSignup";
-import { DefaultLoginSignupValues } from "ezpzos.core";
+import { DefaultLoginSignupValues, LogHandler, LogLevel, OTPType } from "ezpzos.core";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { setMobileNumber, setOTPType } from "../../Store/AuthSlice";
+import { handleSendOTP } from "../../Services/PublicService";
 
 /**
- * @param data pass a "isLogin" mock boolean value into LoginOrSignup Page, check if the customer is login or not(!login===signup)
+ * This is the ContactForm component for user to login/signup
+ * @param isLogin pass a "isLogin" mock boolean value into LoginOrSignup Page, check if the customer is login or not(!login===signup)
  */
-const ContactForm = (data: LoginSignupDataProp) => {
-	const isLogin = data.isLogin;
+interface ContactFormProps {
+	isLogin: boolean;
+}
 
+const logger = new LogHandler("ContactForm.tsx");
+
+const ContactForm: React.FC<ContactFormProps> = ({ isLogin }) => {
+	const [mobileNumberLocal, setMobileNumberLocal] = useState<string>("");
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
-	const handleSendOTP = () => {
-		navigate("/otp");
+	const onSendOTP = async () => {
+		try {
+			// Determine the use of otpService is for login or signup
+			const otpType = isLogin ? OTPType.LoginOTP : OTPType.SignupOTP;
+			// Use the handleSendOTP function from OTPService
+			await handleSendOTP(mobileNumberLocal);
+
+			// If OTP sent successfully, store the mobile number and otpType, navigate to OTP page
+			dispatch(setMobileNumber(mobileNumberLocal));
+			dispatch(setOTPType(otpType));
+			navigate("/otp");
+		} catch (error) {
+			if (error instanceof Error) {
+				logger.Log("ContactForm", `Failed to send OTP: ${error.message}`, LogLevel.ERROR);
+			} else {
+				logger.Log("ContactForm", "Unexpected error during sending OTP", LogLevel.ERROR);
+			}
+		}
 	};
 
 	return (
@@ -24,6 +49,8 @@ const ContactForm = (data: LoginSignupDataProp) => {
 				</p>
 				<input
 					type="tel"
+					value={mobileNumberLocal}
+					onChange={e => setMobileNumberLocal(e.target.value)}
 					placeholder={DefaultLoginSignupValues.ContactFormDefaultValue.PhoneNumberDefaultValue}
 					className="block h-[50px] w-[370px] pl-20 rounded-lg bg-[#F8F9FA] text-xl placeholder:text-[#988B8B] focus:outline-none"
 				/>
@@ -32,7 +59,7 @@ const ContactForm = (data: LoginSignupDataProp) => {
 				</p>
 			</div>
 			<button
-				onClick={handleSendOTP}
+				onClick={onSendOTP}
 				className="h-[50px] w-[370px] rounded-lg mt-4 text-[#FFFFFF] text-xl bg-gradient-to-r from-[#BBDAFFF5] to-[#FF993CF5]"
 			>
 				{DefaultLoginSignupValues.ContactFormDefaultValue.SendOTPDefaultValue}

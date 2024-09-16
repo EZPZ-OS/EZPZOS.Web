@@ -1,15 +1,20 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoCloseOutline } from "react-icons/io5";
+import { handleSendOTP, handleCompleteOTP } from "../../Services/PublicService";
+import { OTPType } from "ezpzos.core";
 
 interface OTPFormProps {
-	MobileNumber?: string;
+	MobileNumber: string | null;
+	otpType: OTPType | null;
+	onComplete: (otpToken: string, exp: number, otpTarget: OTPType) => void;
 }
 
-const OTPForm: React.FC<OTPFormProps> = ({ MobileNumber = "0473001475" }) => {
+const OTPForm: React.FC<OTPFormProps> = ({ MobileNumber, otpType, onComplete }) => {
 	const navigate = useNavigate();
 	const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
 	const [pin, setPin] = useState<string[]>(Array(6).fill(""));
+	const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
 	useEffect(() => {
 		if (inputsRef.current[0]) {
@@ -36,9 +41,31 @@ const OTPForm: React.FC<OTPFormProps> = ({ MobileNumber = "0473001475" }) => {
 		}
 	};
 
-	const handleSubmit = () => {
-		const pinCode = pin.join("");
-		console.log(pinCode);
+	//sending OTP to user's mobile
+	const onSendOTP = async () => {
+		try {
+			await handleSendOTP(MobileNumber || "");
+		} catch (error) {
+			if (error instanceof Error) {
+				setErrorMessage(error.message);
+			} else {
+				setErrorMessage("An unexpected error occurred.");
+			}
+		}
+	};
+
+	//verifying OTP code
+	const onCompleteOTP = async () => {
+		try {
+			const otp = pin.join("");
+			await handleCompleteOTP(MobileNumber || "", otp, otpType, onComplete);
+		} catch (error) {
+			if (error instanceof Error) {
+				setErrorMessage(error.message);
+			} else {
+				setErrorMessage("An unexpected error occurred.");
+			}
+		}
 	};
 
 	const isPinComplete = pin.join("").length === 6;
@@ -71,8 +98,15 @@ const OTPForm: React.FC<OTPFormProps> = ({ MobileNumber = "0473001475" }) => {
 						))}
 					</div>
 				</div>
+				{/* TODO: update UI design for errorMessage display */}
+				{errorMessage && (
+					<p className="text-red-500 text-sm mt-2">{errorMessage}</p> // Display error message here
+				)}
 				<p className="mt-4 self-start text-[15px]">
-					Didn’t get an SMS? <span className="underline font-semibold">Send again</span>
+					Didn’t get an SMS?{" "}
+					<button onClick={onSendOTP} className="inline underline font-semibold border-none bg-transparent">
+						Send again
+					</button>
 				</p>
 			</div>
 
@@ -84,7 +118,7 @@ const OTPForm: React.FC<OTPFormProps> = ({ MobileNumber = "0473001475" }) => {
 					}`}
 					type="button"
 					disabled={!isPinComplete}
-					onClick={handleSubmit}
+					onClick={onCompleteOTP}
 				>
 					Continue
 				</button>
