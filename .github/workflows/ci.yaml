@@ -9,24 +9,53 @@ on:
       - Chris-devops-GHA-ci
 
 jobs:
-  build-Web:
-    # needs: build-Core
-    # if: ${{ github.repository == 'EZPZ-OS/EZPZOS.Web' && needs.build-Core.outputs.Core_build_status == 'success' }}
+  build-Core:
+    if: ${{ github.repository == 'EZPZ-OS/EZPZOS.Core' }}
     runs-on: ubuntu-latest
     outputs:
-      Web_build_status: ${{ steps.set_web_status.outputs.status }}
+      Core_build_status: ${{ steps.set_core_status.outputs.status }}
     steps:
-      - name: Checkout Web repository
-        uses: actions/checkout@v4
-        with:
-          repository: EZPZ-OS/EZPZOS.Web
-          ref: Chris-devops-GHA-ci
       - name: Checkout Core repository
         uses: actions/checkout@v4
         with:
           repository: EZPZ-OS/EZPZOS.Core
-          token: ${{ secrets.GH_TOKEN }} # Use the GH_TOKEN to authenticate
-          path: EZPZOS.Core # Check out Core repo in a specific folder
+          ref: Chris-devops-GHA-ci
+
+      - name: Set up environment with GitHub Token
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}  # Access token from secrets
+        run: echo "GitHub Token available"
+
+      - name: Install and build Core
+        id: install_build_core
+        working-directory: ./EZPZOS.Core
+        run: |
+          npm install
+          npm run build
+
+      - name: Set Core build status
+        id: set_core_status
+        run: echo "status=${{ job.status }}" >> $GITHUB_OUTPUT
+
+  build-Web:
+    needs: build-Core
+    if: ${{ github.repository == 'EZPZ-OS/EZPZOS.Web' && needs.build-Core.outputs.Core_build_status == 'success' }}
+    runs-on: ubuntu-latest
+    outputs:
+      Web_build_status: ${{ steps.set_web_status.outputs.status }}
+    steps:
+      # - name: Checkout Web repository
+      #   uses: actions/checkout@v4
+      #   with:
+      #     repository: EZPZ-OS/EZPZOS.Web
+      #     ref: Chris-devops-GHA-ci
+
+      # - name: Checkout Core repository
+      #   uses: actions/checkout@v4
+      #   with:
+      #     repository: EZPZ-OS/EZPZOS.Core
+      #     token: ${{ secrets.GH_TOKEN }} # Use the GH_TOKEN to authenticate
+      #     path: EZPZOS.Core # Check out Core repo in a specific folder
 
       - name: Set up environment with GitHub Token
         env:
@@ -35,6 +64,7 @@ jobs:
 
       - name: Install and build Web
         id: install_build_web
+        working-directory: ./EZPZOS.Web
         run: |
           npm install
           npm run build
