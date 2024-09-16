@@ -10,7 +10,7 @@ on:
 
 jobs:
   build-Core:
-    if: ${{ github.repository == 'EZPZ-OS/EZPZOS.Core' }}
+    # if: ${{ github.repository == 'EZPZ-OS/EZPZOS.Core' }}
     runs-on: ubuntu-latest
     outputs:
       Core_build_status: ${{ steps.set_core_status.outputs.status }}
@@ -38,8 +38,8 @@ jobs:
         run: echo "status=${{ job.status }}" >> $GITHUB_OUTPUT
 
   build-Web:
-    needs: build-Core
-    if: ${{ github.repository == 'EZPZ-OS/EZPZOS.Web' && needs.build-Core.outputs.Core_build_status == 'success' }}
+    # needs: build-Core
+    # if: ${{ github.repository == 'EZPZ-OS/EZPZOS.Web' && needs.build-Core.outputs.Core_build_status == 'success' }}
     runs-on: ubuntu-latest
     outputs:
       Web_build_status: ${{ steps.set_web_status.outputs.status }}
