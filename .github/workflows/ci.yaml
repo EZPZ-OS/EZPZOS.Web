@@ -15,16 +15,16 @@ jobs:
     outputs:
       Core_build_status: ${{ steps.set_core_status.outputs.status }}
     steps:
+      - name: Set up environment with GitHub Token
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}  # Access token from secrets
+        run: echo "GitHub Token available"
+
       - name: Checkout Core repository
         uses: actions/checkout@v4
         with:
           repository: EZPZ-OS/EZPZOS.Core
           ref: Chris-devops-GHA-ci
-
-      - name: Set up environment with GitHub Token
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}  # Access token from secrets
-        run: echo "GitHub Token available"
 
       - name: Install and build Core
         id: install_build_core
