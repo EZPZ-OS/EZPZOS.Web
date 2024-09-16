@@ -4,9 +4,9 @@ on:
   push:
     branches:
       - chris-ci-test
-  pull_request:
-    branches:
-      - chris-ci-test
+    paths:
+      - '**/*'
+  workflow_dispatch:
 
 jobs:
   build-Core:
