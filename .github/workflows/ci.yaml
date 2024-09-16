@@ -21,6 +21,12 @@ jobs:
         with:
           repository: EZPZ-OS/EZPZOS.Web
           ref: Chris-devops-GHA-ci
+      - name: Checkout Core repository
+        uses: actions/checkout@v4
+        with:
+          repository: EZPZ-OS/EZPZOS.Core
+          token: ${{ secrets.GH_TOKEN }} # Use the GH_TOKEN to authenticate
+          path: EZPZOS.Core # Check out Core repo in a specific folder
 
       - name: Set up environment with GitHub Token
         env:
