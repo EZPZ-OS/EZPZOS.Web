@@ -27,6 +27,7 @@
     "react-scripts": "^5.0.1",
     "react-tabs": "^6.0.2",
     "react-toastify": "^10.0.5",
+    "tailwind-scrollbar-hide": "^1.1.7",
     "typeface-lato": "^1.1.13",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
