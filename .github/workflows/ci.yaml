@@ -26,11 +26,12 @@ jobs:
         with:
           repository: EZPZ-OS/EZPZOS.Core
           token: ${{ secrets.GH_TOKEN }}  # Use the GH_TOKEN to authenticate and checkout Core
-          path: /home/runner/work/EZPZOS.Core  # This creates a directory at the root of the workspace
+          path: EZPZOS.Core  # This creates a directory at the root of the workspace
 
       # Correctly move Core to be on the same level as Web
       - name: verify the files structure
         run: |
+          mv EZPZOS.Core /home/runner/work/EZPZOS.Core
           ls -alh /home/runner/work/  # List to verify the structure at the workspace level
 
       # Step 3: Install dependencies and build Core
