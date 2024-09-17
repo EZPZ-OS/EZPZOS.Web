@@ -38,7 +38,7 @@ jobs:
       # Correctly move Core to be on the same level as Web
       - name: verify the files structure
         run: |
-          cp EZPZOS.Core /home/runner/work/EZPZOS.Core
+          cp -r EZPZOS.Core /home/runner/work/EZPZOS.Core
           ls -alh /home/runner/work/  # List to verify the structure at the workspace level
 
       # Step 5: Install dependencies and build Web (after Core is built)
