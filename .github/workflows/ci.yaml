@@ -26,7 +26,13 @@ jobs:
         with:
           repository: EZPZ-OS/EZPZOS.Core
           token: ${{ secrets.GH_TOKEN }}  # Use the GH_TOKEN to authenticate and checkout Core
-          path: EZPZOS.Core  # Checkout Core into this path
+          path: temp/EZPZOS.Core  # Checkout Core into a temporary path
+
+      # Move Core to be on the same level as Web
+      - name: Move Core directory
+        run: |
+          mv temp/EZPZOS.Core EZPZOS.Core
+          ls -alh  # List to verify the structure
 
       # Step 3: Install dependencies and build Core
       - name: Install and build Core
@@ -34,9 +40,6 @@ jobs:
         run: |
           npm install
           npm run build
-
-      - name: List directory structure
-        run: ls -alh
     
       # Step 4: List Web node_modules to verify Core is linked
       # - name: Verify ezpzos in node_modules
