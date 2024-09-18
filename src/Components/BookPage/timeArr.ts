@@ -10,7 +10,7 @@ export default function getTimeArr(startTime: string, endTime: string, interval:
 		typeof Number(startTime.split(":")[0]) !== "number" ||
 		typeof Number(endTime.split(":")[0]) !== "number" ||
 		typeof Number(startTime.split(":")[1]) !== "number" ||
-		typeof Number(endTime.split(":")[1])!== "number"
+		typeof Number(endTime.split(":")[1]) !== "number"
 	) {
 		console.log("wrong input1");
 		return;
@@ -33,19 +33,17 @@ export default function getTimeArr(startTime: string, endTime: string, interval:
 	let currentHour = startTimeObj.hour;
 	let currentMin = startTimeObj.minute;
 	while (currentHour * 60 + currentMin <= endTimeObj.hour * 60 + endTimeObj.minute) {
-        if(currentMin==0){
-            arr.push(currentHour+":00");
-        }
-        else{
-            arr.push(currentHour+":"+currentMin);
-        }
-        if(currentMin+interval>=60){
-            currentHour +=1
-            currentMin=currentMin+interval-60
-        }
-        else{
-            currentMin+=interval
-        }
-    }
-    return arr
+		if (currentMin == 0) {
+			arr.push(currentHour + ":00");
+		} else {
+			arr.push(currentHour + ":" + currentMin);
+		}
+		if (currentMin + interval >= 60) {
+			currentHour += 1;
+			currentMin = currentMin + interval - 60;
+		} else {
+			currentMin += interval;
+		}
+	}
+	return arr;
 }

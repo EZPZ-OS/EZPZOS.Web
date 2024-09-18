@@ -12,7 +12,7 @@ import { Scrollbar } from "swiper/modules";
 import "swiper/css/scrollbar";
 import { useNavigate } from "react-router-dom";
 import "swiper/css";
-import {DefaultBookDonePageValues} from 'ezpzos.core'
+import { DefaultBookDonePageValues } from "ezpzos.core";
 
 /**
  * This is the page of BookPage,including size, date and time selection.
@@ -67,7 +67,7 @@ export default function BookPage() {
 	};
 
 	//time slot part
-  const {startTime,endTime,interval} = DefaultBookDonePageValues
+	const { startTime, endTime, interval } = DefaultBookDonePageValues;
 	const timeArr = getTimeArr(startTime, endTime, interval);
 	let timeSwiper = [];
 	if (typeof timeArr !== "undefined") {
