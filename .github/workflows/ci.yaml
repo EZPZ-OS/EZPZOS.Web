@@ -41,6 +41,7 @@ jobs:
         run: |
           cp -r EZPZOS.Core /home/runner/work/EZPZOS.Core
           ls -alh /home/runner/work/  # List to verify the structure at the workspace level
+          ls -alh /home/runner/work/EZPZOS.Web/EZPZOS.Web/node_modules/
 
       
       # # Step 4: Move the built Core to a location accessible by Web
