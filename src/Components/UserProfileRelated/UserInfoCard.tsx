@@ -21,7 +21,7 @@ import { RootState } from "../../Store/Store";
  *
  * TODO:
  * - Replace the placeholder avatar with the actual avatar once the backend is fully integrated.
- * - Create the functionality for edit button to update user information after backend is fully integrated.
+ * - Create the functionality for edit button to update user avatar, mobile and email (mobile need to be checked by OTP and email need to be verified by emailing).
  */
 
 interface UserInfoCardProps {
