@@ -46,7 +46,7 @@ jobs:
       # Step 4: Move the built Core to a location accessible by Web
       - name: Move Core to Web
         run: |
-          cp -r EZPZOS.Core/lib ./EZPZOS.Web/node_modules/ezpzos.core
+          cp -r EZPZOS.Core/lib /home/runner/work/EZPZOS.Web/EZPZOS.Web/node_modules/ezpzos.core
     
 
       # Step 5: Install dependencies and build Web (after Core is built)
