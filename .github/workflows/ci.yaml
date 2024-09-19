@@ -34,6 +34,11 @@ jobs:
         run: |
           npm install
           npm run build
+
+      # Step 4: Move the built Core to a location accessible by Web
+      - name: Move Core to Web
+        run: |
+          cp -r EZPZOS.Core/lib ./EZPZOS.Web/node_modules/ezpzos.core
     
       # Correctly move Core to be on the same level as Web
       - name: verify the files structure
