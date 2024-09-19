@@ -5,8 +5,8 @@ import { setOTPVerified, setOTPTarget, setUser, login } from "../../Store/AuthSl
 import { useNavigate } from "react-router-dom";
 import { LogLevel, LogHandler, DefaultLoginSignupValues, OTPType } from "ezpzos.core";
 import OTPForm from "../../Components/OTP/OTPForm";
-import { useAlertTag } from "../../Hooks/useAlertTag";
 import { AuthService } from "../../Services/PublicService";
+import { showAlert } from "../../Store/AlertSlice";
 
 const logger = new LogHandler("OTPPage.tsx");
 
@@ -15,9 +15,6 @@ const OTPPage: React.FC = () => {
 	const otpType = useSelector((state: RootState) => state.auth.otpType);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-
-	// Call useAlertTag at the top level of the component
-	const { triggerAlert } = useAlertTag({ timeout: 3000 });
 
 	// This handleCompleteOTP function handles OTP completion
 	const handleCompleteOTP = async (otpToken: string, exp: number, otpTarget: OTPType) => {
@@ -38,28 +35,33 @@ const OTPPage: React.FC = () => {
 					// Dispatch user to save in Redux for frontend to use user info
 					dispatch(setUser(result.user));
 
-					// Trigger success alert and navigate to profile page
-					triggerAlert({
-						message: DefaultLoginSignupValues.MobileLoginDefaultValue.LoginSuccessMessage,
-						isError: false,
-						navigateTo: "/profile"
-					});
+					dispatch(
+						showAlert({
+						  message: DefaultLoginSignupValues.MobileLoginDefaultValue.LoginSuccessMessage,
+						  isError: false,
+						  navigateTo: "/profile", 
+						})
+					  );
 				} else {
-					// Trigger error alert and navigate to home page
-					triggerAlert({
-						message: result.message || "An error occurred.",
-						isError: true,
-						navigateTo: "/"
-					});
+					// Show error alert and navigate to home page
+					dispatch(
+						showAlert({
+							message: result.message || "An error occurred.",
+							isError: true,
+							navigateTo: "/"
+						})
+					)
 				}
 			} catch (error: any) {
 				logger.Log("OTP", `Error during login: ${error.message}`, LogLevel.ERROR);
-				// Trigger error alert and navigate to home page
-				triggerAlert({
-					message: error.message || "An error occurred.",
-					isError: true,
-					navigateTo: "/"
-				});
+				// Show error alert and navigate to home page
+				dispatch(
+					showAlert({
+						message: error.message || "An error occurred.",
+						isError: true,
+						navigateTo: "/"
+					})
+				)
 			}
 		}
 	};

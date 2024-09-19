@@ -1,44 +1,51 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../Store/Store";
 import BottomNavBar from "../../Components/BottomNavBar";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { DefaultPersonalInfoPageValues } from "ezpzos.core";
 import useAuthCheck from "../../Hooks/useAuthCheck";
-import { useAlertTag } from "../../Hooks/useAlertTag";
 import UserInfoCard from "../../Components/UserProfileRelated/UserInfoCard";
+import { showAlert } from "../../Store/AlertSlice";
 
 const PersonalInfo: React.FC = () => {
 	let user = useSelector((state: RootState) => state.auth.user);
+	const dispatch = useDispatch();
 	const isAuthenticated = useAuthCheck();
 	const [isLogout, setIsLogout] = useState<boolean>(false); // Track if the user logged out intentionally
-
-	// Call useAlertTag at the top level of the component
-	const { triggerAlert } = useAlertTag({ timeout: 3000 });
-
+	
 	// Effect to manage the alert and navigation for unauthenticated users
 	useEffect(() => {
 		if (!isAuthenticated && !isLogout) {
-			// Trigger the alert when user is not authenticated and hasn't logged out intentionally
-			triggerAlert({
-				message: "Please login first.",
-				isError: true,
-				navigateTo: "/login", // Navigate to login page
-			});
+			// Show alert when user is not authenticated and hasn't logged out intentionally
+			dispatch(
+				showAlert({
+					message: "Please login first.",
+					isError: true,
+					navigateTo: "/login" // Navigate to login page
+				})
+			);
 		}
-	}, [isAuthenticated, isLogout, triggerAlert]);
+	}, [isAuthenticated, isLogout, dispatch]);
 
 	// Handle the logout action
 	const handleLogout = () => {
-		setIsLogout(true); // Mark as logged out
-		// Trigger alert and navigate to home page
-		triggerAlert({
-			message: "User logged out successfully.",
-			isError: false,
-			navigateTo: "/",
-		});
-	};
+		// Mark as logged out intentionally first
+		setIsLogout(true);
+	
+		// Simulate delay to ensure the state update occurs before dispatching the alert
+		setTimeout(() => {
+		  // Trigger alert and navigate to home page
+		  dispatch(
+			showAlert({
+			  message: "User logged out successfully.",
+			  isError: false,
+			  navigateTo: "/", // Navigate to home page
+			})
+		  );
+		}, 30); // Slight delay to ensure the state updates correctly
+	  };
 
 	return (
 		<div>

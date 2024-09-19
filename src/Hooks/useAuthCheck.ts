@@ -1,6 +1,6 @@
-import { useAlertTag } from "./useAlertTag";
+import { showAlert } from "../Store/AlertSlice";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../Store/Store";
 import { DefaultRoutesValues } from "ezpzos.core";
 
@@ -14,20 +14,20 @@ import { DefaultRoutesValues } from "ezpzos.core";
  */
 function useAuthCheck() {
 	const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn); // Get login status from Redux
-
-	// Call useAlertTag at the top level of the hook
-	const { triggerAlert } = useAlertTag({ timeout: 3000 });
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		if (!isLoggedIn) {
 			// Trigger the alert and navigate to login page after the alert is hidden
-			triggerAlert({
-				message: "Please login first.",
-				isError: true,
-				navigateTo: `/${DefaultRoutesValues.AuthRoutes.Login}` // Navigate to the login page
-			});
+			dispatch(
+				showAlert({
+					message: "Please login first.",
+					isError: true,
+					navigateTo: `/${DefaultRoutesValues.AuthRoutes.Login}` // Navigate to the login page
+				})
+			);
 		}
-	}, [isLoggedIn, triggerAlert]);
+	}, [isLoggedIn, showAlert]);
 
 	return isLoggedIn;
 }

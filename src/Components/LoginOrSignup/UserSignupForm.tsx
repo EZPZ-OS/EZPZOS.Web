@@ -5,7 +5,7 @@ import { login, setUser } from "../../Store/AuthSlice";
 import { RootState } from "../../Store/Store";
 import { PhoneNumberNormalizer, LogHandler, LogLevel } from "ezpzos.core";
 import { AuthService } from "../../Services/PublicService";
-import { useAlertTag } from "../../Hooks/useAlertTag";
+import { showAlert } from "../../Store/AlertSlice";
 
 interface UserSignupFormProps {
 	otpToken?: string | null;
@@ -26,9 +26,6 @@ const UserSignupForm: React.FC<UserSignupFormProps> = ({ otpToken, otpTarget }) 
 	const normalizer = new PhoneNumberNormalizer(mobileNumber || "");
 	const normalizedMobile = normalizer.normalize();
 
-	// Call useAlertTag at the top level of the component
-	const { triggerAlert } = useAlertTag({ timeout: 3000 });
-
 	// Handle form submission
 	const handleSubmit = async (event: React.FormEvent) => {
 		event.preventDefault(); // Prevent default form submission behavior
@@ -43,26 +40,32 @@ const UserSignupForm: React.FC<UserSignupFormProps> = ({ otpToken, otpTarget }) 
 				// Dispatch user to save in Redux for frontend to use user info
 				dispatch(setUser(result.user));
 				// Trigger success alert and navigate to home page
-				triggerAlert({
-					message: DefaultLoginSignupValues.UserSignupFormDefaultValue.UserCreatedMessage,
-					navigateTo: "/",
-				});
+				dispatch(
+					showAlert({
+						message: DefaultLoginSignupValues.UserSignupFormDefaultValue.UserCreatedMessage,
+						isError: false,
+						navigateTo: "/"
+					})
+				);
 			} else if (result) {
-				// Trigger error alert and navigate to home page
-				triggerAlert({
-					message: result.message || "An error occurred.",
-					isError: true,
-					navigateTo: "/",
-				});
+				dispatch(
+					showAlert({
+						message: result.message || "An error occurred.",
+						isError: true,
+						navigateTo: "/"
+					})
+				);
 			}
 		} catch (error) {
 			// Handle unexpected errors
 			logger.Log("Signup", `An unexpected error occurred: ${error}`, LogLevel.ERROR);
-			triggerAlert({
-				message: "An unexpected error occurred.",
-				isError: true,
-				navigateTo: "/",
-			});
+			dispatch(
+				showAlert({
+					message: "An unexpected error occurred.",
+					isError: true,
+					navigateTo: "/"
+				})
+			);
 		}
 	};
 
