@@ -40,6 +40,7 @@ jobs:
       - name: verify the files structure
         run: |
           cp -r EZPZOS.Core /home/runner/work/EZPZOS.Core
+          ls -alh /home/runner/work/EZPZOS.Core
           ls -alh /home/runner/work/  # List to verify the structure at the workspace level
           mkdir /home/runner/work/EZPZOS.Web/EZPZOS.Web/node_modules/
           cp -r EZPZOS.Core /home/runner/work/EZPZOS.Web/EZPZOS.Web/node_modules/ezpzos.core
