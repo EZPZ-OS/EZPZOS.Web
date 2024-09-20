@@ -43,7 +43,9 @@ jobs:
           echo "in $(pwd)"
           ls 
           echo "out of $(pwd)"
-          ls
+          ls ../
+          echo "======="
+          ls ../../
           mkdir /home/runner/work/EZPZOS.Web/EZPZOS.Web/node_modules/
           cp -r EZPZOS.Core /home/runner/work/EZPZOS.Web/EZPZOS.Web/node_modules/ezpzos.core
 
