@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check PWD
+      - name: Check PWD before cloning Web Repo
         run: |
           echo "in $(pwd) before cloning Web Repo"
           ls 
@@ -26,7 +26,7 @@ jobs:
           repository: EZPZ-OS/EZPZOS.Web
           ref: Chris-devops-GHA-ci
 
-      - name: Check PWD
+      - name: Check PWD after cloning Web Repo
         run: |
           echo "in $(pwd) after cloning Web Repo"
           ls 
@@ -51,7 +51,7 @@ jobs:
       # Correctly move Core to be on the same level as Web
       - name: verify the files structure
         run: |
-          cp -r EZPZOS.Core /home/runner/work/EZPZOS.Core
+          cp -r EZPZOS.Core /home/runner/work/EZPZOS.Web/EZPZOS.Core
           echo "in $(pwd)"
           ls 
           echo "out of $(pwd)"
