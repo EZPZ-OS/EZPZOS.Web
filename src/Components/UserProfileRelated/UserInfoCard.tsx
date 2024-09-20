@@ -99,13 +99,13 @@ const UserInfoCard: React.FC<UserInfoCardProps> = ({ avatar, username, phone, em
 							<input
 								type="text"
 								value={editedName}
-								placeholder="Please enter your name"
+								placeholder={DefaultPersonalInfoPageValues.EditUsernamePlaceHolder}
 								onChange={e => setEditedName(e.target.value)}
 								className="border-none bg-[#E3E3E3] px-2 py-1 rounded-lg pl-[20px] pr-[45px] focus:outline-none placeholder-[#898686]"
 							/>
 							<button onClick={handleUpdateUser} className="ml-2 bg-black text-white text-sm px-3 py-1 rounded-2xl"
 							style={{ boxShadow: "0px 4px 6px rgba(93, 88, 88, 0.5)" }}>
-								Confirm
+								{DefaultPersonalInfoPageValues.ConfirmButton}
 							</button>
 						</div>
 					) : (
