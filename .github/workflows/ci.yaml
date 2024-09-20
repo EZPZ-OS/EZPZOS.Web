@@ -13,12 +13,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Check PWD
+        run: |
+          echo "in $(pwd) before cloning Web Repo"
+          ls 
+
+    
       # Step 1: Checkout the Web repository (Main repo)
       - name: Checkout Web repository
         uses: actions/checkout@v4
         with:
           repository: EZPZ-OS/EZPZOS.Web
           ref: Chris-devops-GHA-ci
+
+      - name: Check PWD
+        run: |
+          echo "in $(pwd) after cloning Web Repo"
+          ls 
+          
 
       # Step 2: Checkout the Core repository (Dependency)
       - name: Checkout Core repository
@@ -46,9 +58,7 @@ jobs:
           ls ../
           echo "======="
           ls ../../
-          mkdir /home/runner/work/EZPZOS.Web/EZPZOS.Web/node_modules/
-          cp -r EZPZOS.Core /home/runner/work/EZPZOS.Web/EZPZOS.Web/node_modules/ezpzos.core
-
+          
       
       # # Step 4: Move the built Core to a location accessible by Web
       # - name: Move Core to Web
