@@ -13,26 +13,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check PWD before cloning Web Repo
-        run: |
-          echo "in $(pwd) before cloning Web Repo"
-          ls 
-
-    
-      # Step 1: Checkout the Web repository (Main repo)
       - name: Checkout Web repository
         uses: actions/checkout@v4
         with:
           repository: EZPZ-OS/EZPZOS.Web
           ref: Chris-devops-GHA-ci
-
-      - name: Check PWD after cloning Web Repo
-        run: |
-          echo "in $(pwd) after cloning Web Repo"
-          ls 
           
-
-      # Step 2: Checkout the Core repository (Dependency)
       - name: Checkout Core repository
         uses: actions/checkout@v4
         with:
@@ -40,38 +26,31 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}  # Use the GH_TOKEN to authenticate and checkout Core
           path: EZPZOS.Core  # This creates a directory at the root of the workspace
 
-      # Step 3: Install dependencies and build Core
       - name: Install and build Core
         working-directory: ./EZPZOS.Core
         run: |
           npm install
           npm run build
 
+      - name: Set Core build status
+        id: core_build_status
+        run: echo "CORE_BUILD_STATUS=${{ job.status }}" >> $GITHUB_ENV  # Store Core build status in an environment variable
 
-      # Correctly move Core to be on the same level as Web
-      - name: verify the files structure
+      - name: Copy Core Directory to Correct Location
         run: |
           cp -r EZPZOS.Core /home/runner/work/EZPZOS.Web/EZPZOS.Core
-          echo "in $(pwd)"
-          ls 
-          echo "out of $(pwd)"
-          ls ../
-          echo "======="
-          ls ../../
-          
-      
-      # # Step 4: Move the built Core to a location accessible by Web
-      # - name: Move Core to Web
-      #   run: |
-      #     cp -r EZPZOS.Core/lib /home/runner/work/EZPZOS.Web/EZPZOS.Web/node_modules/ezpzos.core
-    
 
-      # Step 5: Install dependencies and build Web (after Core is built)
       - name: Install and build Web
-        # working-directory: ./EZPZOS.Web
+        working-directory: ./EZPZOS.Web
         run: |
           npm install
           npm run build
 
+      - name: Set Web build status
+        id: web_build_status
+        run: echo "WEB_BUILD_STATUS=${{ job.status }}" >> $GITHUB_ENV  # Store Web build status in an environment variable
 
-
+      - name: Output Core and Web build statuses
+        run: |
+          echo "Core Build Status: $CORE_BUILD_STATUS"
+          echo "Web Build Status: $WEB_BUILD_STATUS"
