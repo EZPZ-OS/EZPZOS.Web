@@ -41,7 +41,6 @@ jobs:
           cp -r EZPZOS.Core /home/runner/work/EZPZOS.Web/EZPZOS.Core
 
       - name: Install and build Web
-        working-directory: ./EZPZOS.Web
         run: |
           npm install
           npm run build
