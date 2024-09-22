@@ -26,7 +26,7 @@ pipeline {
                     withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws_credentials']]){
                         dir('../EZPZOS.Core'){
                             sh '''
-                            
+                            pwd
                             rm .env
                             // aws s3 cp https://ezpzos-env-file.s3.ap-southeast-2.amazonaws.com/core-env .env
                             aws s3api get-object --bucket ezpzos-env-file --key core-env
