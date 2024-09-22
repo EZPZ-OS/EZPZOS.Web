@@ -14,7 +14,7 @@ pipeline {
                     // sh ' git clone https://github.com/EZPZ-OS/EZPZOS.Core.git'
                     withCredentials([string(credentialsId: 'git_credential', variable: 'git_credential')]){
                         sh'''
-                        git clone https://$git_credential@github.com/EZPZ-OS/EZPZOS.Core.git
+                        git clone https://$git_credential@github.com/EZPZ-OS/EZPZOS.Core.git ../EZPZOS.Core
                         '''
                     }
                 }
@@ -27,7 +27,9 @@ pipeline {
                         dir('EZPZOS.Core'){
                             sh '''
                             rm .env
-                            aws s3 cp https://ezpzos-env-file.s3.ap-southeast-2.amazonaws.com/core-env .env
+                            // aws s3 cp https://ezpzos-env-file.s3.ap-southeast-2.amazonaws.com/core-env .env
+                            aws s3api get-object --bucket ezpzos-env-file --key core-env
+
                             npm i
                             npm run build
                             '''
