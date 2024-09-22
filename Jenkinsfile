@@ -24,7 +24,7 @@ pipeline {
             steps{
                 script{
                     withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws_credentials']]){
-                        dir('/EZPZOS.Core'){
+                        dir('../EZPZOS.Core'){
                             sh '''
                             pwd
                             rm .env
