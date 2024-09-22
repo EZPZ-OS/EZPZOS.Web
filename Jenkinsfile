@@ -20,7 +20,7 @@ pipeline {
                 }
             }
         }
-        stage('Run Core/'){
+        stage('Run Core'){
             steps{
                 script{
                     withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws_credentials']]){
@@ -59,6 +59,7 @@ pipeline {
                 script{
                     dir('EZPZOS.Web'){
                         sh '''
+                        ls dist
                         aws s3 sync dist/ s3://${S3_BUCKET}
                         '''
                     }
