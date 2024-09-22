@@ -44,7 +44,7 @@ pipeline {
                     
                         dir('EZPZOS.Web'){
                             sh '''
-                            rm .env
+                            ls
                             aws s3 cp "s3://ezpzos-env-file/core-env" .env
                             npm i
                             npm run build
