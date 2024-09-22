@@ -3,7 +3,7 @@ pipeline {
     environment {
         AWS_ACCOUNT_ID = '975049907995'
         AWS_REGION = 'ap-southeast-2'
-        S3_BUCKET = ''
+        S3_BUCKET = 'ezpz-web-chris'
     }
    stages{
         stage('Git clone from EZPZOS'){
@@ -11,11 +11,12 @@ pipeline {
                 script{
                 
                     // clone core repo
-                    git url: 'https://github.com/EZPZ-OS/EZPZOS.Core.git', branch: 'Devops'
                     
-                    dir('EZPZOS.Web'){
-                        git url: 'https://github.com/EZPZ-OS/EZPZOS.Web.git', branch: 'Devops'
-                    }
+                    sh''' git clone https://github.com/EZPZ-OS/EZPZOS.Core.git ../EZPZOS.Core
+                    git switch Devops
+                    '''
+                    
+                   
                 }
             }
         }
