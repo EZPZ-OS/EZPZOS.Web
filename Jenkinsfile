@@ -12,9 +12,10 @@ pipeline {
                 
                     // clone core repo
                     // sh ' git clone https://github.com/EZPZ-OS/EZPZOS.Core.git'
-                    
-                    dir('EZPZOS.Core'){
-                        git url: 'https://github.com/EZPZ-OS/EZPZOS.Core.git', branch: 'Devops',credentialsId: 'git_credential'
+                    withCredentials([string(credentialsId: 'git_credential', variable: 'git_credential')]){
+                        dir('EZPZOS.Core'){
+                            git url: 'https://github.com/EZPZ-OS/EZPZOS.Core.git', branch: 'Devops',credentialsId: 'git_credential'
+                        }
                     }
                 }
             }
