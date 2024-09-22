@@ -11,11 +11,11 @@ pipeline {
                 script{
                 
                     // clone core repo
-                    // git url: 'https://github.com/EZPZ-OS/EZPZOS.Core.git', branch: 'Devops'
+                    sh ' git clone https://github.com/EZPZ-OS/EZPZOS.Core.git'
                     
-                    dir('EZPZOS.Core'){
-                        git url: 'https://github.com/EZPZ-OS/EZPZOS.Core.git', branch: 'Devops'
-                    }
+                    // dir('EZPZOS.Web'){
+                    //     git url: 'https://github.com/EZPZ-OS/EZPZOS.Web.git', branch: 'Devops'
+                    // }
                 }
             }
         }
@@ -43,7 +43,7 @@ pipeline {
                         dir('EZPZOS.Web'){
                             sh '''
                             rm .env
-                            aws s3 cp https://ezpzos-env-file.s3.ap-southeast-2.amazonaws.com/web-env .env
+                            aws s3 cp https://ezpzos-env-file.s3.ap-southeast-2.amazonaws.com/ .env
                             npm i
                             npm run build
                             '''
@@ -57,13 +57,12 @@ pipeline {
                 script{
                     dir('EZPZOS.Web'){
                         sh '''
-                        aws s3 cp dist/* http://ezpz-web-chris.s3-website-ap-southeast-2.amazonaws.com
+                        aws s3 sync dist/ s3://${S3_BUCKET}
                         '''
                     }
                 }
             }
         }
-   }
     post{
         always{
             cleanWs()
