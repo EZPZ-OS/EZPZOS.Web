@@ -11,12 +11,11 @@ pipeline {
                 script{
                 
                     // clone core repo
+                    // git url: 'https://github.com/EZPZ-OS/EZPZOS.Core.git', branch: 'Devops'
                     
-                    sh''' git clone https://github.com/EZPZ-OS/EZPZOS.Core.git ../EZPZOS.Core
-                    git switch Devops
-                    '''
-                    
-                   
+                    dir('EZPZOS.Core'){
+                        git url: 'https://github.com/EZPZ-OS/EZPZOS.Core.git', branch: 'Devops'
+                    }
                 }
             }
         }
