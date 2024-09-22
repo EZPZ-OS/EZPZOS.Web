@@ -41,8 +41,7 @@ pipeline {
             steps{
                 script{
                     withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws_credentials']]){
-                    
-                        dir('EZPZOS.Web'){
+                        dir(''){
                             sh '''
                             ls
                             aws s3 cp "s3://ezpzos-env-file/core-env" .env
@@ -57,7 +56,7 @@ pipeline {
         stage('Upload EZPZOS.Web to S3 Bucket '){
             steps{
                 script{
-                    dir('EZPZOS.Web'){
+                    dir(''){
                         sh '''
                         ls dist
                         aws s3 sync dist/ s3://${S3_BUCKET}
