@@ -24,11 +24,11 @@ pipeline {
             steps{
                 script{
                     withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws_credentials']]){
-                        dir('../EZPZOS.Core'){
+                        dir('/EZPZOS.Core'){
                             sh '''
+                            pwd
                             rm .env
-                            aws s3 cp "s3://ezpzos-env-file/web-env" .env
-
+                            aws s3 cp "s3://ezpzos-env-file/core-env" .env
                             npm i
                             npm run build
                             '''
@@ -45,7 +45,7 @@ pipeline {
                         dir('EZPZOS.Web'){
                             sh '''
                             rm .env
-                            aws s3 cp https://ezpzos-env-file.s3.ap-southeast-2.amazonaws.com/ .env
+                            aws s3 cp "s3://ezpzos-env-file/core-env" .env
                             npm i
                             npm run build
                             '''
@@ -73,7 +73,12 @@ pipeline {
             script{
                 sh '''
                 rm -rf ../EZPZOS.Core
+                pwd
+                ls 
+                ls ../*
+
                 '''
+
             }
          }
     }
