@@ -26,9 +26,8 @@ pipeline {
                     withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws_credentials']]){
                         dir('../EZPZOS.Core'){
                             sh '''
-                            pwd
                             rm .env
-                            aws s3api get-object --bucket ezpzos-env-file --key core-env
+                            aws s3 cp "s3://ezpzos-env-file/web-env" .env
 
                             npm i
                             npm run build
