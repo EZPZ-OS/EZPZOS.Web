@@ -72,6 +72,11 @@ pipeline {
         always{
             cleanWs()
             deleteDir()
+            script{
+                sh '''
+                rm -rf ../EZPZOS.Core
+                '''
+            }
          }
     }
 }
