@@ -13,6 +13,8 @@ import MenuCreate from "./Pages/Menu/MenuCreate";
 import PersonalInfo from "./Pages/Profile/PersonalInfo";
 import BookPage from "./Components/BookPage/BookPage";
 import BusinessHome from "./Pages/Kitchen/BusinessHome";
+import BookConfirmPage from "./Pages/BookConfrimPage/BookConfirmPage";
+import BookDone from "./Components/ClientBookDone/BookDone";
 
 const AppRoutes: React.FC = () => (
 	<Routes>
@@ -39,7 +41,9 @@ const AppRoutes: React.FC = () => (
 		/>
 		<Route path={DefaultRoutesValues.BusinessRoutes.CreateMenu} element={<MenuCreate />} />
 		{/* Book Routes*/}
-		<Route path={DefaultRoutesValues.BookRoutes.Book} element={<BookPage />}/>
+		<Route path={DefaultRoutesValues.BookRoutes.Book} element={<BookPage />} />
+		<Route path={DefaultRoutesValues.BookRoutes.Confirm} element={<BookConfirmPage />} />
+		<Route path={DefaultRoutesValues.BookRoutes.Booked} element={<BookDone />} />
 	</Routes>
 );
 
