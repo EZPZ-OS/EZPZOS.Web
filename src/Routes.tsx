@@ -7,11 +7,11 @@ import { DefaultRoutesValues } from "ezpzos.core";
 import Profile from "./Pages/Profile/Profile";
 import LoginSignupPage from "./Pages/LoginOrSignup/LoginOrSignup";
 import OTPPage from "./Pages/OTPPage/OTPPage";
-import BusinessHome from "./Pages/Kitchen/BuisnessHome";
 import ClientCartPage from "./Pages/ClientCart/ClientCartPage";
 import PastOrder from "./Pages/PastOrder/PastOrder";
 import MenuCreate from "./Pages/Menu/MenuCreate";
 import PersonalInfo from "./Pages/Profile/PersonalInfo";
+import BusinessHome from "./Pages/Kitchen/BusinessHome";
 
 const AppRoutes: React.FC = () => (
 	<Routes>
@@ -25,6 +25,7 @@ const AppRoutes: React.FC = () => (
 		<Route path={DefaultRoutesValues.UserRoutes.Profile} element={<Profile />} />
 		<Route path={DefaultRoutesValues.UserRoutes.UserInfo} element={<PersonalInfo />} />
 		<Route path={DefaultRoutesValues.UserRoutes.PastOrders} element={<PastOrder />} />
+		<Route path={DefaultRoutesValues.CartRoutes.ClientCart} element={<ClientCartPage />} />
 
 		{/* Business Routes */}
 		<Route
