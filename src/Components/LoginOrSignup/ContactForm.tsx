@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import GoogleIcon from "../../Assets/Images/GoogleIcon.png";
-import { DefaultLoginSignupValues, LogHandler, LogLevel } from "ezpzos.core";
+import { DefaultLoginSignupValues, LogHandler, LogLevel, OTPType } from "ezpzos.core";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setMobileNumber } from "../Auth/AuthSlice";
-import { handleSendOTP } from "../../Components/OTP/OTPService";
+import { setMobileNumber, setOTPType } from "../../Store/AuthSlice";
+import { handleSendOTP } from "../../Services/PublicService";
 
 /**
  * This is the ContactForm component for user to login/signup
@@ -23,11 +23,14 @@ const ContactForm: React.FC<ContactFormProps> = ({ isLogin }) => {
 
 	const onSendOTP = async () => {
 		try {
+			// Determine the use of otpService is for login or signup
+			const otpType = isLogin ? OTPType.LoginOTP : OTPType.SignupOTP;
 			// Use the handleSendOTP function from OTPService
 			await handleSendOTP(mobileNumberLocal);
 
-			// If OTP sent successfully, store the mobile number and navigate to OTP page
+			// If OTP sent successfully, store the mobile number and otpType, navigate to OTP page
 			dispatch(setMobileNumber(mobileNumberLocal));
+			dispatch(setOTPType(otpType));
 			navigate("/otp");
 		} catch (error) {
 			if (error instanceof Error) {
