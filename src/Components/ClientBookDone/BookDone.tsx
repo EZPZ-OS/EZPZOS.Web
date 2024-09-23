@@ -50,7 +50,7 @@ export default function BookDone(props: { people: number; date: string; time: st
 					</ul>
 				</div>
 				{/**Back to Home Button */}
-				<div className="mt-[80px] flex justify-center   h-[47px]  text-white font-[20px] font-[400]">
+				<div className="mt-[80px] flex justify-center   h-[47px]  text-white font-[20px]">
 					<div
 						className=" flex justify-center items-center bg-gradient-to-r from-[#EF7221] to-[#FF6514] w-[334px] h-[47px] rounded-[3px]"
 						onClick={returnHomePage}
