@@ -1,0 +1,49 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - chris-GHA-ci
+  pull_request:
+    branches:
+      - chris-GHA-ci
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the Web repository (Main repo)
+      - name: Checkout Web repository
+        uses: actions/checkout@v4
+        with:
+          repository: EZPZ-OS/EZPZOS.Web
+          ref: chris-GHA-ci
+
+      # Step 2: Checkout the Core repository (Dependency)
+      - name: Checkout Core repository
+        uses: actions/checkout@v4
+        with:
+          repository: EZPZ-OS/EZPZOS.Core
+          token: ${{ secrets.GH_TOKEN }}  # Use the GH_TOKEN to authenticate and checkout Core
+          path: EZPZOS.Core  # This creates a directory at the root of the workspace
+
+      # Step 3: Install dependencies and build Core
+      - name: Install and build Core
+        working-directory: ./EZPZOS.Core
+        run: |
+          npm install
+          npm run build
+    
+      # Correctly move Core to be on the same level as Web
+      - name: verify the files structure
+        run: |
+          cp -r EZPZOS.Core /home/runner/work/EZPZOS.Core
+          ls -alh /home/runner/work/  # List to verify the structure at the workspace level
+
+      # Step 5: Install dependencies and build Web (after Core is built)
+      - name: Install and build Web
+        # working-directory: ./EZPZOS.Web
+        run: |
+          npm install
+          npm run build
