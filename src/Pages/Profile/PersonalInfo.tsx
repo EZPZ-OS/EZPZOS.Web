@@ -14,7 +14,7 @@ const PersonalInfo: React.FC = () => {
 	const dispatch = useDispatch();
 	const isAuthenticated = useAuthCheck();
 	const [isLogout, setIsLogout] = useState<boolean>(false); // Track if the user logged out intentionally
-	
+
 	// Effect to manage the alert and navigation for unauthenticated users
 	useEffect(() => {
 		if (!isAuthenticated && !isLogout) {
@@ -29,23 +29,25 @@ const PersonalInfo: React.FC = () => {
 		}
 	}, [isAuthenticated, isLogout, dispatch]);
 
+	// Effect to handle the logout process when `isLogout` becomes true
+	useEffect(() => {
+		if (isLogout) {
+			// Trigger alert and navigate to the home page
+			dispatch(
+				showAlert({
+					message: "User logged out successfully.",
+					isError: false,
+					navigateTo: "/" // Navigate to home page
+				})
+			);
+		}
+	}, [isLogout, dispatch]); // This effect runs when `isLogout` is set to true
+
 	// Handle the logout action
 	const handleLogout = () => {
-		// Mark as logged out intentionally first
+		// Mark as logged out intentionally
 		setIsLogout(true);
-	
-		// Simulate delay to ensure the state update occurs before dispatching the alert
-		setTimeout(() => {
-		  // Trigger alert and navigate to home page
-		  dispatch(
-			showAlert({
-			  message: "User logged out successfully.",
-			  isError: false,
-			  navigateTo: "/", // Navigate to home page
-			})
-		  );
-		}, 30); // Slight delay to ensure the state updates correctly
-	  };
+	};
 
 	return (
 		<div>
