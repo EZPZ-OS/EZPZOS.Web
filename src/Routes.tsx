@@ -29,7 +29,7 @@ const AppRoutes: React.FC = () => (
 		<Route path={DefaultRoutesValues.UserRoutes.Profile} element={<Profile />} />
 		<Route path={DefaultRoutesValues.UserRoutes.UserInfo} element={<PersonalInfo />} />
 		<Route path={DefaultRoutesValues.UserRoutes.PastOrders} element={<PastOrder />} />
-		<Route path={DefaultRoutesValues.CartRoutes.ClientCart} element={<ClientCartPage />} />
+		{/*<Route path={DefaultRoutesValues.CartRoutes.ClientCart} element={<ClientCartPage />} />*/}
 
 		{/* Business Routes */}
 		<Route
