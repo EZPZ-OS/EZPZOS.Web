@@ -7,7 +7,7 @@ import { DefaultRoutesValues } from "ezpzos.core";
 import Profile from "./Pages/Profile/Profile";
 import LoginSignupPage from "./Pages/LoginOrSignup/LoginOrSignup";
 import OTPPage from "./Pages/OTPPage/OTPPage";
-import ClientCartPage from "./Pages/ClientCart/ClientCartPage";
+// import ClientCartPage from "./Pages/ClientCart/ClientCartPage";
 import PastOrder from "./Pages/PastOrder/PastOrder";
 import MenuCreate from "./Pages/Menu/MenuCreate";
 import PersonalInfo from "./Pages/Profile/PersonalInfo";
