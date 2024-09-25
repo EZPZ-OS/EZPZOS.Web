@@ -1,23 +1,26 @@
+import React from "react";
+import { Link } from "react-router-dom";
+
 interface HomePageButtonProps {
 	img: string;
 	title: string;
+	path: string;
 }
-/**
- * This interface defining the properties for the HomePageButton.
- * @param title is to store the HomePageButton's title.
- * @param img is to store the HomePageButton's img url string.
- */
-const HomePageButtons = (props: HomePageButtonProps) => {
-	return (
-		<div>
-			<div className="w-full flex justify-center items-center gap-10 mt-12">
-				<div className="flex flex-col items-center gap-2 ">
-					<img src={require(`../../Assets/Icons/${props.img}`)} className="w-[70px] h-[80px]" alt="logo" />
 
-					<div className="text-white">{props.title}</div>
-				</div>
+/**
+ * This interface defines the properties for the HomePageButton.
+ * @param title - The HomePageButton's title.
+ * @param img - The HomePageButton's image URL string.
+ * @param path - The navigation path to be linked to when the button is clicked.
+ */
+const HomePageButtons: React.FC<HomePageButtonProps> = ({ img, title, path }) => {
+	return (
+		<Link to={path} className="w-full flex justify-center items-center gap-10 mt-12">
+			<div className="flex flex-col w-[90px] items-center gap-2">
+				<img src={require(`../../Assets/Icons/${img}`)} className="w-[70px] h-[80px]" alt={title} />
+				<div className="text-white text-sm">{title}</div>
 			</div>
-		</div>
+		</Link>
 	);
 };
 

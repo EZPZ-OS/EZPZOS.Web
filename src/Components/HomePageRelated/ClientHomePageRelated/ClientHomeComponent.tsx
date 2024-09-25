@@ -1,4 +1,5 @@
-import { ClientHomePageValuesProp } from "../../../pages/Home";
+import React from "react";
+import { ClientHomePageValuesProp } from "../../../Pages/Home";
 import { DefaultHomePageValues } from "ezpzos.core";
 import Logo from "../../../Assets/Images/Logo.png";
 import ClientAvatar from "../../../Assets/Icons/ClientAvatar.png";
@@ -8,10 +9,9 @@ import LogoWithName from "../../../Assets/Images/LogoWithName.png";
 import { Link } from "react-router-dom";
 
 /**
- * @param isLoggedIn is a variable to store login status data that passed from EZPZ.CORE ClientPageValuesProp constant,
- * @param data pass a DefaultClientHomePageValues mock data  into Client Home Component.
+ * @param isLoggedIn - Boolean to store login status data, passed from EZPZ.CORE ClientPageValuesProp constant.
+ * @param data - Pass a DefaultClientHomePageValues mock data into Client Home Component.
  */
-
 const ClientHomeComponent = (data: ClientHomePageValuesProp) => {
 	const isLoggedIn = data.ClientHomePageValues.IsLoggedIn;
 
@@ -45,16 +45,16 @@ const ClientHomeComponent = (data: ClientHomePageValuesProp) => {
 
 	const notificationlist = (
 		<div className="flex flex-col items-center w-4/5 mt-6">
-			{/*get HomePageNotification from data variable and use map to display each HomePageNotification*/}
-			{data.ClientHomePageValues.NotificationList.map((data: any, index: any) => {
-				return <HomePageNotification key={index} title={data.title} content={data.content} />;
-			})}
+			{/* Get HomePageNotification from data variable and use map to display each HomePageNotification */}
+			{data.ClientHomePageValues.NotificationList.map((notification, index) => (
+				<HomePageNotification key={index} title={notification.title} content={notification.content} />
+			))}
 		</div>
 	);
 
 	const notLoggedInSignInButton = (
 		<div className="flex-col">
-			<Link to="signup">
+			<Link to="/login">
 				<button className="h-[50px] w-[370px] rounded-lg mt-14 text-[#FFFFFF] text-xl bg-gradient-to-r from-[#FFB682F5] via-[#F8A27AF5] to-[#F28C83F5]">
 					{DefaultHomePageValues.NotLoggedInSignInButton.SignInButtonDefualtValue}
 				</button>
@@ -63,8 +63,8 @@ const ClientHomeComponent = (data: ClientHomePageValuesProp) => {
 				<span className=" text-[#dcdcdcbb] ">
 					{DefaultHomePageValues.NotLoggedInSignInButton.OfferSignUpDefaultValue}
 				</span>
-				<Link to="" className="font-bold text-[#dcdcdcbb] ">
-					{DefaultHomePageValues.NotLoggedInSignInButton.SignUpButtonDefualtValue}
+				<Link to="/signup" className="font-bold text-[#dcdcdcbb] ">
+					{DefaultHomePageValues.NotLoggedInSignInButton.SignUpButtonDefaultValue}
 				</Link>
 			</div>
 		</div>
@@ -75,11 +75,16 @@ const ClientHomeComponent = (data: ClientHomePageValuesProp) => {
 			{isLoggedIn ? loggedInLogo : notLoggedInLogo}
 			{isLoggedIn ? loggedInOpening : ""}
 
-			{/*get HomePageButtonList from data variable and use map to display each homepage button*/}
+			{/* Get HomePageButtonList from data variable and use map to display each homepage button */}
 			<div className="flex gap-16">
-				{data.ClientHomePageValues.HomePageButtonList.map((data, index) => {
-					return <HomePageButtons key={index} img={data.Img} title={data.Title} />;
-				})}
+				{data.ClientHomePageValues.HomePageButtonList.map((buttonData, index) => (
+					<HomePageButtons
+						key={index}
+						img={buttonData.Img}
+						title={buttonData.Title}
+						path={buttonData.Path} // Pass the path prop to HomePageButtons
+					/>
+				))}
 			</div>
 
 			{isLoggedIn ? notificationlist : ""}
