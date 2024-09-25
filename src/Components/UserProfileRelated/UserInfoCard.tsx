@@ -5,7 +5,7 @@ import { DefaultPersonalInfoPageValues, User } from "ezpzos.core";
 import { logout, setUser } from "../../Store/AuthSlice";
 import { showAlert } from "../../Store/AlertSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { UserService } from "../../Services/PrivateService";
+import { UserService } from "../../Services/Private/UserService";
 import { RootState } from "../../Store/Store";
 
 /**
@@ -37,21 +37,21 @@ const UserInfoCard: React.FC<UserInfoCardProps> = ({ avatar, username, phone, em
 	const user = useSelector((state: RootState) => state.auth.user); // Get the current user from Redux
 	// State to track if each field is being edited
 	const [isEditingName, setIsEditingName] = useState(false);
-	const [editedName, setEditedName] = useState(username || "");// Track the edited name
+	const [editedName, setEditedName] = useState(username || ""); // Track the edited name
 
 	//show successfully logged out message and direct to home page after logout
 	const handleLogout = () => {
 		dispatch(logout());
 		onLogout(); // Notify parent that the user has logged out
 	};
-	
+
 	const handleUpdateUser = async () => {
-		if(user && editedName) {
-			const updatedUserData= {
+		if (user && editedName) {
+			const updatedUserData = {
 				...user,
 				Username: editedName
-			}
-			
+			};
+
 			try {
 				// Call the UserService to update the user in the backend
 				const response = await UserService.updateUserRequest(updatedUserData);
@@ -72,8 +72,7 @@ const UserInfoCard: React.FC<UserInfoCardProps> = ({ avatar, username, phone, em
 				dispatch(showAlert({ message: "An unexpected error occurred", isError: true }));
 			}
 		}
-		
-	}
+	};
 
 	const toggleEditName = () => setIsEditingName(!isEditingName);
 
@@ -103,8 +102,11 @@ const UserInfoCard: React.FC<UserInfoCardProps> = ({ avatar, username, phone, em
 								onChange={e => setEditedName(e.target.value)}
 								className="border-none bg-[#E3E3E3] px-2 py-1 rounded-lg pl-[20px] pr-[45px] focus:outline-none placeholder-[#898686]"
 							/>
-							<button onClick={handleUpdateUser} className="ml-2 bg-black text-white text-sm px-3 py-1 rounded-2xl"
-							style={{ boxShadow: "0px 4px 6px rgba(93, 88, 88, 0.5)" }}>
+							<button
+								onClick={handleUpdateUser}
+								className="ml-2 bg-black text-white text-sm px-3 py-1 rounded-2xl"
+								style={{ boxShadow: "0px 4px 6px rgba(93, 88, 88, 0.5)" }}
+							>
 								{DefaultPersonalInfoPageValues.ConfirmButton}
 							</button>
 						</div>
