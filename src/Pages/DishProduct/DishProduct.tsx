@@ -26,7 +26,6 @@ const settings = {
 }
 
 const DishProduct = () => {
-    console.log('render=======')
     const singleDishPrice = 22.0
     const [proNum, setProNum] = useState(1)
     const [price, setPrice] = useState(0)
@@ -64,15 +63,19 @@ const DishProduct = () => {
         setOptions(copyOptions)
     }
 
+    const goBack = ()=>{
+        
+    }
+
     return (
-        <div className="relative bg-white pb-5">
+        <div className="relative bg-gradient-to-b from-[#FFFFFF] from-65% to-[#E5D9D3] to-100% pb-5">
             <div className="fixed left-0 top-0 z-10 w-full h-[60px] bg-white">
-                <div className="absolute left-5 top-5 w-full h-[38px] text-2xl flex flex-row items-center">
+                <div className="absolute left-5 top-5 w-full h-[38px] text-2xl flex flex-row items-center" onClick={goBack}>
                     <FaArrowLeftLong fontWeight={400}/>
                     <span className="ml-2">Back</span>
                 </div>
             </div>
-            <div className="ml-5 mr-5 mt-[68px]">
+            <div className="ml-7 mr-7 mt-[68px]">
                 {/* 轮播图部分 */}
                 <div className="w-full h-56 mt-7">
                     <Slider {...settings} className="w-full h-full">

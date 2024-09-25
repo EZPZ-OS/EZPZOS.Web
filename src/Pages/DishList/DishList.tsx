@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { FaArrowLeft } from "react-icons/fa";
 
 import DishItem from '../../Components/DishItem/DishItem';
-import Dish from '../../Assets/Images/Dish.png'
+import Dish from '../../Assets/Images/dish.png'
 
 const DishList = () => {
     const [availableDish, setAvailableDish] = useState([
