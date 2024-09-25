@@ -3,10 +3,10 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - chris-GHA-ci
+      - main
   pull_request:
     branches:
-      - chris-GHA-ci
+      - main
 
 jobs:
   build:
@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: EZPZ-OS/EZPZOS.Web
-          ref: chris-GHA-ci
+          ref: main
 
       # Step 2: Checkout the Core repository (Dependency)
       - name: Checkout Core repository
