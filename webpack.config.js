@@ -13,6 +13,9 @@ module.exports = {
 	},
 	devServer: {
 		historyApiFallback: true,
+		static: {
+			directory: path.join(__dirname, "public"), // Serve static files from "public"
+		},
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
@@ -30,12 +33,11 @@ module.exports = {
 	],
 	resolve: {
 		modules: [__dirname, "src", "node_modules"],
-		extensions: ["*", ".js", ".jsx", ".tsx", ".ts"],
+		extensions: [".*", ".js", ".jsx", ".tsx", ".ts"],
 		fallback: {
 			url: require.resolve("url"),
 			fs: require.resolve("graceful-fs"),
 			buffer: require.resolve("buffer"),
-			Buffer: require.resolve("Buffer"),
 			timers: require.resolve("timers"),
 			events: false,
 			"node:stream": require.resolve("node:stream"),
@@ -67,9 +69,22 @@ module.exports = {
 				use: ["style-loader", "css-loader", "postcss-loader"],
 			},
 			{
+				test: /\.css$/,
+				include: path.resolve(__dirname, "./node_modules/swiper"),
+				use: ["style-loader", "css-loader", "postcss-loader"],
+			},
+			{
+				test: /\.css$/,
+				include: path.resolve(__dirname, "./node_modules/react-calendar/dist/Calendar.css"),
+				use: ["style-loader", "css-loader", "postcss-loader"],
+			},
+			{
 				test: /\.(png|svg|jpg|gif|ico|json)$/,
+				type: "asset/resource", // Use Webpack 5 asset module
 				exclude: /node_modules/,
-				use: ["file-loader?name=[name].[ext]"],
+				generator: {
+					filename: "images/[name][ext][query]",
+				},
 			},
 		],
 	},
