@@ -43,7 +43,7 @@ const MenuRead = () => {
             </div>
             <div className="h-[calc(100vh+7px)] ml-7 mr-7 mt-[68px]">
                 <div className="text-sm text-slate-400">This is how your details look to a customer :)</div>
-                {/* 轮播图部分 */}
+                {/* slideshow part */}
                 <div className="w-full h-56 mt-7">
                     <Slider {...settings} className="w-full h-full">
                         <div className="w-full h-56">

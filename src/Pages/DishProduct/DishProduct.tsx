@@ -26,7 +26,6 @@ const settings = {
 }
 
 const DishProduct = () => {
-    console.log('render=======')
     const singleDishPrice = 22.0
     const [proNum, setProNum] = useState(1)
     const [price, setPrice] = useState(0)
