@@ -1,7 +1,7 @@
 name: Build and Deploy
 
 on:
-  push:https://github.com/EZPZ-OS/EZPZOS.Web/pull/47/conflicts
+  push:
     branches:
       - main
   pull_request:
