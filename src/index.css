@@ -4,6 +4,33 @@
 @import url('https://fonts.googleapis.com/css2?family=Istok+Web:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
 
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
+
+
+.slick-list{
+  height: 100%;
+  box-shadow: 0 5px 4px rgba(81,81,81, .4);
+}
+.slick-dots{
+  bottom: -33px;
+}
+.slick-dots li span{
+  display: block;
+  opacity: 1;
+  background-color: #9F9E9E;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+}
+.slick-dots li.slick-active span{
+  opacity: 1;
+  background-color: #D26211;
+}
+
 @layer utilities {
   /* Hide scrollbar for Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
