@@ -12,14 +12,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       # Step 1: Checkout the Web repository (Main repo)
-      # - name: Checkout Web repository
-      #   uses: actions/checkout@v4
-      #   with:
-      #     repository: EZPZ-OS/EZPZOS.Web
-      #     ref: main
+      - name: Checkout Web repository
+        uses: actions/checkout@v4
+        with:
+          repository: EZPZ-OS/EZPZOS.Web
+          ref: main
       # Step 2: Checkout the Core repository (Dependency)       
       - name: Checkout Core repository
         uses: actions/checkout@v4
@@ -35,7 +34,7 @@ jobs:
           echo "outside of $(pwd)"
           ls ../
           
-          mv  EZPZOS.Core /home/runner/work/EZPZOS.Core
+          mv  EZPZOS.Core/ /home/runner/work/EZPZOS.Web/
           
       # Step 4: Install dependencies and build Core
       - name: Install and build Core
