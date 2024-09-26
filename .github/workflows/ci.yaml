@@ -29,12 +29,12 @@ jobs:
       # Step 3: Correctly move Core to be on the same level as Web
       - name: verify the files structure
         run: |
+          mv  EZPZOS.Core/ ../EZPZOS.Core
           pwd 
           ls
           echo "outside of $(pwd)"
           ls ../
           
-          mv  EZPZOS.Core/ ../EZPZOS.Core
           
       # Step 4: Install dependencies and build Core
       - name: Install and build Core
