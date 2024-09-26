@@ -15,11 +15,11 @@ jobs:
 
     steps:
       # Step 1: Checkout the Web repository (Main repo)
-      - name: Checkout Web repository
-        uses: actions/checkout@v4
-        with:
-          repository: EZPZ-OS/EZPZOS.Web
-          ref: main
+      # - name: Checkout Web repository
+      #   uses: actions/checkout@v4
+      #   with:
+      #     repository: EZPZ-OS/EZPZOS.Web
+      #     ref: main
       # Step 2: Checkout the Core repository (Dependency)       
       - name: Checkout Core repository
         uses: actions/checkout@v4
