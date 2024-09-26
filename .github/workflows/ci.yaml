@@ -34,7 +34,7 @@ jobs:
           echo "outside of $(pwd)"
           ls ../
           
-          mv  EZPZOS.Core/ /home/runner/work/EZPZOS.Web/
+          mv  EZPZOS.Core/ /home/runner/work/EZPZOS.Web/EZPZOS.Core/
           
       # Step 4: Install dependencies and build Core
       - name: Install and build Core
