@@ -33,7 +33,7 @@ module.exports = {
 	],
 	resolve: {
 		modules: [__dirname, "src", "node_modules"],
-		extensions: ["*", ".js", ".jsx", ".tsx", ".ts"],
+		extensions: [".*", ".js", ".jsx", ".tsx", ".ts"],
 		fallback: {
 			url: require.resolve("url"),
 			fs: require.resolve("graceful-fs"),
@@ -55,7 +55,7 @@ module.exports = {
 			{
 				test: /\.css$/,
 				include: path.resolve(__dirname, "src"),
-				exclude:/node_modules/,
+				exclude: /node_modules/,
 				use: ["style-loader", "css-loader", "postcss-loader"],
 			},
 			{
