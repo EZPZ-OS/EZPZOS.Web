@@ -1,53 +1,56 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../Store/Store";
 import BottomNavBar from "../../Components/BottomNavBar";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { DefaultPersonalInfoPageValues } from "ezpzos.core";
 import useAuthCheck from "../../Hooks/useAuthCheck";
-import AlertTag from "../../Components/AlertTag";
 import UserInfoCard from "../../Components/UserProfileRelated/UserInfoCard";
-
-/**
- * This PersonalInfo page is responsible for displaying and managing the user's personal information.
- * It so far includes:
- * 
- * - Fetching the user's authentication status using `useAuthCheck`.
- * - Displaying user details such as avatar, username, phone number, and email, along with an option to log out.
- * - Handling both intentional logouts (via the "Logout" button) and unintentional session terminations (when the user is unauthenticated).
- * - Showing appropriate alert messages like "Please login first" or "User logged out successfully" based on user actions.
- * 
-
- * This component conditionally renders content based on whether the user is authenticated or not and communicates with child components like `UserInfoCard`.
- */
+import { showAlert } from "../../Store/AlertSlice";
 
 const PersonalInfo: React.FC = () => {
 	let user = useSelector((state: RootState) => state.auth.user);
+	const dispatch = useDispatch();
 	const isAuthenticated = useAuthCheck();
-	const [showAlert, setShowAlert] = useState<boolean>(false);
-	const [alertMessage, setAlertMessage] = useState<string>(""); // Track the specific alert message
-	// Track if the user logged out intentionally from clicking the logout button in the child component UserInfoCard
-	const [isLogout, setIsLogout] = useState<boolean>(false); 
-	// Effect to manage the alert visibility
+	const [isLogout, setIsLogout] = useState<boolean>(false); // Track if the user logged out intentionally
+
+	// Effect to manage the alert and navigation for unauthenticated users
 	useEffect(() => {
 		if (!isAuthenticated && !isLogout) {
-			setAlertMessage("Please login first."); // Set the "Please login first" message
-			setShowAlert(true); //Show "Please login first" alert only if not logged out intentionally
+			// Show alert when user is not authenticated and hasn't logged out intentionally
+			dispatch(
+				showAlert({
+					message: "Please login first.",
+					isError: true,
+					navigateTo: "/login" // Navigate to login page
+				})
+			);
 		}
-	}, [isAuthenticated, isLogout]);
+	}, [isAuthenticated, isLogout, dispatch]);
 
+	// Effect to handle the logout process when `isLogout` becomes true
+	useEffect(() => {
+		if (isLogout) {
+			// Trigger alert and navigate to the home page
+			dispatch(
+				showAlert({
+					message: "User logged out successfully.",
+					isError: false,
+					navigateTo: "/" // Navigate to home page
+				})
+			);
+		}
+	}, [isLogout, dispatch]); // This effect runs when `isLogout` is set to true
+
+	// Handle the logout action
 	const handleLogout = () => {
-		setIsLogout(true); // Mark as logged out
-		setAlertMessage("User logged out successfully."); // Set the "User logged out" message
-    	setShowAlert(true); // Show the "User logged out" message
-	  };
+		// Mark as logged out intentionally
+		setIsLogout(true);
+	};
 
 	return (
 		<div>
-			{/* Conditionally Render AlertTag if showAlert is true */}
-			{showAlert && <AlertTag alertMessage={alertMessage} isError={alertMessage === "Please login first."} />}
-
 			{isAuthenticated && (
 				<div className="flex flex-col w-screen font-lato">
 					<div className="bg-nav-bar-gradient w-full h-[142px] flex items-center z-10">

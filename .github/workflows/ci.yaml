@@ -8,48 +8,48 @@ on:
     branches:
       - main
 
+
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
+      # Step 1: Checkout the Web repository (Main repo)
       - name: Checkout Web repository
         uses: actions/checkout@v4
         with:
           repository: EZPZ-OS/EZPZOS.Web
           ref: main
-          
+      # Step 2: Checkout the Core repository (Dependency)       
       - name: Checkout Core repository
         uses: actions/checkout@v4
         with:
           repository: EZPZ-OS/EZPZOS.Core
           token: ${{ secrets.GH_TOKEN }}  # Use the GH_TOKEN to authenticate and checkout Core
           path: EZPZOS.Core  # This creates a directory at the root of the workspace
-
+      # Step 3: Correctly move Core to be on the same level as Web
+      - name: verify the files structure
+        run: |
+          mv  EZPZOS.Core/ ../EZPZOS.Core
+          pwd 
+          ls
+          echo "outside of $(pwd)"
+          ls ../
+          
+          
+      # Step 4: Install dependencies and build Core
       - name: Install and build Core
-        working-directory: ./EZPZOS.Core
+        working-directory: ../EZPZOS.Core
         run: |
           npm install
           npm run build
+    
 
-      - name: Set Core build status
-        id: core_build_status
-        run: echo "CORE_BUILD_STATUS=${{ job.status }}" >> $GITHUB_ENV  # Store Core build status in an environment variable
 
-      - name: Copy Core Directory to Correct Location
-        run: |
-          cp -r EZPZOS.Core /home/runner/work/EZPZOS.Web/EZPZOS.Core
-
+      # Step 5: Install dependencies and build Web (after Core is built)
       - name: Install and build Web
+        # working-directory: ./EZPZOS.Web
         run: |
           npm install
           npm run build
 
-      - name: Set Web build status
-        id: web_build_status
-        run: echo "WEB_BUILD_STATUS=${{ job.status }}" >> $GITHUB_ENV  # Store Web build status in an environment variable
 
-      - name: Output Core and Web build statuses
-        run: |
-          echo "Core Build Status: $CORE_BUILD_STATUS"
-          echo "Web Build Status: $WEB_BUILD_STATUS"

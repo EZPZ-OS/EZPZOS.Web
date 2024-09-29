@@ -3,16 +3,9 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { login, setUser } from "../../Store/AuthSlice";
 import { RootState } from "../../Store/Store";
-import { useNavigate } from "react-router-dom";
 import { PhoneNumberNormalizer, LogHandler, LogLevel } from "ezpzos.core";
 import { AuthService } from "../../Services/PublicService";
-import AlertTag from "../AlertTag";
-
-/**
- * This interface defining the properties for the UserSignupFormProp
- * @param otpToken pass the otpToken from LoginOrSignup page received from otpPage after mobile verification to indicate the success
- * @param otpTarget pass the otpTarget from LoginOrSignup page received from otpPage to indicate either the otp is for signup/login
- */
+import { showAlert } from "../../Store/AlertSlice";
 
 interface UserSignupFormProps {
 	otpToken?: string | null;
@@ -24,50 +17,55 @@ const logger = new LogHandler("UserSignupForm.tsx");
 const UserSignupForm: React.FC<UserSignupFormProps> = ({ otpToken, otpTarget }) => {
 	const [username, setUsername] = useState<string>("");
 	const [email, setEmail] = useState<string>("");
-	const [showSuccess, setShowSuccess] = useState<boolean>(false); // State to manage the success alert
-	const [showError, setShowError] = useState<{ visible: boolean; message?: string }>({ visible: false }); // State to manage the error alert
-	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
-	//Select the mobileNumber saved in Redux authState to display in the input field
+	// Select the mobileNumber saved in Redux authState to display in the input field
 	const mobileNumber = useSelector((state: RootState) => state.auth.mobileNumber);
 
-	//Normalize the phone number to make sure userMobile's format is consistent (+614xxxxxxxx)
+	// Normalize the phone number to make sure userMobile's format is consistent (+614xxxxxxxx)
 	const normalizer = new PhoneNumberNormalizer(mobileNumber || "");
 	const normalizedMobile = normalizer.normalize();
 
-	//Handle form submission
+	// Handle form submission
 	const handleSubmit = async (event: React.FormEvent) => {
-		event.preventDefault(); // Prevent the default form submission behavior
+		event.preventDefault(); // Prevent default form submission behavior
 
-		const result = await AuthService.signupRequest(otpToken, username, email, normalizedMobile, otpTarget);
+		try {
+			const result = await AuthService.signupRequest(otpToken, username, email, normalizedMobile, otpTarget);
 
-		if (result.success && result.token && result.user) {
-			logger.Log("Signup", "Created user successfully", LogLevel.INFO);
-			// Dispatch the token to activate login state in Redux
-			dispatch(login({token: result.token, user: result.user})); 
-			// Dispatch user to save in Redux for frontend to use user info
-			dispatch(setUser(result.user))
-			setShowSuccess(true); // Show the success message
-			setTimeout(() => {
-				setShowSuccess(false);
-				navigate("/"); // Navigate to home after the success message is hidden
-			}, 3000);
-		} else if (result) {
-			// Show error message in the alert tag
-			setShowError({ visible: true, message: result.message || "An error occurred." });
-			setTimeout(() => {
-				setShowError({ visible: false });
-				navigate("/"); // Navigate to home after the error message is hidden
-			}, 3000);
-		} else {
-			// Handle unexpected undefined result
-			logger.Log("Signup", "An unexpected error occurred.", LogLevel.ERROR);
-			setShowError({ visible: true, message: "An unexpected error occurred." });
-			setTimeout(() => {
-				setShowError({ visible: false });
-				navigate("/"); // Navigate to home after the error message is hidden
-			}, 3000);
+			if (result.success && result.token && result.user) {
+				logger.Log("Signup", "Created user successfully", LogLevel.INFO);
+				// Dispatch the token to activate login state in Redux
+				dispatch(login({ token: result.token, user: result.user }));
+				// Dispatch user to save in Redux for frontend to use user info
+				dispatch(setUser(result.user));
+				// Trigger success alert and navigate to home page
+				dispatch(
+					showAlert({
+						message: DefaultLoginSignupValues.UserSignupFormDefaultValue.UserCreatedMessage,
+						isError: false,
+						navigateTo: "/"
+					})
+				);
+			} else if (result) {
+				dispatch(
+					showAlert({
+						message: result.message || "An error occurred.",
+						isError: true,
+						navigateTo: "/"
+					})
+				);
+			}
+		} catch (error) {
+			// Handle unexpected errors
+			logger.Log("Signup", `An unexpected error occurred: ${error}`, LogLevel.ERROR);
+			dispatch(
+				showAlert({
+					message: "An unexpected error occurred.",
+					isError: true,
+					navigateTo: "/"
+				})
+			);
 		}
 	};
 
@@ -76,12 +74,6 @@ const UserSignupForm: React.FC<UserSignupFormProps> = ({ otpToken, otpTarget }) 
 			onSubmit={handleSubmit}
 			className="flex flex-wrap max-w-screen-sm justify-center align-center mt-[71px] mx-auto font-sans font-normal"
 		>
-			{/* Conditionally render the success or error alert */}
-			{showSuccess && (
-				<AlertTag alertMessage={DefaultLoginSignupValues.UserSignupFormDefaultValue.UserCreatedMessage} />
-			)}
-			{showError.visible && <AlertTag alertMessage={showError.message} isError={true} />}
-
 			<div>
 				<label htmlFor="username" className="block text-xl text-[#FBFBFB] p-1.5">
 					{DefaultLoginSignupValues.UserSignupFormDefaultValue.UsernameLabel}

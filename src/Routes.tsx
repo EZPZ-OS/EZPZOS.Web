@@ -7,8 +7,8 @@ import { DefaultRoutesValues } from "ezpzos.core";
 import Profile from "./Pages/Profile/Profile";
 import LoginSignupPage from "./Pages/LoginOrSignup/LoginOrSignup";
 import OTPPage from "./Pages/OTPPage/OTPPage";
-import ClientCartPage from "./Pages/ClientCart/ClientCartPage";
 import PastOrder from "./Pages/PastOrder/PastOrder";
+import MenuRead from "./Pages/MenuRead/MenuRead";
 import MenuCreate from "./Pages/Menu/MenuCreate";
 import PersonalInfo from "./Pages/Profile/PersonalInfo";
 import BookPage from "./Components/BookPage/BookPage";
@@ -16,6 +16,7 @@ import BusinessHome from "./Pages/Kitchen/BusinessHome";
 import BookConfirmPage from "./Pages/BookConfrimPage/BookConfirmPage";
 import BookDone from "./Components/ClientBookDone/BookDone";
 import OrderStatus from "./Pages/OrderStatus/OrderStatus";
+import ClientCartPage from "./Pages/ClientCart/ClientCartPage";
 
 const AppRoutes: React.FC = () => (
 	<Routes>
@@ -32,6 +33,9 @@ const AppRoutes: React.FC = () => (
 		<Route path={DefaultRoutesValues.CartRoutes.ClientCart} element={<ClientCartPage />} />
 
 		{/* Business Routes */}
+		<Route path="businesshome" element={<BusinessHome BusinessHomePageValues={{IsLoggedIn:true, HomePageButtonList:[],NotificationList:[]}}/>} />
+		<Route path="businessmenulist" element={<MenuRead />} />
+
 		<Route
 			path={DefaultRoutesValues.BusinessRoutes.Home}
 			element={
@@ -45,7 +49,7 @@ const AppRoutes: React.FC = () => (
 		{/* Book Routes*/}
 		<Route path={DefaultRoutesValues.BookRoutes.Book} element={<BookPage />} />
 		<Route path={DefaultRoutesValues.BookRoutes.Confirm} element={<BookConfirmPage />} />
-		<Route path={DefaultRoutesValues.BookRoutes.Booked} element={<BookDone />} />
+		<Route path={DefaultRoutesValues.BookRoutes.Booked} element={<BookDone  people={2} date={""} time={""} userName={""}/>} />
 
 		{/* Order Routes*/}
 		<Route path={DefaultRoutesValues.OrderRoutes.OrderStatus} element={<OrderStatus />} />
