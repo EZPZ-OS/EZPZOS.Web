@@ -1,63 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { FaArrowLeft } from "react-icons/fa";
 
 import DishItem from '../../Components/DishItem/DishItem';
-import Dish from '../../Assets/Images/dish.png'
+import { GetAllCuisines } from "../../Services/Private/MenuService";
 
 const DishList = () => {
-    const [availableDish, setAvailableDish] = useState([
-        {
-            "id": 1,
-            "dishName": "Stewed beef with potatos 01",
-            "dishImg": Dish,
-            "tags": ["No.1 ordered"],
-            "desc": "This is the description. This is the description.This is the description.",
-            "price": 17.5
-        },
-        {
-            "id": 2,
-            "dishName": "Stewed beef with potatos 02",
-            "dishImg": Dish,
-            "tags": ["No.1 ordered"],
-            "desc": "This is the description. This is the description.This is the description.",
-            "price": 20.5
-        },
-        {
-            "id": 3,
-            "dishName": "Stewed beef with potatos 03",
-            "dishImg": Dish,
-            "tags": ["No.1 ordered"],
-            "desc": "This is the description. This is the description.This is the description.",
-            "price": 25.5
-        }
-    ])
-
-    const [notAvailableDish, setNotAvailableDish] = useState([
-        {
-            "id": 4,
-            "dishName": "Stewed beef with potatos 01",
-            "dishImg": Dish,
-            "tags": ["No.1 ordered"],
-            "desc": "This is the description. This is the description.This is the description.",
-            "price": 17.5
-        },
-        {
-            "id": 5,
-            "dishName": "Stewed beef with potatos 02",
-            "dishImg": Dish,
-            "tags": ["No.1 ordered"],
-            "desc": "This is the description. This is the description.This is the description.",
-            "price": 20.5
-        },
-        {
-            "id": 6,
-            "dishName": "Stewed beef with potatos 03",
-            "dishImg": Dish,
-            "tags": ["No.1 ordered"],
-            "desc": "This is the description. This is the description.This is the description.",
-            "price": 25.5
-        }
-    ])
+    const [availableDish, setAvailableDish] = useState<any[]>([])
+    const [notAvailableDish, setNotAvailableDish] = useState<any[]>([])
+    const navigate = useNavigate();
 
     const handleGoBack = () => {
         // go back
@@ -67,9 +18,29 @@ const DishList = () => {
         // go to add dish page
     }
 
-    const handleDishDetail = () => {
+    const handleDishDetail = (id: string) => {
         // go to dish detail page
+        navigate('/menu-detail/' + id)
     }
+
+    useEffect(()=>{
+        GetAllCuisines().then(res => {
+            if(res.status === 200){
+                let dishArr = res.data;
+                dishArr.forEach((ele : any) => {
+                    if(ele.IsAvailable){
+                        setAvailableDish((prevArray:any[]) => {
+                            return [...prevArray, ele];
+                        });
+                    }else{
+                        setNotAvailableDish((prevArray:any[]) => {
+                            return [...prevArray, ele];
+                        })
+                    }
+                })
+            }
+        })
+    }, [])
 
     return (
         <div className="relative">

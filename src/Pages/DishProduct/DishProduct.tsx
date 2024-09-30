@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom';
 import Slider from 'react-slick'
 
 import { FaArrowLeftLong, FaPlus } from "react-icons/fa6";
 import { GrFormSubtract } from "react-icons/gr";
 import { MdOutlineCheckBox, MdOutlineCheckBoxOutlineBlank } from "react-icons/md";
+import { GetCuisineById } from "../../Services/Private/MenuService";
 
 import demoImg01 from '../../Assets/Images/11.png'
 import demoImg02 from '../../Assets/Images/London.png'
@@ -26,7 +28,8 @@ const settings = {
 }
 
 const DishProduct = () => {
-    const singleDishPrice = 22.0
+    const params = useParams();
+    const navigate = useNavigate();
     const [proNum, setProNum] = useState(1)
     const [price, setPrice] = useState(0)
     const [isSpicy, setIsSpicy] = useState(true)
@@ -34,10 +37,27 @@ const DishProduct = () => {
         {'Extra': [{'title': 'Add Sliced Beef', 'value': true}, {'title': 'Add Stir-fired Egg and Romato', 'value': false}]},
         {'Noodle': [{'title': 'Add Flat Noodle', 'value': false}]}
     ])
+    const [singleDishPrice, setSingleDishPrice] = useState(0);
+    const [dishName, setDishName] = useState('');
+    const [dishDesc, setDishDesc] = useState('');
+    const [category, setCategory] = useState('');
 
     useEffect(()=>{
         setPrice(proNum * singleDishPrice)
     }, [proNum])
+
+    useEffect(()=>{
+        let dishId = params.id;
+        GetCuisineById(dishId).then(res => {
+            if(res.status === 200){
+                setDishName(res.data.Name)
+                setDishDesc(res.data.Description)
+                setCategory(res.data.Category)
+                setSingleDishPrice(res.data.Price)
+                setPrice(proNum * res.data.Price)
+            }
+        })
+    }, [])
 
     const handProNum = (flag: string) => {
         if (flag === 'substract'){
@@ -52,7 +72,7 @@ const DishProduct = () => {
     }
 
     const handleAddCart = () => {
-
+        // add cart
     }
 
     const handleOptions = (key: number, valIndex: number) => {
@@ -64,7 +84,7 @@ const DishProduct = () => {
     }
 
     const goBack = ()=>{
-        
+        navigate('/menu-list')
     }
 
     return (
@@ -76,7 +96,7 @@ const DishProduct = () => {
                 </div>
             </div>
             <div className="ml-7 mr-7 mt-[68px]">
-                {/* 轮播图部分 */}
+                {/* slideshow part */}
                 <div className="w-full h-56 mt-7">
                     <Slider {...settings} className="w-full h-full">
                         <div className="w-full h-56">
@@ -90,12 +110,11 @@ const DishProduct = () => {
                         </div>
                     </Slider>
                 </div>
-                <div className="text-[24px] font-bold mt-5 text-text-dishpro-color [text-shadow:_0_3px_2px_rgb(81_81_81_/_40%)]">Seafood Fried noodles</div>
+                <div className="text-[24px] font-bold mt-5 text-text-dishpro-color [text-shadow:_0_3px_2px_rgb(81_81_81_/_40%)]">{dishName}</div>
                 <ul className="mt-2 flex flex-row">
-                    <li className="h-5 leading-5 text-sm text-[#5A4F4F] px-2 bg-gradient-to-r from-[#F279A5] to-[#FA986E] opacity-90 rounded-sm mr-1 shadow-tag">gluten free</li>
-                    <li className="h-5 leading-5 text-sm text-[#5A4F4F] px-2 bg-gradient-to-r from-[#F279A5] to-[#FA986E] opacity-90 rounded-sm mr-1 shadow-tag">Seafood</li>
+                    <li className="h-5 leading-5 text-sm text-[#5A4F4F] px-2 bg-gradient-to-r from-[#F279A5] to-[#FA986E] opacity-90 rounded-sm mr-1 shadow-tag">{category}</li>
                 </ul>
-                <div className="mt-3 text-text-dishpro-color text-xl [text-shadow:_0_3px_2px_rgb(81_81_81_/_40%)]">This is introduction. This is introduction. This is introduction. This is introduction. This is introduction.</div>
+                <div className="mt-3 text-text-dishpro-color text-xl [text-shadow:_0_3px_2px_rgb(81_81_81_/_40%)]">{dishDesc}</div>
                 <div className="mt-3">
                     <h2 className="text-text-dishpro-color font-bold">Choose flavor:</h2>
                     <div className="mt-1 flex flex-row items-center">
