@@ -42,6 +42,8 @@ const authSlice = createSlice({
 		},
 		setUser(state, action: PayloadAction<User>) {
 			state.user = action.payload;
+			// Update localStorage whenever the user is updated
+			localStorage.setItem("user", JSON.stringify(action.payload));
 		},
 		login(state, action: PayloadAction<{ token: string; user: User }>) {
 			// Put token inside localStorage and Redux, and set isLoggedIn to true

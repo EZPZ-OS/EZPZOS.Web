@@ -18,7 +18,7 @@ export const UserService = {
 				errorCode?: number;
 				errorMessage?: string;
 			}>(
-				`/private/user/update/${userData.Id}`,
+				`/private/user/${userData.Id}`,
 				userData // The updated user data
 			);
 
@@ -42,6 +42,53 @@ export const UserService = {
 			return {
 				success: false,
 				message: error.message || "An unexpected error occurred during the user update."
+			};
+		}
+	},
+
+  //update Avatar
+  updateAvatarRequest:async (
+		userId: string,
+    avatarFile: File
+	): Promise<{ result: boolean; message?: string }> => {
+		try {
+			// Log the update request for debugging
+			logger.Log("updateAvatarRequest", `Attempting to update Avatar with ID: ${userId}`, LogLevel.INFO);
+
+      // Create FormData to append the avatar file
+      const formData = new FormData();
+      formData.append('avatar', avatarFile); // The 'avatar' field must match what the backend expects
+
+			// Make a PUT request to upload the avatar
+			const response = await apiClient.put(
+				`/private/user/${userId}/avatar`,
+				formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data', // Ensure multipart/form-data header is set
+          },
+        }
+			);
+
+			// Check if the update was successful
+			if (response.data.result) {
+				logger.Log("updateAvatarRequest", `Avatar updated successfully`, LogLevel.INFO);
+				return {
+					result: true,
+				};
+			} else {
+				logger.Log("updateAvatarRequest", `Failed to update avatar: ${response.data.errorMessage}`, LogLevel.ERROR);
+				return {
+					result: false,
+					message: response.data.errorMessage || "Failed to update avatar."
+				};
+			}
+		} catch (error: any) {
+			// Log any unexpected errors
+			logger.Log("updateAvatarRequest", `Error updating avatar: ${error.message}`, LogLevel.ERROR);
+			return {
+				result: false,
+				message: error.message || "An unexpected error occurred during the avatar update."
 			};
 		}
 	}

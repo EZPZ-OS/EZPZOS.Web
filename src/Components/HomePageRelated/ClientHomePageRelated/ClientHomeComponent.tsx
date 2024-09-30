@@ -7,6 +7,8 @@ import HomePageButtons from "../HomePageButtons";
 import HomePageNotification from "../HomePageNotification";
 import LogoWithName from "../../../Assets/Images/LogoWithName.png";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../Store/Store";
 
 /**
  * @param isLoggedIn - Boolean to store login status data, passed from EZPZ.CORE ClientPageValuesProp constant.
@@ -14,8 +16,16 @@ import { Link } from "react-router-dom";
  */
 const ClientHomeComponent = (data: ClientHomePageValuesProp) => {
 	const isLoggedIn = data.ClientHomePageValues.IsLoggedIn;
+	let user = null;
+	if (isLoggedIn === true) {
+		user = useSelector((state: RootState) => state.auth.user)
+	}
 
-	const loggedInLogo = <img src={ClientAvatar} className="w-[110px] h-[110px] mt-32" alt="logo" />;
+	const loggedInLogo = (
+		<Link to="/profile">
+			<img src={ClientAvatar} className="w-[110px] h-[110px] mt-32" alt="logo" />
+		</Link>
+	);
 
 	const notLoggedInLogo = (
 		<div>
@@ -27,12 +37,12 @@ const ClientHomeComponent = (data: ClientHomePageValuesProp) => {
 	);
 
 	const loggedInOpening = (
-		<div>
+		<div className="text-center">
 			<p className="text-3xl font-black mt-8 bg-gradient-to-r from-[#CDE1FF] to-[#E56923] text-transparent bg-clip-text">
-				{DefaultHomePageValues.LoggedInOpening[0]}
+				Hi, {user?.Username}
 			</p>
 			<p className="text-sm font-bold bg-gradient-to-r text-center from-[#FBFBFB] to-[#959595] text-transparent bg-clip-text mt-1">
-				{DefaultHomePageValues.LoggedInOpening[1]}
+				{DefaultHomePageValues.LoggedInOpening}
 			</p>
 		</div>
 	);
@@ -47,7 +57,7 @@ const ClientHomeComponent = (data: ClientHomePageValuesProp) => {
 		<div className="flex flex-col items-center w-4/5 mt-6">
 			{/* Get HomePageNotification from data variable and use map to display each HomePageNotification */}
 			{data.ClientHomePageValues.NotificationList.map((notification, index) => (
-				<HomePageNotification key={index} title={notification.title} content={notification.content} />
+				<HomePageNotification key={index} title={notification.Title} content={notification.Content} />
 			))}
 		</div>
 	);
