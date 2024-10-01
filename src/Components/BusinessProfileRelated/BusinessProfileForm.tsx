@@ -1,9 +1,9 @@
 import React from 'react';
-import {BiImage} from "react-icons/bi";
+import { IoArrowBackOutline } from "react-icons/io5";
 
 const BusinessProfileForm: React.FC = () => {
     return(
-        <div className="min-h-screen bg-gray-100 flex justify-center items-center p-4">
+        <div className="min-h-screen bg-[F5F5F5] flex flex-col justify-center items-center">
             <div className="max-w-md w-full bg-white shadow-lg rounded-lg">
                 <div className="flex items-center p-4">
                     <button className="text-gray-700 hover:text-gray-900">
