@@ -45,6 +45,12 @@ const authSlice = createSlice({
 			// Update localStorage whenever the user is updated
 			localStorage.setItem("user", JSON.stringify(action.payload));
 		},
+		setAvatar(state, action: PayloadAction<string>) {
+			if (state.user) {
+			  state.user.Avatar = action.payload; // Update the avatar in the user object
+			  localStorage.setItem("user", JSON.stringify(state.user));
+			}
+		},
 		login(state, action: PayloadAction<{ token: string; user: User }>) {
 			// Put token inside localStorage and Redux, and set isLoggedIn to true
 			const { token, user } = action.payload;
@@ -69,5 +75,5 @@ const authSlice = createSlice({
 	}
 });
 
-export const { setOTPVerified, setMobileNumber, setOTPType, setOTPTarget, setUser, login, logout } = authSlice.actions;
+export const { setOTPVerified, setMobileNumber, setOTPType, setOTPTarget, setUser, setAvatar, login, logout } = authSlice.actions;
 export default authSlice.reducer;

@@ -7,6 +7,7 @@ import { showAlert } from "../../Store/AlertSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { UserService } from "../../Services/Private/UserService";
 import { RootState } from "../../Store/Store";
+import AvatarUploadModal from "./AvatarUploadModal";
 
 /**
  * This component represents the user profile card in the Personal Info page.
@@ -38,6 +39,12 @@ const UserInfoCard: React.FC<UserInfoCardProps> = ({ avatar, username, phone, em
 	// State to track if each field is being edited
 	const [isEditingName, setIsEditingName] = useState(false);
 	const [editedName, setEditedName] = useState(username || ""); // Track the edited name
+	const [isModalOpen, setIsModalOpen] = useState(false); //Control AvatarUploadModal state
+
+	// Toggle modal visibility
+	const toggleModal = () => {
+		setIsModalOpen(!isModalOpen); // Toggle the modal's open/close state
+	};
 
 	//show successfully logged out message and direct to home page after logout
 	const handleLogout = () => {
@@ -82,11 +89,22 @@ const UserInfoCard: React.FC<UserInfoCardProps> = ({ avatar, username, phone, em
 			style={{ boxShadow: "0px 4px 6px rgba(93, 88, 88, 0.5)" }}
 		>
 			{/* TODO: change avatar to user.avatar when backend is fully setup */}
-			<img src={ClientAvatar} className="ml-[42px] mt-[63px] w-[107px] h-[107px]"></img>
+			<img src={user?.Avatar ?? ClientAvatar} className="ml-[42px] mt-[63px] w-[107px] h-[107px] rounded-full" style={{objectFit:"cover", objectPosition:"center"}}></img>
 			<MdOutlineEdit
-				className="bg-[#D9D9D9] text-2xl rounded-full border-[3px] border-[#D9D9D9] relative bottom-[33px] left-[123px]"
+				className="bg-[#D9D9D9] text-2xl rounded-full border-[3px] border-[#D9D9D9] relative bottom-[33px] left-[123px] cursor-pointer"
 				style={{ boxShadow: "0px 4px 6px rgba(93, 88, 88, 0.5)" }}
+				onClick={toggleModal}
 			/>
+
+			{/* Modal for avatar upload */}
+			{user?.Id && (
+				<AvatarUploadModal
+					isOpen={isModalOpen}
+					onClose={toggleModal}
+					userId={user.Id} // Only pass if it's defined
+				/>
+			)}
+
 			<div className="w-full h-[8px] bg-[#E2DEDE]"></div>
 			<div className="ml-[40px] mt-[18px]">
 				<p className="text-[24px] font-bold ">{DefaultPersonalInfoPageValues.InfoTitle}</p>
@@ -114,7 +132,7 @@ const UserInfoCard: React.FC<UserInfoCardProps> = ({ avatar, username, phone, em
 						<div className="flex justify-between">
 							<p className="text-[#898686] text-[16px]">{username}</p>
 							<MdOutlineEdit
-								className="bg-[#D9D9D9] text-2xl rounded-full border-[3px] border-[#D9D9D9] absolute bottom-[5px] right-[33px]"
+								className="bg-[#D9D9D9] text-2xl rounded-full border-[3px] border-[#D9D9D9] absolute bottom-[5px] right-[33px] cursor-pointer"
 								style={{ boxShadow: "0px 4px 6px rgba(93, 88, 88, 0.5)" }}
 								onClick={toggleEditName}
 							/>
