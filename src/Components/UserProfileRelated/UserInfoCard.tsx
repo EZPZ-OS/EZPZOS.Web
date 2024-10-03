@@ -33,7 +33,7 @@ interface UserInfoCardProps {
 	onLogout: () => void;
 }
 
-const UserInfoCard: React.FC<UserInfoCardProps> = ({ avatar, username, phone, email, onLogout }) => {
+const UserInfoCard: React.FC<UserInfoCardProps> = ({ username, phone, email, onLogout }) => {
 	const dispatch = useDispatch();
 	const user = useSelector((state: RootState) => state.auth.user); // Get the current user from Redux
 	// State to track if each field is being edited
