@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import Slider from 'react-slick'
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { FaArrowLeftLong, FaPlus } from "react-icons/fa6";
 import { GrFormSubtract } from "react-icons/gr";
@@ -71,8 +73,58 @@ const DishProduct = () => {
         }
     }
 
+    const CustomToast = () => {
+        return (
+            <div>
+                <h2>Success</h2>
+                <p>Add shopping cart successfully!</p>
+            </div>
+        )
+    }
+    const handleToast = () => {
+        toast.success(<CustomToast />, {
+            position: 'top-center',
+            autoClose: 3000,
+            hideProgressBar: true,
+            progress: undefined
+        })
+    }
     const handleAddCart = () => {
         // add cart
+        // store data into localstorage
+        // user_id, dish_id, dish_name, dish_number, dish_price
+        let userStorage: string|null = localStorage.getItem('user');
+        let user: any = JSON.parse(userStorage!);
+        let dishObject = {
+            "user_id": user.Id,
+            "dish_id": params.id,
+            "dish_name": dishName,
+            "dish_number": proNum,
+            "dish_price": price,
+            "dish_per_price": singleDishPrice
+        }
+
+        let cartObj: string|null = localStorage.getItem('cartObj');
+        if(cartObj === null){
+            localStorage.setItem('cartObj', JSON.stringify([dishObject]))
+        }else{
+            // first, filter dishId
+            let cartContentArr = JSON.parse(cartObj);
+            let flag = false;
+            cartContentArr.forEach((item: any) => {
+                if(item.user_id === user.Id && item.dish_id === params.id){
+                    flag = true;
+                    item.dish_number += proNum;
+                    item.dish_price += price;
+                }
+            })
+            if(!flag){
+                cartContentArr.push(dishObject);
+            }
+            localStorage.setItem('cartObj', JSON.stringify(cartContentArr))
+        }
+        // show toast hint
+        handleToast();
     }
 
     const handleOptions = (key: number, valIndex: number) => {
@@ -167,6 +219,7 @@ const DishProduct = () => {
                 </div>
                 <div className="w-10/12 h-12 leading-[48px] mx-auto bg-gradient-to-r from-[#EF7221] to-[#DC4200] opacity-90 rounded-2xl mt-3 text-center text-white font-bold text-xl" onClick={handleAddCart}>Add to cart</div>
             </div>
+            <ToastContainer />
         </div>
     )
 }
