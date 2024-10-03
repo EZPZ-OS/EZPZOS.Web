@@ -76,6 +76,24 @@ const ClientCartForm: React.FC = () => {
 		console.log([cuisines, subtotalAmount]);
 		// dine in -> booking
 		// take away -> order/status
+
+		// sync modify localstorage data
+		let userStorage: string|null = localStorage.getItem('user');
+        let user: any = JSON.parse(userStorage!);
+
+		let cartStorage: string|null = localStorage.getItem('cartObj');
+		if(cartStorage !== null){
+			let cartArr: any = JSON.parse(cartStorage);
+			let arr:any = [];
+			cartArr.forEach((item: any) => {
+				if(item.user_id != user.Id){
+					arr.push(item);
+				}
+			})
+			let newArr = [...arr, ...cuisineList];
+			localStorage.setItem('cartObj', JSON.stringify(newArr))
+		}
+		
 		if(deliveryType === 'dinein'){
 			navigate('/booking')
 		}else{

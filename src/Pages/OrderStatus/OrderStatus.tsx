@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { DefaultOrderStatusPageValues, orderListData } from "ezpzos.core";
+import moment from 'moment';
 import { Link } from "react-router-dom";
 import unreadyImg from '../../Assets/Images/unready.png'
 import preparing from '../../Assets/Images/preparing.png'
@@ -10,9 +11,46 @@ import OrderList from '../../Components/OrderList/OrderList';
 
 const OrderStatus = () => {
     const [orderState, setOrderState] = useState(2)
-    const [subTotal, setSubTotal] = useState('$70')
+    const [subTotal, setSubTotal] = useState('$0')
     const [disCount, setDiscount] = useState('-$8.0')
-    const [total, setTotal] = useState('$68.0')
+    const [total, setTotal] = useState('$0')
+    const [orderDetail, setOrderDetail] = useState<any[]>([])
+
+    useEffect(()=>{
+        let userStorage: string|null = localStorage.getItem('user');
+        let user: any = JSON.parse(userStorage!);
+
+		let cartStorage: string|null = localStorage.getItem('cartObj');
+		if(cartStorage !== null){
+			let cartArr: any = JSON.parse(cartStorage);
+			let object = {
+                "orderId": 1,
+                "orderName": "Take Away",
+                "orderDishList": [],
+                "total": "0"
+            };
+            let sum = 0;
+            cartArr.forEach((item: any) => {
+                if(item.user_id === user.Id){
+                    let obj = {
+                        "count": item.dish_number,
+                        "name": item.dish_name,
+                        "price": "$" + item.dish_price
+                    }
+                    sum += item.dish_price;
+                    object.orderDishList.push(obj);
+                }
+            });
+            object.total = "$" + sum;
+            
+            setOrderDetail((prevArray:any[]) => {
+                return [...prevArray, object];
+            });
+
+            setSubTotal(object.total)
+            setTotal('$' + (sum - 8))
+		}
+    }, [])
 
     return (
         <div className="relative w-full h-screen">
@@ -32,9 +70,9 @@ const OrderStatus = () => {
                 <h2 className="text-center font-bold text-black text-[24px]">{DefaultOrderStatusPageValues.ShopName}</h2>
                 <div className="text-center text-[#4D4D4D] text-sm">{DefaultOrderStatusPageValues.ABN}</div>
                 <div className="text-center text-[#4D4D4D] text-sm">{DefaultOrderStatusPageValues.Invoice}</div>
-                <div className="text-right text-[#4D4D4D] text-sm mr-5 mt-2">{DefaultOrderStatusPageValues.Time}</div>
+                <div className="text-right text-[#4D4D4D] text-sm mr-5 mt-2">{moment().format('MM-DD-YYYY HH:mm')}</div>
                 {
-                    orderListData.map((item: any) => (
+                    orderDetail.map((item: any) => (
                         <OrderList 
                             key={item.orderId} 
                             orderId={item.orderId}
