@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ClientAvatar from "../../Assets/Icons/ClientAvatar.png";
 import { MdOutlineEdit } from "react-icons/md";
-import { DefaultPersonalInfoPageValues, User } from "ezpzos.core";
+import { DefaultPersonalInfoPageValues } from "ezpzos.core";
 import { logout, setUser } from "../../Store/AuthSlice";
 import { showAlert } from "../../Store/AlertSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -62,10 +62,11 @@ const UserInfoCard: React.FC<UserInfoCardProps> = ({ username, phone, email, onL
 
 			try {
 				// Call the UserService to update the user in the backend
-				const response = await UserService.updateUserRequest(updatedUserData);
+				const response = await UserService.updateUserRequest(user.Id, updatedUserData);
 
 				if (response.success && response.user) {
 					// If the update is successful, update the user in Redux
+					response.user.Avatar = user.Avatar
 					dispatch(setUser(response.user));
 					// Show success alert
 					dispatch(showAlert({ message: "User updated successfully", isError: false }));
