@@ -1,10 +1,10 @@
 import React, { useRef, useState } from "react";
-import ReactImageCropperDropzone from "react-image-cropper-dropzone";
+import { ReactImageCropperDropzone } from "./ReactImageCropperDropzone";
 import { base64StringToBlob } from "blob-util";
-import { UserService } from "../../Services/Private/UserService";
-import { showAlert } from "../../Store/AlertSlice";
+import { UserService } from "../../../Services/Private/UserService";
+import { showAlert } from "../../../Store/AlertSlice";
 import { useDispatch } from "react-redux";
-import { setAvatar } from "../../Store/AuthSlice";
+import { setAvatar } from "../../../Store/AuthSlice";
 
 interface AvatarUploadModalProps {
 	isOpen: boolean;
@@ -48,9 +48,9 @@ const AvatarUploadModal: React.FC<AvatarUploadModalProps> = ({ isOpen, onClose, 
 		}
 	};
 
-	// Handle file change (when user selects or captures a file)
-	const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const file = event.target.files?.[0]; // Get the first selected file
+	// **Trigger cropping when a file is selected, either dropped or via file input**
+	const handleFileSelected = (acceptedFiles: File[]) => {
+		const file = acceptedFiles[0]; // Get the first selected file
 		if (file) {
 			const reader = new FileReader();
 			reader.onload = () => {
@@ -59,6 +59,14 @@ const AvatarUploadModal: React.FC<AvatarUploadModalProps> = ({ isOpen, onClose, 
 				setIsCropping(true); // Open the cropping tool
 			};
 			reader.readAsDataURL(file); // Convert file to base64
+		}
+	};
+
+	// Handle file change (when user selects or captures a file)
+	const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const file = event.target.files?.[0]; // Get the first selected file
+		if (file) {
+			handleFileSelected([file]);
 		}
 	};
 
@@ -90,6 +98,7 @@ const AvatarUploadModal: React.FC<AvatarUploadModalProps> = ({ isOpen, onClose, 
 			dispatch(showAlert({ message: "An error occurred while uploading the avatar.", isError: true }));
 		} finally {
 			setUploading(false);
+			setIsCropping(false);
 			onClose(); // Close modal after uploading
 		}
 	};
@@ -148,9 +157,10 @@ const AvatarUploadModal: React.FC<AvatarUploadModalProps> = ({ isOpen, onClose, 
 								"image/png": [".png"]
 							}}
 							title="Crop your picture"
-							lockAspectRatio={true}
+							lockAspectRatio={false}
 							aspectRatio={952 / 380}
 							afterCrop={afterCrop}
+							base64Image={base64}
 						>
 							<div className="Box Border Button" role="button" tabIndex={0}>
 								<div className="Box flex justify-center">

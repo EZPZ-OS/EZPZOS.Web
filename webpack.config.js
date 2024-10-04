@@ -9,27 +9,27 @@ module.exports = {
 	output: {
 		filename: "bundle.js",
 		path: path.resolve(__dirname, "dist"),
-		publicPath: "/",
+		publicPath: "/"
 	},
 	devServer: {
 		historyApiFallback: true,
 		static: {
-			directory: path.join(__dirname, "public"), // Serve static files from "public"
-		},
+			directory: path.join(__dirname, "public") // Serve static files from "public"
+		}
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			template: "./public/index.html",
+			template: "./public/index.html"
 		}),
 		new webpack.DefinePlugin({
-			"process.env": JSON.stringify(dotenv.config().parsed),
+			"process.env": JSON.stringify(dotenv.config().parsed)
 		}),
-		new webpack.NormalModuleReplacementPlugin(/^node:/, (resource) => {
+		new webpack.NormalModuleReplacementPlugin(/^node:/, resource => {
 			resource.request = resource.request.replace(/^node:/, "");
 		}),
 		new webpack.ProvidePlugin({
-			Buffer: ["buffer", "Buffer"],
-		}),
+			Buffer: ["buffer", "Buffer"]
+		})
 	],
 	resolve: {
 		modules: [__dirname, "src", "node_modules"],
@@ -42,50 +42,42 @@ module.exports = {
 			events: false,
 			"node:stream": require.resolve("node:stream"),
 			buffer: require.resolve("buffer"),
-			stream: false,
-		},
+			stream: false
+		}
 	},
 	module: {
 		rules: [
 			{
 				test: /\.(js|ts)x?$/,
 				exclude: /node_modules/,
-				use: ["babel-loader"],
+				use: ["babel-loader"]
 			},
+			// General CSS loader for your project files (src)
 			{
 				test: /\.css$/,
 				include: path.resolve(__dirname, "src"),
-				exclude:/node_modules/,
-				use: ["style-loader", "css-loader", "postcss-loader"],
+				use: ["style-loader", "css-loader", "postcss-loader"]
 			},
+			// Handle CSS files from node_modules, specifically for cropperjs
 			{
 				test: /\.css$/,
-				include: path.resolve(__dirname, "./node_modules/react-tabs"),
-				use: ["style-loader", "css-loader", "postcss-loader"],
+				include: [
+					path.resolve(__dirname, "node_modules/cropperjs"),
+					path.resolve(__dirname, "node_modules/react-tabs"),
+					path.resolve(__dirname, "node_modules/react-toastify"),
+					path.resolve(__dirname, "node_modules/swiper"),
+					path.resolve(__dirname, "node_modules/react-calendar")
+				],
+				use: ["style-loader", "css-loader"] // No postcss-loader for node_modules CSS
 			},
-			{
-				test: /\.css$/,
-				include: path.resolve(__dirname, "./node_modules/react-toastify"),
-				use: ["style-loader", "css-loader", "postcss-loader"],
-			},
-			{
-				test: /\.css$/,
-				include: path.resolve(__dirname, "./node_modules/swiper"),
-				use: ["style-loader", "css-loader", "postcss-loader"],
-			},
-			{
-				test: /\.css$/,
-				include: path.resolve(__dirname, "./node_modules/react-calendar/dist/Calendar.css"),
-				use: ["style-loader", "css-loader", "postcss-loader"],
-			},
+			// Loader for images and assets
 			{
 				test: /\.(png|svg|jpg|gif|ico|json)$/,
-				type: "asset/resource", // Use Webpack 5 asset module
-				exclude: /node_modules/,
+				type: "asset/resource",
 				generator: {
-					filename: "images/[name][ext][query]",
-				},
-			},
-		],
-	},
+					filename: "images/[name][ext][query]"
+				}
+			}
+		]
+	}
 };

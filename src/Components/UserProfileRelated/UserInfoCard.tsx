@@ -7,7 +7,7 @@ import { showAlert } from "../../Store/AlertSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { UserService } from "../../Services/Private/UserService";
 import { RootState } from "../../Store/Store";
-import AvatarUploadModal from "./AvatarUploadModal";
+import AvatarUploadModal from "./UploadAvatar/AvatarUploadModal";
 
 /**
  * This component represents the user profile card in the Personal Info page.
@@ -89,7 +89,11 @@ const UserInfoCard: React.FC<UserInfoCardProps> = ({ username, phone, email, onL
 			style={{ boxShadow: "0px 4px 6px rgba(93, 88, 88, 0.5)" }}
 		>
 			{/* TODO: change avatar to user.avatar when backend is fully setup */}
-			<img src={user?.Avatar ?? ClientAvatar} className="ml-[42px] mt-[63px] w-[107px] h-[107px] rounded-full" style={{objectFit:"cover", objectPosition:"center"}}></img>
+			<img
+				src={user?.Avatar ?? ClientAvatar}
+				className="ml-[42px] mt-[63px] w-[107px] h-[107px] rounded-full"
+				style={{ objectFit: "cover", objectPosition: "center" }}
+			></img>
 			<MdOutlineEdit
 				className="bg-[#D9D9D9] text-2xl rounded-full border-[3px] border-[#D9D9D9] relative bottom-[33px] left-[123px] cursor-pointer"
 				style={{ boxShadow: "0px 4px 6px rgba(93, 88, 88, 0.5)" }}
