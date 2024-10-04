@@ -22,7 +22,6 @@ const UserDashboard: React.FC<UserDashboardProps> = ({ avatar, username }) => {
 	};
 	return (
 		<div className="bg-gradient-to-b from-[#D3D4D4] h-[702px] w-screen font-lato relative">
-			{/* TODO: Change the img src to user.avatar when user avatar is fully setup in backend*/}
 			<img
 				src={avatar ?? ClientAvatar}
 				className="w-[107px] h-[107px] absolute -top-[53.5px] rounded-full"

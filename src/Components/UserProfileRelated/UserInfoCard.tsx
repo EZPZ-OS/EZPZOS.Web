@@ -54,8 +54,9 @@ const UserInfoCard: React.FC<UserInfoCardProps> = ({ username, phone, email, onL
 
 	const handleUpdateUser = async () => {
 		if (user && editedName) {
+			const { Avatar, ...restOfUser } = user
 			const updatedUserData = {
-				...user,
+				...restOfUser,
 				Username: editedName
 			};
 
