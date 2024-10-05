@@ -17,6 +17,8 @@ import BookConfirmPage from "./Pages/BookConfrimPage/BookConfirmPage";
 import BookDone from "./Components/ClientBookDone/BookDone";
 import OrderStatus from "./Pages/OrderStatus/OrderStatus";
 import ClientCartPage from "./Pages/ClientCart/ClientCartPage";
+import DishList from "./Pages/DishList/DishList";
+import DishProduct from "./Pages/DishProduct/DishProduct";
 
 const AppRoutes: React.FC = () => (
 	<Routes>
@@ -31,6 +33,8 @@ const AppRoutes: React.FC = () => (
 		<Route path={DefaultRoutesValues.UserRoutes.UserInfo} element={<PersonalInfo />} />
 		<Route path={DefaultRoutesValues.UserRoutes.PastOrders} element={<PastOrder />} />
 		<Route path={DefaultRoutesValues.CartRoutes.ClientCart} element={<ClientCartPage />} />
+		<Route path={DefaultRoutesValues.MenuRoutes.List} element={<DishList />}/>
+		<Route path={DefaultRoutesValues.MenuRoutes.Detail} element={<DishProduct />} />
 
 		{/* Business Routes */}
 		<Route path="businesshome" element={<BusinessHome BusinessHomePageValues={{IsLoggedIn:true, HomePageButtonList:[],NotificationList:[]}}/>} />
