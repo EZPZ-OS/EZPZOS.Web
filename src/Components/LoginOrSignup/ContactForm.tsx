@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setMobileNumber, setOTPType } from "../../Store/AuthSlice";
 import { handleSendOTP } from "../../Services/PublicService";
+import { Link } from "react-router-dom";
 
 /**
  * This is the ContactForm component for user to login/signup
@@ -79,9 +80,11 @@ const ContactForm: React.FC<ContactFormProps> = ({ isLogin }) => {
 				</p>
 			</div>
 			<button className="h-[50px] w-[370px] rounded-lg mt-16 text-[#FFFFFF] text-xl bg-gradient-to-r from-[#FFB682F5] via-[#F8A27AF5] to-[#F28C83F5]">
-				{isLogin
-					? DefaultLoginSignupValues.ContactFormDefaultValue.SignupDefaultValue
-					: DefaultLoginSignupValues.ContactFormDefaultValue.SigninDefaultValue}
+				{isLogin ? (
+					<Link to={"/signup"}>{DefaultLoginSignupValues.ContactFormDefaultValue.SignupDefaultValue}</Link>
+				) : (
+					<Link to={"/login"}>{DefaultLoginSignupValues.ContactFormDefaultValue.SigninDefaultValue}</Link>
+				)}
 			</button>
 		</div>
 	);

@@ -39,7 +39,7 @@ const OTPPage: React.FC = () => {
 						showAlert({
 						  message: DefaultLoginSignupValues.MobileLoginDefaultValue.LoginSuccessMessage,
 						  isError: false,
-						  navigateTo: "/profile", 
+						  navigateTo: "/", 
 						})
 					  );
 				} else {
