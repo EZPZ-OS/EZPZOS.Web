@@ -10,6 +10,7 @@ export interface ReactImageCropperDropzoneProps {
 	lockAspectRatio?: boolean;
 	aspectRatio: number;
 	base64Image?: string;
+	defaultOpenState?: boolean;
 }
 
 export const ReactImageCropperDropzone: React.FC<ReactImageCropperDropzoneProps> = ({
@@ -19,9 +20,10 @@ export const ReactImageCropperDropzone: React.FC<ReactImageCropperDropzoneProps>
 	title,
 	lockAspectRatio = true,
 	aspectRatio,
-	base64Image
+	base64Image,
+	defaultOpenState = true
 }) => {
-	const [open, setOpen] = useState<boolean>(true);
+	const [open, setOpen] = useState<boolean>(defaultOpenState);
 	const [image, setImage] = useState<string>("");
 
 	// Trigger the cropper when base64Image from parent changes
