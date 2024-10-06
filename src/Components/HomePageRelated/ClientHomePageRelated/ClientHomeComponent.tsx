@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import { ClientHomePageValuesProp } from "../../../Pages/Home";
 import { DefaultHomePageValues } from "ezpzos.core";
 import Logo from "../../../Assets/Images/Logo.png";
@@ -7,6 +7,10 @@ import HomePageButtons from "../HomePageButtons";
 import HomePageNotification from "../HomePageNotification";
 import LogoWithName from "../../../Assets/Images/LogoWithName.png";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../Store/Store";
+import { setAvatar } from "../../../Store/AuthSlice";
+import { UserService } from "../../../Services/Private/UserService";
 
 /**
  * @param isLoggedIn - Boolean to store login status data, passed from EZPZ.CORE ClientPageValuesProp constant.
@@ -14,8 +18,37 @@ import { Link } from "react-router-dom";
  */
 const ClientHomeComponent = (data: ClientHomePageValuesProp) => {
 	const isLoggedIn = data.ClientHomePageValues.IsLoggedIn;
+	const dispatch = useDispatch();
+	let user = null;
+	if (isLoggedIn === true) {
+		user = useSelector((state: RootState) => state.auth.user)
+	}
 
-	const loggedInLogo = <img src={ClientAvatar} className="w-[110px] h-[110px] mt-32" alt="logo" />;
+	useEffect(() => {
+		if (isLoggedIn && user?.Id) {
+		  const fetchAvatar = async () => {
+			const response = await UserService.getAvatarRequest(user.Id);
+			if (response.result && response.avatarUrl) {
+				// If avatar is not an empty string, use the fetched avatar; otherwise, use the default avatar
+				const avatarToUse = response.avatarUrl !== "" ? response.avatarUrl : ClientAvatar;
+				dispatch(setAvatar(avatarToUse));
+			} else {
+			  console.error(response.message);
+			}
+		  };	  
+		  fetchAvatar();
+		}
+	  }, [isLoggedIn, user?.Id, dispatch]);
+
+	const loggedInLogo = (
+		<Link to="/profile">
+			{user?.Avatar ? (
+            <img src={user.Avatar} alt="User Avatar" className="rounded-full w-24 h-24 mt-44" style={{objectFit:"cover", objectPosition:"center"}}/>
+          ) : (
+            <p>Loading avatar...</p>
+          )}
+		</Link>
+	);
 
 	const notLoggedInLogo = (
 		<div>
@@ -27,12 +60,12 @@ const ClientHomeComponent = (data: ClientHomePageValuesProp) => {
 	);
 
 	const loggedInOpening = (
-		<div>
+		<div className="text-center">
 			<p className="text-3xl font-black mt-8 bg-gradient-to-r from-[#CDE1FF] to-[#E56923] text-transparent bg-clip-text">
-				{DefaultHomePageValues.LoggedInOpening[0]}
+				Hi, {user?.Username}
 			</p>
 			<p className="text-sm font-bold bg-gradient-to-r text-center from-[#FBFBFB] to-[#959595] text-transparent bg-clip-text mt-1">
-				{DefaultHomePageValues.LoggedInOpening[1]}
+				{DefaultHomePageValues.LoggedInOpening}
 			</p>
 		</div>
 	);
@@ -47,7 +80,7 @@ const ClientHomeComponent = (data: ClientHomePageValuesProp) => {
 		<div className="flex flex-col items-center w-4/5 mt-6">
 			{/* Get HomePageNotification from data variable and use map to display each HomePageNotification */}
 			{data.ClientHomePageValues.NotificationList.map((notification, index) => (
-				<HomePageNotification key={index} title={notification.title} content={notification.content} />
+				<HomePageNotification key={index} title={notification.Title} content={notification.Content} />
 			))}
 		</div>
 	);
