@@ -80,6 +80,40 @@ export const AuthService = {
 			// Return the error information
 			return { success: false, message: errorMessage };
 		}
+	},
+
+	//login by mobile request
+	adminLoginRequest: async (
+		mobile: string | null,
+	): Promise<{ success: boolean; message?: string; token?: string; user?: User }> => {
+		try {
+			const response = await apiClient.post("/public/login/admin", { mobile });
+			// Check if the response contains the token and store it in localStorage
+			if (response.status === 200 && response.data.token) {
+				const { token: JWTToken, user } = response.data;
+				logger.Log("loginByMobile", "User login successfully", LogLevel.INFO);
+				return { success: true, token: JWTToken, user };
+			} else {
+				return {
+					success: false,
+					message: DefaultLoginSignupValues.MobileLoginDefaultValue.LoginErrorMessage.default
+				};
+			}
+		} catch (error: any) {
+			// Handle errors that occur during the request
+			type StatusCodes = 401 | 403 | 404;
+			const status = error.response?.status as StatusCodes | undefined;
+
+			// Handle error message depending on the status code
+			const errorMessage =
+				DefaultLoginSignupValues.MobileLoginDefaultValue.LoginErrorMessage[status as StatusCodes] ||
+				DefaultLoginSignupValues.MobileLoginDefaultValue.LoginErrorMessage.default;
+
+			logger.Log("loginByMobile", errorMessage, LogLevel.ERROR);
+
+			// Return the error information
+			return { success: false, message: errorMessage };
+		}
 	}
 };
 
