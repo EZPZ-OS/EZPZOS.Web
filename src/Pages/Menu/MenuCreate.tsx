@@ -15,8 +15,6 @@ const MenuCreate: React.FC = () => {
 	const [tags, setTags] = useState<string[]>(["No.1 ordered"]);
 	const [newTag, setNewTag] = useState("");
 	const [isAvailable, setIsAvailable] = useState(false);
-	const [dishImageUrl, setDishImageUrl] = useState("");
-	const [imagePreview, setImagePreview] = useState("");
 	const [showError, setShowError] = useState(false); // Error handling state
 	const [base64, setBase64] = useState<string>(""); // Store cropped image in base64
 
@@ -36,13 +34,6 @@ const MenuCreate: React.FC = () => {
 	 */
 	const handleRemoveTag = (tagToRemove: string) => {
 		setTags(tags.filter(tag => tag !== tagToRemove));
-	};
-
-	/**
-	 * Inserts the provided image URL into the image preview area
-	 */
-	const handleInsertImageUrl = () => {
-		setImagePreview(dishImageUrl);
 	};
 
 	// Callback after cropping the image
@@ -65,8 +56,6 @@ const MenuCreate: React.FC = () => {
 			category,
 			tags,
 			isAvailable,
-			dishImageUrl,
-			imagePreview
 		};
 
 		console.log("Menu Details JSON:", JSON.stringify(menuDetails));
