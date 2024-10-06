@@ -10,6 +10,7 @@ import OTPPage from "./Pages/OTPPage/OTPPage";
 import PastOrder from "./Pages/PastOrder/PastOrder";
 import MenuRead from "./Pages/MenuRead/MenuRead";
 import MenuCreate from "./Pages/Menu/MenuCreate";
+import MenuUpdate from "./Pages/Menu/MenuUpdate";
 import PersonalInfo from "./Pages/Profile/PersonalInfo";
 import BookPage from "./Components/BookPage/BookPage";
 import BusinessHome from "./Pages/Kitchen/BusinessHome";
@@ -33,12 +34,13 @@ const AppRoutes: React.FC = () => (
 		<Route path={DefaultRoutesValues.UserRoutes.UserInfo} element={<PersonalInfo />} />
 		<Route path={DefaultRoutesValues.UserRoutes.PastOrders} element={<PastOrder />} />
 		<Route path={DefaultRoutesValues.CartRoutes.ClientCart} element={<ClientCartPage />} />
-		<Route path={DefaultRoutesValues.MenuRoutes.List} element={<DishList />}/>
+		<Route path={DefaultRoutesValues.MenuRoutes.List} element={<DishList />} />
 		<Route path={DefaultRoutesValues.MenuRoutes.Detail} element={<DishProduct />} />
 
 		{/* Business Routes */}
 		<Route path="businesshome" element={<BusinessHome BusinessHomePageValues={{IsLoggedIn:true, HomePageButtonList:[],NotificationList:[]}}/>} />
 		<Route path="businessmenulist" element={<MenuRead />} />
+		<Route path="menuupdate" element={<MenuUpdate />} />
 
 		<Route
 			path={DefaultRoutesValues.BusinessRoutes.Home}
@@ -49,6 +51,7 @@ const AppRoutes: React.FC = () => (
 			}
 		/>
 		<Route path={DefaultRoutesValues.BusinessRoutes.CreateMenu} element={<MenuCreate />} />
+		
 
 		{/* Book Routes*/}
 		<Route path={DefaultRoutesValues.BookRoutes.Book} element={<BookPage />} />
