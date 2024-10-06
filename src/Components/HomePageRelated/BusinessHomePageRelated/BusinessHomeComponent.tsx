@@ -1,12 +1,16 @@
+import { useEffect } from "react";
 import BusinessAvatar from "../../../Assets/Icons/BusinessAvatar.png";
 import LogoWithName from "../../../Assets/Images/LogoWithName.png";
 import { DefaultHomePageValues } from "ezpzos.core";
-
 import { Link } from "react-router-dom";
 import Logo from "../../../Assets/Images/Logo.png";
 import HomePageButtons from "../HomePageButtons";
 import HomePageNotification from "../HomePageNotification";
 import { BusinessPageValuesProp } from "../../../Pages/Kitchen/BusinessHome";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../../Store/Store";
+import { setAvatar } from "../../../Store/AuthSlice";
+import { UserService } from "../../../Services/Private/UserService";
 
 /**
  * @param isLoggedIn is a variable to store login status data that passed from EZPZ.CORE BusienssPageValuesProp constant,
@@ -14,11 +18,37 @@ import { BusinessPageValuesProp } from "../../../Pages/Kitchen/BusinessHome";
  */
 
 const BusinessHomeComponent = (data: BusinessPageValuesProp) => {
-	const isLoggedIn = data.BusinessHomePageValues.IsLoggedIn
-	const loggedInLogo = <img src={BusinessAvatar} className="w-[110px] h-[110px] mt-32" alt="logo" />;
+	const isLoggedIn = data.IsLoggedIn;
+	const dispatch = useDispatch();
+	const user = useSelector((state: RootState) => state.auth.user);
+
+	useEffect(() => {
+		if (isLoggedIn && user?.Id) {
+			const fetchAvatar = async () => {
+				const response = await UserService.getAvatarRequest(user.Id);
+				if (response.result && response.avatarUrl) {
+					// If avatar is not an empty string, use the fetched avatar; otherwise, use the default avatar
+					const avatarToUse = response.avatarUrl !== "" ? response.avatarUrl : BusinessAvatar;
+					dispatch(setAvatar(avatarToUse));
+				} else {
+					console.error(response.message);
+				}
+			};
+			fetchAvatar();
+		}
+	}, [isLoggedIn, user?.Id, dispatch]);
+	const loggedInLogo = user ? (
+		<img src={user.Avatar} className="w-[110px] h-[110px] mt-32 rounded-full" alt="logo" />
+	) : (
+		<img src={BusinessAvatar} className="w-[110px] h-[110px] mt-32 rounded-full" alt="logo" />
+	);
+
 	const loggedInOpening = (
-		<div>
+		<div className="text-center">
 			<p className="text-3xl font-black mt-8 bg-gradient-to-r from-[#CDE1FF] to-[#E56923] text-transparent bg-clip-text">
+				Hi, {user?.Username}
+			</p>
+			<p className="text-sm font-bold bg-gradient-to-r text-center from-[#FBFBFB] to-[#959595] text-transparent bg-clip-text mt-1">
 				{DefaultHomePageValues.LoggedInOpening[0]}
 			</p>
 			<p className="text-sm font-bold bg-gradient-to-r text-center from-[#FBFBFB] to-[#959595] text-transparent bg-clip-text mt-1">
@@ -49,8 +79,8 @@ const BusinessHomeComponent = (data: BusinessPageValuesProp) => {
 	const homePageButton = (
 		<div className="flex gap-16">
 			{/*get HomePageButtonList from data variable and use map to display each homepage button*/}
-			{data.BusinessHomePageValues.HomePageButtonList.map((data, index) => {
-				return <HomePageButtons key={index} img={data.Img} title={data.Title} />;
+			{data.HomePageButtonList.map((data, index) => {
+				return <HomePageButtons key={index} img={data.Img} title={data.Title} path={data.Path} />;
 			})}
 		</div>
 	);
@@ -58,7 +88,7 @@ const BusinessHomeComponent = (data: BusinessPageValuesProp) => {
 	const notificationList = (
 		<div className="flex flex-col items-center w-4/5 mt-6">
 			{/*get HomePageNotification from data variable and use map to display each HomePageNotification*/}
-			{data.BusinessHomePageValues.NotificationList.map((item, index) => {
+			{data.NotificationList.map((item, index) => {
 				return <HomePageNotification key={index} title={item.Title} content={item.Content} />;
 			})}
 		</div>
@@ -78,7 +108,7 @@ const BusinessHomeComponent = (data: BusinessPageValuesProp) => {
 	return (
 		<div>
 			<div className="w-full flex flex-col justify-center items-center">
-				{isLoggedIn ? loggedInLogo : notLoggedInLogo}
+				{isLoggedIn ? <Link to="/profile">{loggedInLogo} </Link> : notLoggedInLogo}
 				{isLoggedIn ? loggedInOpening : notLoggedInOpening}
 				{isLoggedIn ? "" : notLoggedInSignInButton}
 				{isLoggedIn ? homePageButton : ""}

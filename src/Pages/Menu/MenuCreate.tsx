@@ -3,8 +3,10 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 import { PiUploadSimpleLight } from "react-icons/pi";
 import { DefaultMenuCreateValues } from "ezpzos.core";
 import { ReactImageCropperDropzone } from "../../Components/UserProfileRelated/UploadAvatar/ReactImageCropperDropzone";
+import { useNavigate } from "react-router-dom";
 
 const MenuCreate: React.FC = () => {
+  const navigate = useNavigate()
 	// State variables to store form inputs and their corresponding setters
 	const [dishName, setDishName] = useState("");
 	const [dishDescription, setDishDescription] = useState("");
@@ -75,7 +77,7 @@ const MenuCreate: React.FC = () => {
 	 * Navigates back to the previous page
 	 */
 	const goBack = () => {
-		// Implement the logic to go back to the previous page
+		navigate("/menu-list")
 	};
 
 	return (
@@ -170,7 +172,6 @@ const MenuCreate: React.FC = () => {
 						<div className="w-full px-3 py-2 border border-gray-300 rounded bg-gray-100 flex items-center justify-center">
 							<label className="w-full flex items-center justify-center cursor-pointer">
 								<PiUploadSimpleLight className="mr-2" />
-
 								<ReactImageCropperDropzone
 									accept={{
 										"image/jpeg": [".jpeg", ".jpg"],
@@ -197,9 +198,9 @@ const MenuCreate: React.FC = () => {
 									src={base64}
 									alt="Cropped Avatar Preview"
 									style={{
-										width: "100px",
-										height: "100px",
-										borderRadius: "50%",
+										width: "300px",
+										height: "200px",
+										borderRadius: "5%",
 										objectFit: "cover",
 										objectPosition: "center"
 									}}

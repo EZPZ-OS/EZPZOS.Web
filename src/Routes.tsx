@@ -37,14 +37,11 @@ const AppRoutes: React.FC = () => (
 		<Route path={DefaultRoutesValues.MenuRoutes.Detail} element={<DishProduct />} />
 
 		{/* Business Routes */}
-		<Route path="businesshome" element={<BusinessHome BusinessHomePageValues={{IsLoggedIn:true, HomePageButtonList:[],NotificationList:[]}}/>} />
-		<Route path="businessmenulist" element={<MenuRead />} />
-
 		<Route
 			path={DefaultRoutesValues.BusinessRoutes.Home}
 			element={
 				<BusinessHome
-					BusinessHomePageValues={{ IsLoggedIn: true, HomePageButtonList: [], NotificationList: [] }}
+					 
 				/>
 			}
 		/>
