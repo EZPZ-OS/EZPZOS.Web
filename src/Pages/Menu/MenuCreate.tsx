@@ -23,19 +23,6 @@ const MenuCreate: React.FC = () => {
 	const [showError, setShowError] = useState(false); // Error handling state
 	const [base64, setBase64] = useState<string>(""); // Store cropped image in base64
 
-  function uint8ArrayToBase64(u8Arr: any) {
-    let CHUNK_SIZE = 0x8000; // 每次处理的块大小
-    let index = 0;
-    let length = u8Arr.length;
-    let result = '';
-    let slice;
-    while (index <= length) {
-        slice = u8Arr.subarray(index, Math.min(index + CHUNK_SIZE, length));
-        result += String.fromCharCode.apply(null, slice);
-        index += CHUNK_SIZE;
-    }
-    return btoa(result);
-  }
 
   useEffect(()=>{
     if(typeof params.id === 'string' && params.id !== ""){
