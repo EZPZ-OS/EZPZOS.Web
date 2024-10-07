@@ -17,6 +17,7 @@ const DishList = () => {
 		navigate("/menucreate")
 	};
 
+
 	const handleDishDetail = (id: string) => {
 		// go to dish detail page
 		navigate("/menu-detail/" + id);

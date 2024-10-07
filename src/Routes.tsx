@@ -38,6 +38,7 @@ const AppRoutes: React.FC = () => (
 		{/* Business Routes */}
 		<Route path={DefaultRoutesValues.BusinessRoutes.Home} element={<BusinessHome />} />
 		<Route path={DefaultRoutesValues.BusinessRoutes.CreateMenu} element={<MenuCreate />} />
+		<Route path={DefaultRoutesValues.MenuRoutes.Edit} element={<MenuCreate />} />
 
 		{/* Book Routes*/}
 		<Route path={DefaultRoutesValues.BookRoutes.Book} element={<BookPage />} />
