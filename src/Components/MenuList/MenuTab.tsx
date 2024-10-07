@@ -15,13 +15,6 @@ const MenuTab: React.FC<MenuTabProps> = ({ tableNumber, selectedTab }) => {
   return (
     <div>
       <HotSales/>
-      <h1 className="text-3xl mb-4">
-        This is menu page placeholder, for testing purpose
-      </h1>
-      <h1 className="text-3xl mb-4 text-blue-500">
-        you're on **{selectedTab}**!
-      </h1>
-      <div className="mb-4">Table Number: {tableNumber}</div>
     </div>
   );
 };

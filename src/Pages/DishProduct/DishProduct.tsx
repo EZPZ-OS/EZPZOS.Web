@@ -32,6 +32,7 @@ const settings = {
 }
 
 const DishProduct = () => {
+    const [authBtn, setAuthBtn] = useState(true);
     const [cusineId, setCusineId] = useState('')
     const [isShow, setIsShow] = useState(false)
     const params = useParams();
@@ -53,6 +54,14 @@ const DishProduct = () => {
     }, [proNum])
 
     useEffect(()=>{
+        let userStorage: string|null = localStorage.getItem('user');
+        let user: any = JSON.parse(userStorage!);
+        if (user.Username === 'Admin'){
+            setAuthBtn(true);
+        } else {
+            setAuthBtn(false);
+        }
+
         let dishId = params.id;
         setCusineId(dishId ?? "");
         GetCuisineById(dishId).then(res => {
@@ -163,10 +172,14 @@ const DishProduct = () => {
                     <FaArrowLeftLong fontWeight={400}/>
                     <span className="ml-2">Back</span>
                 </div>
-                <div className="absolute right-5 top-5">
-                    <span className="ml-2 leading-9 bg-orange-500 text-white text-base px-2 rounded" onClick={handleEditCuisine}>Edit</span>
-                    <span className="ml-2 leading-9 bg-red-500 text-white text-base px-2 rounded" onClick={handleDeleteCuisine}>Delete</span>
-                </div>
+                {
+                    authBtn ? (
+                        <div className="absolute right-5 top-5">
+                            <span className="ml-2 leading-9 bg-orange-500 text-white text-base px-2 rounded" onClick={handleEditCuisine}>Edit</span>
+                            <span className="ml-2 leading-9 bg-red-500 text-white text-base px-2 rounded" onClick={handleDeleteCuisine}>Delete</span>
+                        </div>
+                    ) : ''
+                }
             </div>
             <div className="ml-7 mr-7 mt-[68px]">
                 {/* slideshow part */}

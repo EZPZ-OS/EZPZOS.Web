@@ -6,12 +6,7 @@ import React from "react";
 const MenuHotSaleCard: React.FC = () => {
   return (
     <div>
-      <h1 className="text-3xl mb-4">
-        This is menu-HotSale card placeholder, for dev purpose
-      </h1>
-      <h1 className="text-3xl mb-4 text-blue-500">
-        you're viewing on TOP SALE LIST!
-      </h1>
+      
     </div>
   );
 };
