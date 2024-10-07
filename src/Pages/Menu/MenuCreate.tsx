@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from 'react-router-dom';
+import { ToastContainer, toast } from "react-toastify";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { PiUploadSimpleLight } from "react-icons/pi";
 import { DefaultMenuCreateValues } from "ezpzos.core";
 import { ReactImageCropperDropzone } from "../../Components/UserProfileRelated/UploadAvatar/ReactImageCropperDropzone";
+import { createCusine, GetCuisineById, editCusine } from "../../Services/Private/MenuService";
 
 const MenuCreate: React.FC = () => {
+  const params = useParams();
+  const navigate = useNavigate();
 	// State variables to store form inputs and their corresponding setters
 	const [dishName, setDishName] = useState("");
 	const [dishDescription, setDishDescription] = useState("");
@@ -17,6 +22,37 @@ const MenuCreate: React.FC = () => {
 	const [imagePreview, setImagePreview] = useState("");
 	const [showError, setShowError] = useState(false); // Error handling state
 	const [base64, setBase64] = useState<string>(""); // Store cropped image in base64
+
+  function uint8ArrayToBase64(u8Arr: any) {
+    let CHUNK_SIZE = 0x8000; // 每次处理的块大小
+    let index = 0;
+    let length = u8Arr.length;
+    let result = '';
+    let slice;
+    while (index <= length) {
+        slice = u8Arr.subarray(index, Math.min(index + CHUNK_SIZE, length));
+        result += String.fromCharCode.apply(null, slice);
+        index += CHUNK_SIZE;
+    }
+    return btoa(result);
+  }
+
+  useEffect(()=>{
+    if(typeof params.id === 'string' && params.id !== ""){
+      // edit page
+      GetCuisineById(params.id).then(res => {
+        if (res.status === 200){
+          setDishName(res.data.Name);
+          setDishDescription(res.data.Description);
+          setDishPrice(res.data.Price);
+          setCategory(res.data.Category);
+          setIsAvailable(res.data.IsAvailable);
+          setBase64(res.data.Image);
+        }
+      });
+    }
+  }, [])
+
 
 	/**
 	 * Adds a new tag to the tags list if it does not already exist
@@ -57,25 +93,55 @@ const MenuCreate: React.FC = () => {
 		}
 
 		const menuDetails = {
-			dishName,
-			dishDescription,
-			dishPrice,
-			category,
-			tags,
-			isAvailable,
-			dishImageUrl,
-			imagePreview
+			"Name": dishName,
+			"Description": dishDescription,
+			"Price": parseFloat(dishPrice),
+			"Category": category,
+			"IsAvailable": isAvailable,
+      "EstimatedTime": 60,
+			"Image": base64
 		};
 
-		console.log("Menu Details JSON:", JSON.stringify(menuDetails));
-		// Handle submission logic
+    if(typeof params.id === 'string' && params.id !== ""){
+      editCusine(params.id, menuDetails).then(res => {
+        console.log('====edit====', res)
+        if(res.status === 200){
+          navigate('/menu-list')
+        }
+      })
+    }else{
+      createCusine(menuDetails).then(res => {
+        if(res.status === 200 || res.status === 201){
+          handleToast()
+          navigate('/menu-list')
+        }
+      })
+    }
 	};
+
+  const CustomToast = () => {
+    return (
+        <div>
+            <h2>Success</h2>
+            <p>Cuisine is created successfully!</p>
+        </div>
+    )
+}
+  const handleToast = () => {
+    toast.success(<CustomToast />, {
+        position: 'top-center',
+        autoClose: 3000,
+        hideProgressBar: true,
+        progress: undefined
+    })
+}
 
 	/**
 	 * Navigates back to the previous page
 	 */
 	const goBack = () => {
 		// Implement the logic to go back to the previous page
+    navigate('/menu-list')
 	};
 
 	return (
@@ -197,9 +263,8 @@ const MenuCreate: React.FC = () => {
 									src={base64}
 									alt="Cropped Avatar Preview"
 									style={{
-										width: "100px",
-										height: "100px",
-										borderRadius: "50%",
+                    width: "100%",
+                    height: "100%",
 										objectFit: "cover",
 										objectPosition: "center"
 									}}
@@ -211,7 +276,7 @@ const MenuCreate: React.FC = () => {
 					</div>
 				</div>
 				<div className="mt-4 flex justify-between">
-					<button className="w-[168px] h-[45px] bg-gray-300 text-gray-700 rounded">
+					<button className="w-[168px] h-[45px] bg-gray-300 text-gray-700 rounded" onClick={goBack}>
 						{DefaultMenuCreateValues.Labels.CancelButton}
 					</button>
 					<button className="w-[168px] h-[45px] bg-orange-500 text-white rounded" onClick={handleSubmit}>
@@ -219,6 +284,7 @@ const MenuCreate: React.FC = () => {
 					</button>
 				</div>
 			</div>
+      <ToastContainer />
 		</div>
 	);
 };

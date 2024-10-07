@@ -15,7 +15,7 @@ const EditDish = () => {
     return (
         <div className="relative">
             <span className="absolute right-[20px] top-[32px] leading-9 bg-red-500 text-white text-base px-2 rounded" onClick={handleDelete}>Delete Item</span>
-            {isShow ? <DeleteDishToast dishId={dishId} hideToast={hideToast}/> : ''}
+            {isShow ? <DeleteDishToast cusineId={dishId}hideToast={hideToast}/> : ''}
         </div>
     )
 }

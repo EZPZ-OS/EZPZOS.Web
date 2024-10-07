@@ -93,7 +93,7 @@ export default function BookPage() {
 			//check if it is the past time
 			if (partyDateTime.getTime() - new Date().getTime() > 0) {
 				//TODO nav to book confirm page, partySize and partyDateTime should be sent to backend
-				// nav('')
+				nav('/booking/success');
 			} else {
 				alert("Wrong select of past date!");
 			}

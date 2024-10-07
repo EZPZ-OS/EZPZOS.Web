@@ -49,6 +49,7 @@ const AppRoutes: React.FC = () => (
 			}
 		/>
 		<Route path={DefaultRoutesValues.BusinessRoutes.CreateMenu} element={<MenuCreate />} />
+		<Route path={DefaultRoutesValues.MenuRoutes.Edit} element={<MenuCreate />} />
 
 		{/* Book Routes*/}
 		<Route path={DefaultRoutesValues.BookRoutes.Book} element={<BookPage />} />

@@ -13,6 +13,8 @@ import demoImg01 from '../../Assets/Images/11.png'
 import demoImg02 from '../../Assets/Images/London.png'
 import demoImg03 from '../../Assets/Images/Newyork.png'
 
+import DeleteDishToast from '../../Components/DeleteMenu/DeleteDishToast'
+
 const settings = {
     dots: true,
     dotsClass: "slick-dots slick-thumb",
@@ -30,6 +32,8 @@ const settings = {
 }
 
 const DishProduct = () => {
+    const [cusineId, setCusineId] = useState('')
+    const [isShow, setIsShow] = useState(false)
     const params = useParams();
     const navigate = useNavigate();
     const [proNum, setProNum] = useState(1)
@@ -50,6 +54,7 @@ const DishProduct = () => {
 
     useEffect(()=>{
         let dishId = params.id;
+        setCusineId(dishId ?? "");
         GetCuisineById(dishId).then(res => {
             if(res.status === 200){
                 setDishName(res.data.Name)
@@ -139,12 +144,28 @@ const DishProduct = () => {
         navigate('/menu-list')
     }
 
+    const handleEditCuisine = () => {
+        navigate('/cuisine-edit/' + params.id)
+    }
+
+    const handleDeleteCuisine = () => {
+        setIsShow(true)
+    }
+
+    const hideToast = () => {
+        setIsShow(false)
+    }
+
     return (
         <div className="relative bg-gradient-to-b from-[#FFFFFF] from-65% to-[#E5D9D3] to-100% pb-5">
             <div className="fixed left-0 top-0 z-10 w-full h-[60px] bg-white">
                 <div className="absolute left-5 top-5 w-full h-[38px] text-2xl flex flex-row items-center" onClick={goBack}>
                     <FaArrowLeftLong fontWeight={400}/>
                     <span className="ml-2">Back</span>
+                </div>
+                <div className="absolute right-5 top-5">
+                    <span className="ml-2 leading-9 bg-orange-500 text-white text-base px-2 rounded" onClick={handleEditCuisine}>Edit</span>
+                    <span className="ml-2 leading-9 bg-red-500 text-white text-base px-2 rounded" onClick={handleDeleteCuisine}>Delete</span>
                 </div>
             </div>
             <div className="ml-7 mr-7 mt-[68px]">
@@ -220,6 +241,7 @@ const DishProduct = () => {
                 <div className="w-10/12 h-12 leading-[48px] mx-auto bg-gradient-to-r from-[#EF7221] to-[#DC4200] opacity-90 rounded-2xl mt-3 text-center text-white font-bold text-xl" onClick={handleAddCart}>Add to cart</div>
             </div>
             <ToastContainer />
+            {isShow ? <DeleteDishToast cusineId={cusineId} hideToast={hideToast}/> : ''}
         </div>
     )
 }

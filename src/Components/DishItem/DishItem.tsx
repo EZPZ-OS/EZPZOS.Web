@@ -6,7 +6,7 @@ const DishItem = (props: any) => {
     const {dishDetail, handleDishDetail} = props;
     return (
         <div className="h-28 mb-2 rounded-lg flex items-center" onClick={() => handleDishDetail(dishDetail.Id)}>
-            <img className="w-28 h-28 rounded-lg" src={Dish} alt="dish_img"/>
+            <img className="w-28 h-28 rounded-lg" src={dishDetail.Image} alt="dish_img"/>
             <div className="flex-1 flex-row ml-2">
                 <h3 className="font-bold text-base leading-none mt-1 mb-1">{dishDetail.Name}</h3>
                 <span className="h-[15px] text-sm rounded-md bg-gradient-to-r from-[#a72353b3] to-[#DC4200] opacity-90 px-2 py-1 text-white">{dishDetail.Category}</span>
