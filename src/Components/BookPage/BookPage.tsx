@@ -92,6 +92,13 @@ export default function BookPage() {
 		if (partyDateTime instanceof Date && !isNaN(partyDateTime.getTime())) {
 			//check if it is the past time
 			if (partyDateTime.getTime() - new Date().getTime() > 0) {
+				
+				localStorage.setItem('orderInfo', JSON.stringify({
+					"partySize": partySize,
+					"date": (partyDate.getMonth()+1) + '-' + partyDate.getDate() + '-' + partyDate.getFullYear(),
+					"time": partyDateTime.getHours() + ":" + partyDateTime.getMinutes()
+				}))
+				
 				//TODO nav to book confirm page, partySize and partyDateTime should be sent to backend
 				nav('/booking/success');
 			} else {
@@ -108,13 +115,13 @@ export default function BookPage() {
 				<IoMdArrowRoundBack style={{ display: "inline" }} />
 				<span onClick={backFun}>Back</span>
 			</div>
-			<div className="mt-[15px] ml-[20px] rounded-[15px] w-[391px] h-[731px] bg-[#F3F3F3] ">
-				<div className="pl-[25px] pt-[35px]">
+			<div className="m-auto mt-[15px] rounded-[15px] w-[391px] h-[731px] bg-[#F3F3F3] ">
+				<div className="flex flex-col items-center pt-[35px]">
 					<div className="text-[#515151] text-[17px]">Party Size</div>
 					<div className="mt-[15px] flex w-[319px] relative">
 						<Swiper slidesPerView={6} onSwiper={swiper => (swiperRef.current = swiper)} slidesPerGroup={6}>
 							{arr.map(index => (
-								<SwiperSlide onClick={() => partySizeClicked(index)}>
+								<SwiperSlide key={index} onClick={() => partySizeClicked(index)}>
 									<PartySizeBlock sizeNumber={index} clicked={partySize === index ? true : false} />
 								</SwiperSlide>
 							))}
@@ -136,13 +143,14 @@ export default function BookPage() {
 							}}
 							modules={[Scrollbar]}
 						>
-							{timeSwiper.map((value: string[]) => {
+							{timeSwiper.map((value: string[], ind: number) => {
 								return (
-									<SwiperSlide className="h-[23px]">
+									<SwiperSlide className="h-[23px]" key={ind}>
 										<div className="flex justify-around">
 											{value.map((valueNumber: string, index: number) => {
 												return (
-													<div
+													<div 
+														key={index}
 														className="h-[23px] w-[96px] border border-black rounded-[12px] flex justify-center items-center"
 														onClick={() => {
 															timeClickedFun(valueNumber);

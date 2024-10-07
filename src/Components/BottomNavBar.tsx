@@ -57,7 +57,7 @@ const BottomNavBar: React.FC<BottomNavBarProps> = ({ isClient }) => {
 
   // console.log('here i am')
   return (
-    <div className="bg-[#D9D9D9] pt-[8px] text-[#988B8B] w-full h-[88px] flex bottom-0 text-center fixed justify-center px-[10%] gap-0">
+    <div className="bg-[#D9D9D9] pt-[8px] text-[#988B8B] w-full h-[88px] flex bottom-0 text-center fixed justify-center px-[10%] gap-0 z-[5000]">
       <div className=" w-full h-[51px] flex justify-between padding-0">
         {navBar.iconList.map((icon, index) => (
           <div
