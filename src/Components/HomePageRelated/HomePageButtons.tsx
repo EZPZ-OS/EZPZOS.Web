@@ -14,6 +14,7 @@ interface HomePageButtonProps {
  * @param path - The navigation path to be linked to when the button is clicked.
  */
 const HomePageButtons: React.FC<HomePageButtonProps> = ({ img, title, path }) => {
+	console.log("path", path)
 	return (
 		<Link to={path} className="w-full flex justify-center items-center gap-10 mt-12">
 			<div className="flex flex-col w-[90px] items-center gap-2">

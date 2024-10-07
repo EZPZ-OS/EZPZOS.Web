@@ -8,7 +8,6 @@ import Profile from "./Pages/Profile/Profile";
 import LoginSignupPage from "./Pages/LoginOrSignup/LoginOrSignup";
 import OTPPage from "./Pages/OTPPage/OTPPage";
 import PastOrder from "./Pages/PastOrder/PastOrder";
-import MenuRead from "./Pages/MenuRead/MenuRead";
 import MenuCreate from "./Pages/Menu/MenuCreate";
 import PersonalInfo from "./Pages/Profile/PersonalInfo";
 import BookPage from "./Components/BookPage/BookPage";
@@ -33,27 +32,21 @@ const AppRoutes: React.FC = () => (
 		<Route path={DefaultRoutesValues.UserRoutes.UserInfo} element={<PersonalInfo />} />
 		<Route path={DefaultRoutesValues.UserRoutes.PastOrders} element={<PastOrder />} />
 		<Route path={DefaultRoutesValues.CartRoutes.ClientCart} element={<ClientCartPage />} />
-		<Route path={DefaultRoutesValues.MenuRoutes.List} element={<DishList />}/>
+		<Route path={DefaultRoutesValues.MenuRoutes.List} element={<DishList />} />
 		<Route path={DefaultRoutesValues.MenuRoutes.Detail} element={<DishProduct />} />
 
 		{/* Business Routes */}
-		<Route path="businesshome" element={<BusinessHome BusinessHomePageValues={{IsLoggedIn:true, HomePageButtonList:[],NotificationList:[]}}/>} />
-		<Route path="businessmenulist" element={<MenuRead />} />
-
-		<Route
-			path={DefaultRoutesValues.BusinessRoutes.Home}
-			element={
-				<BusinessHome
-					BusinessHomePageValues={{ IsLoggedIn: true, HomePageButtonList: [], NotificationList: [] }}
-				/>
-			}
-		/>
+		<Route path={DefaultRoutesValues.BusinessRoutes.Home} element={<BusinessHome />} />
 		<Route path={DefaultRoutesValues.BusinessRoutes.CreateMenu} element={<MenuCreate />} />
+		<Route path={DefaultRoutesValues.MenuRoutes.Edit} element={<MenuCreate />} />
 
 		{/* Book Routes*/}
 		<Route path={DefaultRoutesValues.BookRoutes.Book} element={<BookPage />} />
 		<Route path={DefaultRoutesValues.BookRoutes.Confirm} element={<BookConfirmPage />} />
-		<Route path={DefaultRoutesValues.BookRoutes.Booked} element={<BookDone  people={2} date={""} time={""} userName={""}/>} />
+		<Route
+			path={DefaultRoutesValues.BookRoutes.Booked}
+			element={<BookDone people={2} date={""} time={""} userName={""} />}
+		/>
 
 		{/* Order Routes*/}
 		<Route path={DefaultRoutesValues.OrderRoutes.OrderStatus} element={<OrderStatus />} />
