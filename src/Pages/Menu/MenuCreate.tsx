@@ -91,7 +91,6 @@ const MenuCreate: React.FC = () => {
 
     if(typeof params.id === 'string' && params.id !== ""){
       editCusine(params.id, menuDetails).then(res => {
-        console.log('====edit====', res)
         if(res.status === 200){
           navigate('/menu-list')
         }
