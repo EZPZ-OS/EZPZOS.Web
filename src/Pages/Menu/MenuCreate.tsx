@@ -5,7 +5,7 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 import { PiUploadSimpleLight } from "react-icons/pi";
 import { DefaultMenuCreateValues } from "ezpzos.core";
 import { ReactImageCropperDropzone } from "../../Components/UserProfileRelated/UploadAvatar/ReactImageCropperDropzone";
-import { createCusine, GetCuisineById } from "../../Services/Private/MenuService";
+import { createCusine, GetCuisineById, editCusine } from "../../Services/Private/MenuService";
 
 const MenuCreate: React.FC = () => {
   const params = useParams();
@@ -23,6 +23,20 @@ const MenuCreate: React.FC = () => {
 	const [showError, setShowError] = useState(false); // Error handling state
 	const [base64, setBase64] = useState<string>(""); // Store cropped image in base64
 
+  function uint8ArrayToBase64(u8Arr: any) {
+    let CHUNK_SIZE = 0x8000; // 每次处理的块大小
+    let index = 0;
+    let length = u8Arr.length;
+    let result = '';
+    let slice;
+    while (index <= length) {
+        slice = u8Arr.subarray(index, Math.min(index + CHUNK_SIZE, length));
+        result += String.fromCharCode.apply(null, slice);
+        index += CHUNK_SIZE;
+    }
+    return btoa(result);
+  }
+
   useEffect(()=>{
     if(typeof params.id === 'string' && params.id !== ""){
       // edit page
@@ -33,10 +47,7 @@ const MenuCreate: React.FC = () => {
           setDishPrice(res.data.Price);
           setCategory(res.data.Category);
           setIsAvailable(res.data.IsAvailable);
-          let base64Data = btoa(String.fromCharCode(...new Uint8Array(res.data.Image.data)));
-          let a = base64Data.replace("dataimage/pngbase64", "data:image/png;base64,");
-          console.log('base64Data=======', a);
-          // setBase64("data:image/png;base64"+base64Data);
+          setBase64(res.data.Image);
         }
       });
     }

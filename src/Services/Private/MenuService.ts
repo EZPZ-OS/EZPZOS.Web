@@ -21,3 +21,10 @@ export const deleteCusine = async (id: string|undefined) => {
         `/private/menu/${id}`,
     );
 }
+
+export const editCusine = async (id: string|undefined, cusine: object) => {
+    return await apiClient.put(
+        `/private/menu/${id}`,
+        cusine
+    );
+}
