@@ -1,14 +1,13 @@
 import React from "react";
-
+import { useSelector } from "react-redux";
+import { RootState } from "../../Store/Store";
 import BusinessHomeComponent from "../../Components/HomePageRelated/BusinessHomePageRelated/BusinessHomeComponent";
 import { BusinessHomePageValues } from "ezpzos.core";
 
 export interface BusinessPageValuesProp {
-	BusinessHomePageValues: {
-			IsLoggedIn: boolean;
-			HomePageButtonList: any[];
-			NotificationList: any[];
-	};
+	IsLoggedIn: boolean;
+	HomePageButtonList: any[];
+	NotificationList: any[];
 }
 
 /**
@@ -19,13 +18,18 @@ export interface BusinessPageValuesProp {
  * @param NotificationList is an array to store a list of mock data of notification Title and Content,
  */
 
-const BusinessHome: React.FC<BusinessPageValuesProp> = ({}) => {
+const BusinessHome: React.FC<{}> = () => {
+	const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
 	return (
 		<div>
 			<div className="flex h-screen w-screen bg-[url('./Assets/Images/MainPageBackgroundImage.png')] bg-cover relative overflow-hidden">
 				<div className="h-screen w-screen bg-gradient-to-tl from-transparent from-0% via-[#33291f88] via-41%  to-[#000000ce] to-88%">
 					<div className="absolute h-screen w-screen bg-gradient-to-tl from-transparent from-0% via-[#33291f88] via-41%  to-[#000000ce] to-88%">
-						<BusinessHomeComponent BusinessHomePageValues={BusinessHomePageValues} />
+						<BusinessHomeComponent
+							IsLoggedIn={isLoggedIn}
+							HomePageButtonList={BusinessHomePageValues.HomePageButtonList}
+							NotificationList={BusinessHomePageValues.NotificationList}
+						/>
 					</div>
 				</div>
 			</div>

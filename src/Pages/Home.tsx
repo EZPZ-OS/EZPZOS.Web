@@ -1,6 +1,6 @@
 import React from "react";
 import ClientHomeComponent from "../Components/HomePageRelated/ClientHomePageRelated/ClientHomeComponent";
-import { ClientHomePageValues, DefaultHomePageValues } from "ezpzos.core";
+import { ClientHomePageValues } from "ezpzos.core";
 import { useSelector } from "react-redux";
 import { RootState } from "../Store/Store";
 

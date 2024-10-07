@@ -5,11 +5,17 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 import { PiUploadSimpleLight } from "react-icons/pi";
 import { DefaultMenuCreateValues } from "ezpzos.core";
 import { ReactImageCropperDropzone } from "../../Components/UserProfileRelated/UploadAvatar/ReactImageCropperDropzone";
+import { useNavigate } from "react-router-dom";
+
+const MenuCreate: React.FC = () => {
+  const navigate = useNavigate()
+
 import { createCusine, GetCuisineById, editCusine } from "../../Services/Private/MenuService";
 
 const MenuCreate: React.FC = () => {
   const params = useParams();
   const navigate = useNavigate();
+
 	// State variables to store form inputs and their corresponding setters
 	const [dishName, setDishName] = useState("");
 	const [dishDescription, setDishDescription] = useState("");
@@ -18,8 +24,6 @@ const MenuCreate: React.FC = () => {
 	const [tags, setTags] = useState<string[]>(["No.1 ordered"]);
 	const [newTag, setNewTag] = useState("");
 	const [isAvailable, setIsAvailable] = useState(false);
-	const [dishImageUrl, setDishImageUrl] = useState("");
-	const [imagePreview, setImagePreview] = useState("");
 	const [showError, setShowError] = useState(false); // Error handling state
 	const [base64, setBase64] = useState<string>(""); // Store cropped image in base64
 
@@ -70,13 +74,6 @@ const MenuCreate: React.FC = () => {
 	 */
 	const handleRemoveTag = (tagToRemove: string) => {
 		setTags(tags.filter(tag => tag !== tagToRemove));
-	};
-
-	/**
-	 * Inserts the provided image URL into the image preview area
-	 */
-	const handleInsertImageUrl = () => {
-		setImagePreview(dishImageUrl);
 	};
 
 	// Callback after cropping the image
@@ -143,6 +140,7 @@ const MenuCreate: React.FC = () => {
 		// Implement the logic to go back to the previous page
     navigate('/menu-list')
 	};
+
 
 	return (
 		<div className="min-h-screen bg-white flex justify-center items-center">
@@ -236,7 +234,6 @@ const MenuCreate: React.FC = () => {
 						<div className="w-full px-3 py-2 border border-gray-300 rounded bg-gray-100 flex items-center justify-center">
 							<label className="w-full flex items-center justify-center cursor-pointer">
 								<PiUploadSimpleLight className="mr-2" />
-
 								<ReactImageCropperDropzone
 									accept={{
 										"image/jpeg": [".jpeg", ".jpg"],
@@ -263,8 +260,12 @@ const MenuCreate: React.FC = () => {
 									src={base64}
 									alt="Cropped Avatar Preview"
 									style={{
-                    width: "100%",
-                    height: "100%",
+										width: "300px",
+										height: "200px",
+										borderRadius: "5%",
+										width: "100px",
+										height: "100px",
+										borderRadius: "50%",
 										objectFit: "cover",
 										objectPosition: "center"
 									}}
