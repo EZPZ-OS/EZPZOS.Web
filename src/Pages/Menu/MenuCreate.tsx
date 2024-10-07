@@ -102,12 +102,21 @@ const MenuCreate: React.FC = () => {
 			"Image": base64
 		};
 
-    createCusine(menuDetails).then(res => {
-      if(res.status === 200 || res.status === 201){
-        handleToast()
-        navigate('/menu-list')
-      }
-    })
+    if(typeof params.id === 'string' && params.id !== ""){
+      editCusine(params.id, menuDetails).then(res => {
+        console.log('====edit====', res)
+        if(res.status === 200){
+          navigate('/menu-list')
+        }
+      })
+    }else{
+      createCusine(menuDetails).then(res => {
+        if(res.status === 200 || res.status === 201){
+          handleToast()
+          navigate('/menu-list')
+        }
+      })
+    }
 	};
 
   const CustomToast = () => {
@@ -254,9 +263,8 @@ const MenuCreate: React.FC = () => {
 									src={base64}
 									alt="Cropped Avatar Preview"
 									style={{
-										width: "100px",
-										height: "100px",
-										borderRadius: "50%",
+                    width: "100%",
+                    height: "100%",
 										objectFit: "cover",
 										objectPosition: "center"
 									}}
