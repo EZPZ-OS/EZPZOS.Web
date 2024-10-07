@@ -69,6 +69,7 @@ const MenuCreate: React.FC = () => {
 		navigate("/menu-list")
 	};
 
+
 	return (
 		<div className="min-h-screen bg-white flex justify-center items-center">
 			<div className="w-full max-w-lg mx-auto bg-white p-4 sm:p-6 lg:p-8 rounded-lg shadow-md">
@@ -190,6 +191,9 @@ const MenuCreate: React.FC = () => {
 										width: "300px",
 										height: "200px",
 										borderRadius: "5%",
+										width: "100px",
+										height: "100px",
+										borderRadius: "50%",
 										objectFit: "cover",
 										objectPosition: "center"
 									}}
