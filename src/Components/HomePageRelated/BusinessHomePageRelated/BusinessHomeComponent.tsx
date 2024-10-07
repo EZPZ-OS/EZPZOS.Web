@@ -38,9 +38,19 @@ const BusinessHomeComponent = (data: BusinessPageValuesProp) => {
 		}
 	}, [isLoggedIn, user?.Id, dispatch]);
 	const loggedInLogo = user ? (
-		<img src={user.Avatar} className="w-[110px] h-[110px] mt-32 rounded-full" alt="logo" />
+		<img
+			src={user.Avatar}
+			className="w-[110px] h-[110px] mt-32 rounded-full"
+			style={{ objectFit: "cover", objectPosition: "center" }}
+			alt="logo"
+		/>
 	) : (
-		<img src={BusinessAvatar} className="w-[110px] h-[110px] mt-32 rounded-full" alt="logo" />
+		<img
+			src={BusinessAvatar}
+			className="w-[110px] h-[110px] mt-32 rounded-full"
+			style={{ objectFit: "cover", objectPosition: "center" }}
+			alt="logo"
+		/>
 	);
 
 	const loggedInOpening = (
