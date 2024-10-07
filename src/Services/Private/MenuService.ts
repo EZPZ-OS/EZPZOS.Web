@@ -12,3 +12,12 @@ export const GetCuisineById = async (id: string|undefined) => {
     );
 };
 
+export const createCusine = async (cusine: object) => {
+    return await apiClient.post('/private/menu//create', cusine)
+}
+
+export const deleteCusine = async (id: string|undefined) => {
+    return await apiClient.delete(
+        `/private/menu/${id}`,
+    );
+}

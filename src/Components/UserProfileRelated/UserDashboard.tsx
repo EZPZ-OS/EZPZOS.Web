@@ -22,11 +22,10 @@ const UserDashboard: React.FC<UserDashboardProps> = ({ avatar, username }) => {
 	};
 	return (
 		<div className="bg-gradient-to-b from-[#D3D4D4] h-[702px] w-screen font-lato relative">
-			{/* TODO: Change the img src to user.avatar when user avatar is fully setup in backend*/}
 			<img
-				src={ClientAvatar}
-				className="w-[107px] h-[107px] absolute -top-[53.5px]"
-				style={{ left: "50%", transform: "translateX(-50%)" }}
+				src={avatar ?? ClientAvatar}
+				className="w-[107px] h-[107px] absolute -top-[53.5px] rounded-full"
+				style={{ left: "50%", transform: "translateX(-50%)", objectFit:"cover", objectPosition:"center"}}
 			></img>
 			<div className="flex flex-col items-center mt-[50px]">
 				<p className="font-bold text-xl py-3 relative">

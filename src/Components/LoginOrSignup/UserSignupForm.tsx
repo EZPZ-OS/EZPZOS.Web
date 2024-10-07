@@ -6,6 +6,9 @@ import { RootState } from "../../Store/Store";
 import { PhoneNumberNormalizer, LogHandler, LogLevel } from "ezpzos.core";
 import { AuthService } from "../../Services/PublicService";
 import { showAlert } from "../../Store/AlertSlice";
+import ClientAvatar from "../../Assets/Icons/ClientAvatar.png";
+import { UserService } from "../../Services/Private/UserService";
+import { setAvatar } from "../../Store/AuthSlice";
 
 interface UserSignupFormProps {
 	otpToken?: string | null;
@@ -39,6 +42,27 @@ const UserSignupForm: React.FC<UserSignupFormProps> = ({ otpToken, otpTarget }) 
 				dispatch(login({ token: result.token, user: result.user }));
 				// Dispatch user to save in Redux for frontend to use user info
 				dispatch(setUser(result.user));
+
+				// Fetch the default avatar and convert it to a Blob
+				const response = await fetch(ClientAvatar);
+				const avatarBlob = await response.blob();
+
+				// Create a file from the Blob to send to the backend
+				const avatarFile = new File([avatarBlob], "default-avatar.png", { type: "image/png" });
+
+				// Call updateAvatarRequest with the file
+				const avatarUpdateResponse = await UserService.updateAvatarRequest(result.user.Id, avatarFile);
+
+				if (avatarUpdateResponse.result === true) {
+					// Fetch the updated avatar after successful upload
+					const avatarResponse = await UserService.getAvatarRequest(result.user.Id);
+
+					if (avatarResponse.result && avatarResponse.avatarUrl) {
+						// Dispatch action to update Redux with the fetched avatar
+						dispatch(setAvatar(avatarResponse.avatarUrl));
+					}
+				}
+
 				// Trigger success alert and navigate to home page
 				dispatch(
 					showAlert({

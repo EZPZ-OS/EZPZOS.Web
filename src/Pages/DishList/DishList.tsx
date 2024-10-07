@@ -16,6 +16,7 @@ const DishList = () => {
 
     const handleAddDish = ()=>{
         // go to add dish page
+        navigate('/menucreate')
     }
 
     const handleDishDetail = (id: string) => {
