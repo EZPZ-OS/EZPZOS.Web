@@ -248,9 +248,8 @@ const MenuCreate: React.FC = () => {
 									src={base64}
 									alt="Cropped Avatar Preview"
 									style={{
-										width: "300px",
-										height: "200px",
-										borderRadius: "5%",
+                    					width: "100%",
+                    					height: "100%",
 										objectFit: "cover",
 										objectPosition: "center"
 									}}

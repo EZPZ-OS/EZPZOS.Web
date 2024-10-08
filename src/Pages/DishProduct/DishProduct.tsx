@@ -153,7 +153,7 @@ const DishProduct = () => {
 	};
 
 	const goBack = () => {
-		navigate("/menu-list");
+		navigate(-1);
 	};
 
 	const handleEditCuisine = () => {
