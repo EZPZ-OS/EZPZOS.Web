@@ -21,32 +21,37 @@ const ClientHomeComponent = (data: ClientHomePageValuesProp) => {
 	const dispatch = useDispatch();
 	let user = null;
 	if (isLoggedIn === true) {
-		user = useSelector((state: RootState) => state.auth.user)
+		user = useSelector((state: RootState) => state.auth.user);
 	}
 
 	useEffect(() => {
 		if (isLoggedIn && user?.Id) {
-		  const fetchAvatar = async () => {
-			const response = await UserService.getAvatarRequest(user.Id);
-			if (response.result && response.avatarUrl) {
-				// If avatar is not an empty string, use the fetched avatar; otherwise, use the default avatar
-				const avatarToUse = response.avatarUrl !== "" ? response.avatarUrl : ClientAvatar;
-				dispatch(setAvatar(avatarToUse));
-			} else {
-			  console.error(response.message);
-			}
-		  };	  
-		  fetchAvatar();
+			const fetchAvatar = async () => {
+				const response = await UserService.getAvatarRequest(user.Id);
+				if (response.result && response.avatarUrl) {
+					// If avatar is not an empty string, use the fetched avatar; otherwise, use the default avatar
+					const avatarToUse = response.avatarUrl !== "" ? response.avatarUrl : ClientAvatar;
+					dispatch(setAvatar(avatarToUse));
+				} else {
+					console.error(response.message);
+				}
+			};
+			fetchAvatar();
 		}
-	  }, [isLoggedIn, user?.Id, dispatch]);
+	}, [isLoggedIn, user?.Id, dispatch]);
 
 	const loggedInLogo = (
 		<Link to="/profile">
 			{user?.Avatar ? (
-            <img src={user.Avatar} alt="User Avatar" className="rounded-full w-24 h-24 mt-44" style={{objectFit:"cover", objectPosition:"center"}}/>
-          ) : (
-            <p>Loading avatar...</p>
-          )}
+				<img
+					src={user.Avatar}
+					alt="User Avatar"
+					className="rounded-full w-24 h-24 mt-44"
+					style={{ objectFit: "cover", objectPosition: "center" }}
+				/>
+			) : (
+				<p>Loading avatar...</p>
+			)}
 		</Link>
 	);
 

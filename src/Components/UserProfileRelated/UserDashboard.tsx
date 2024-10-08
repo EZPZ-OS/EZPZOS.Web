@@ -25,7 +25,7 @@ const UserDashboard: React.FC<UserDashboardProps> = ({ avatar, username }) => {
 			<img
 				src={avatar ?? ClientAvatar}
 				className="w-[107px] h-[107px] absolute -top-[53.5px] rounded-full"
-				style={{ left: "50%", transform: "translateX(-50%)", objectFit:"cover", objectPosition:"center"}}
+				style={{ left: "50%", transform: "translateX(-50%)", objectFit: "cover", objectPosition: "center" }}
 			></img>
 			<div className="flex flex-col items-center mt-[50px]">
 				<p className="font-bold text-xl py-3 relative">

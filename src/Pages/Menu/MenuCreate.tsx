@@ -8,8 +8,8 @@ import { ReactImageCropperDropzone } from "../../Components/UserProfileRelated/U
 import { createCusine, GetCuisineById, editCusine } from "../../Services/Private/MenuService";
 
 const MenuCreate: React.FC = () => {
-  const params = useParams();
-  const navigate = useNavigate();
+	const params = useParams();
+	const navigate = useNavigate();
 
 	// State variables to store form inputs and their corresponding setters
 	const [dishName, setDishName] = useState("");
@@ -23,7 +23,7 @@ const MenuCreate: React.FC = () => {
 	const [imagePreview, setImagePreview] = useState("");
 	const [showError, setShowError] = useState(false); // Error handling state
 	const [base64, setBase64] = useState<string>(""); // Store cropped image in base64
-  
+
 	useEffect(() => {
 		if (typeof params.id === "string" && params.id !== "") {
 			// edit page
@@ -87,21 +87,21 @@ const MenuCreate: React.FC = () => {
 			EstimatedTime: 60,
 			Image: base64
 		};
-    
-    if(typeof params.id === 'string' && params.id !== ""){
-      editCusine(params.id, menuDetails).then(res => {
-        if(res.status === 200){
-          navigate('/menu-list')
-        }
-      })
-    }else{
-      createCusine(menuDetails).then(res => {
-        if(res.status === 200 || res.status === 201){
-          handleToast()
-          navigate('/menu-list')
-        }
-      })
-    }
+
+		if (typeof params.id === "string" && params.id !== "") {
+			editCusine(params.id, menuDetails).then(res => {
+				if (res.status === 200) {
+					navigate("/menu-list");
+				}
+			});
+		} else {
+			createCusine(menuDetails).then(res => {
+				if (res.status === 200 || res.status === 201) {
+					handleToast();
+					navigate("/menu-list");
+				}
+			});
+		}
 	};
 
 	const CustomToast = () => {

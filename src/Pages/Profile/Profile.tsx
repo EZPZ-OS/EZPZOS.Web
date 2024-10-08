@@ -13,7 +13,7 @@ import useAuthCheck from "../../Hooks/useAuthCheck";
 
 const Profile: React.FC = () => {
 	let user = useSelector((state: RootState) => state.auth.user);
-	const isAuthenticated = useAuthCheck(); 
+	const isAuthenticated = useAuthCheck();
 
 	return (
 		<div>

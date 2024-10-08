@@ -61,32 +61,28 @@ const BottomNavBar: React.FC<BottomNavBarProps> = ({ isClient }) => {
 		}
 	};
 
-  return (
-    <div className="bg-[#D9D9D9] pt-[8px] text-[#988B8B] w-full h-[88px] flex bottom-0 text-center fixed justify-center px-[10%] gap-0 z-[5000]">
-      <div className=" w-full h-[51px] flex justify-between padding-0">
-        {navBar.iconList.map((icon, index) => (
-          <div
-            key={index}
-            className="flex flex-col items-center cursor-pointer"
-            onClick={() => navigate(navBar.pathList[index])}
-          >
-            {/* here are two divs for each page: icon div + text span div. In the icon div, the flex items-center are to centralize the icon */}
-            <div className="h-[30px] flex items-center">
-              {/* Invoke the renderIcon function*/}
-              {renderIcon(
-                icon,
-                navBar.wordList[index],
-                "h-full w-full object-contain"
-              )}
-            </div>
-            <span className="font-istok text-[14px] font-thin leading-[21px] text-center">
-              {navBar.wordList[index]}
-            </span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+	return (
+		<div className="bg-[#D9D9D9] pt-[8px] text-[#988B8B] w-full h-[88px] flex bottom-0 text-center fixed justify-center px-[10%] gap-0 z-[5000]">
+			<div className=" w-full h-[51px] flex justify-between padding-0">
+				{navBar.iconList.map((icon, index) => (
+					<div
+						key={index}
+						className="flex flex-col items-center cursor-pointer"
+						onClick={() => navigate(navBar.pathList[index])}
+					>
+						{/* here are two divs for each page: icon div + text span div. In the icon div, the flex items-center are to centralize the icon */}
+						<div className="h-[30px] flex items-center">
+							{/* Invoke the renderIcon function*/}
+							{renderIcon(icon, navBar.wordList[index], "h-full w-full object-contain")}
+						</div>
+						<span className="font-istok text-[14px] font-thin leading-[21px] text-center">
+							{navBar.wordList[index]}
+						</span>
+					</div>
+				))}
+			</div>
+		</div>
+	);
 };
 
 export default BottomNavBar;

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import { useRef, useState } from "react";
 import BottomNavBar from "../BottomNavBar";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import PartySizeBlock from "./PartySizeBlock";
@@ -92,15 +92,17 @@ export default function BookPage() {
 		if (partyDateTime instanceof Date && !isNaN(partyDateTime.getTime())) {
 			//check if it is the past time
 			if (partyDateTime.getTime() - new Date().getTime() > 0) {
-				
-				localStorage.setItem('orderInfo', JSON.stringify({
-					"partySize": partySize,
-					"date": (partyDate.getMonth()+1) + '-' + partyDate.getDate() + '-' + partyDate.getFullYear(),
-					"time": partyDateTime.getHours() + ":" + partyDateTime.getMinutes()
-				}))
-				
+				localStorage.setItem(
+					"orderInfo",
+					JSON.stringify({
+						partySize: partySize,
+						date: partyDate.getMonth() + 1 + "-" + partyDate.getDate() + "-" + partyDate.getFullYear(),
+						time: partyDateTime.getHours() + ":" + partyDateTime.getMinutes()
+					})
+				);
+
 				//TODO nav to book confirm page, partySize and partyDateTime should be sent to backend
-				nav('/booking/success');
+				nav("/booking/success");
 			} else {
 				alert("Wrong select of past date!");
 			}
@@ -149,7 +151,7 @@ export default function BookPage() {
 										<div className="flex justify-around">
 											{value.map((valueNumber: string, index: number) => {
 												return (
-													<div 
+													<div
 														key={index}
 														className="h-[23px] w-[96px] border border-black rounded-[12px] flex justify-center items-center"
 														onClick={() => {
