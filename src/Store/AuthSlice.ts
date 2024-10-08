@@ -47,8 +47,8 @@ const authSlice = createSlice({
 		},
 		setAvatar(state, action: PayloadAction<string>) {
 			if (state.user) {
-			  state.user.Avatar = action.payload; // Update the avatar in the user object
-			  localStorage.setItem("user", JSON.stringify(state.user));
+				state.user.Avatar = action.payload; // Update the avatar in the user object
+				localStorage.setItem("user", JSON.stringify(state.user));
 			}
 		},
 		login(state, action: PayloadAction<{ token: string; user: User }>) {
@@ -75,5 +75,6 @@ const authSlice = createSlice({
 	}
 });
 
-export const { setOTPVerified, setMobileNumber, setOTPType, setOTPTarget, setUser, setAvatar, login, logout } = authSlice.actions;
+export const { setOTPVerified, setMobileNumber, setOTPType, setOTPTarget, setUser, setAvatar, login, logout } =
+	authSlice.actions;
 export default authSlice.reducer;

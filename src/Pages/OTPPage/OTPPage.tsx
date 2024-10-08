@@ -37,11 +37,11 @@ const OTPPage: React.FC = () => {
 
 					dispatch(
 						showAlert({
-						  message: DefaultLoginSignupValues.MobileLoginDefaultValue.LoginSuccessMessage,
-						  isError: false,
-						  navigateTo: "/", 
+							message: DefaultLoginSignupValues.MobileLoginDefaultValue.LoginSuccessMessage,
+							isError: false,
+							navigateTo: "/"
 						})
-					  );
+					);
 				} else {
 					// Show error alert and navigate to home page
 					dispatch(
@@ -50,7 +50,7 @@ const OTPPage: React.FC = () => {
 							isError: true,
 							navigateTo: "/"
 						})
-					)
+					);
 				}
 			} catch (error: any) {
 				logger.Log("OTP", `Error during login: ${error.message}`, LogLevel.ERROR);
@@ -61,7 +61,7 @@ const OTPPage: React.FC = () => {
 						isError: true,
 						navigateTo: "/"
 					})
-				)
+				);
 			}
 		}
 	};

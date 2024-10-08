@@ -19,6 +19,8 @@ const MenuCreate: React.FC = () => {
 	const [tags, setTags] = useState<string[]>(["No.1 ordered"]);
 	const [newTag, setNewTag] = useState("");
 	const [isAvailable, setIsAvailable] = useState(false);
+	const [dishImageUrl, setDishImageUrl] = useState("");
+	const [imagePreview, setImagePreview] = useState("");
 	const [showError, setShowError] = useState(false); // Error handling state
 	const [base64, setBase64] = useState<string>(""); // Store cropped image in base64
 
@@ -56,6 +58,13 @@ const MenuCreate: React.FC = () => {
 		setTags(tags.filter(tag => tag !== tagToRemove));
 	};
 
+	/**
+	 * Inserts the provided image URL into the image preview area
+	 */
+	const handleInsertImageUrl = () => {
+		setImagePreview(dishImageUrl);
+	};
+
 	// Callback after cropping the image
 	const afterCrop = (croppedBase64: string) => {
 		setBase64(croppedBase64); // Store the cropped image
@@ -81,7 +90,6 @@ const MenuCreate: React.FC = () => {
 
 		if (typeof params.id === "string" && params.id !== "") {
 			editCusine(params.id, menuDetails).then(res => {
-				console.log("====edit====", res);
 				if (res.status === 200) {
 					navigate("/menu-list");
 				}
@@ -213,6 +221,7 @@ const MenuCreate: React.FC = () => {
 						<div className="w-full px-3 py-2 border border-gray-300 rounded bg-gray-100 flex items-center justify-center">
 							<label className="w-full flex items-center justify-center cursor-pointer">
 								<PiUploadSimpleLight className="mr-2" />
+
 								<ReactImageCropperDropzone
 									accept={{
 										"image/jpeg": [".jpeg", ".jpg"],

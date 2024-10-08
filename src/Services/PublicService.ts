@@ -84,7 +84,7 @@ export const AuthService = {
 
 	//login by mobile request
 	adminLoginRequest: async (
-		mobile: string | null,
+		mobile: string | null
 	): Promise<{ success: boolean; message?: string; token?: string; user?: User }> => {
 		try {
 			const response = await apiClient.post("/public/login/admin", { mobile });
