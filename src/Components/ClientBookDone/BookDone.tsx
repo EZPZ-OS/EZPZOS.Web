@@ -21,9 +21,9 @@ export default function BookDone(props: { people: number; date: string; time: st
 	const { BookDone, BookSuccess, RestaurantAddress } = ClientBookDoneValue;
 	const { people, date, time, userName } = props;
 	const [orderPeople, setOrderPeople] = useState(0);
-	const [orderDate, setOrderDate] = useState('');
-	const [orderTime, setOrderTime] = useState('');
-	const [orderUser, setOrderUser] = useState('');
+	const [orderDate, setOrderDate] = useState("");
+	const [orderTime, setOrderTime] = useState("");
+	const [orderUser, setOrderUser] = useState("");
 
 	const navigate = useNavigate();
 	const returnHomePage = () => {
@@ -31,17 +31,15 @@ export default function BookDone(props: { people: number; date: string; time: st
 	};
 
 	useEffect(() => {
-		let orderInfoStorage: string|null = localStorage.getItem('orderInfo');
-        let orderInfo: any = JSON.parse(orderInfoStorage!);
+		let orderInfoStorage: string | null = localStorage.getItem("orderInfo");
+		let orderInfo: any = JSON.parse(orderInfoStorage!);
 		setOrderPeople(orderInfo.partySize);
 		setOrderDate(orderInfo.date);
 		setOrderTime(orderInfo.time);
-		let userStorage: string|null = localStorage.getItem('user');
-        let user: any = JSON.parse(userStorage!);
+		let userStorage: string | null = localStorage.getItem("user");
+		let user: any = JSON.parse(userStorage!);
 		setOrderUser(user.Username);
-	}, [])
-
-
+	}, []);
 
 	return (
 		<div className="h-[845px] bg-gradient-to-b from-[#E78B57] to-[#4EC1E5]">

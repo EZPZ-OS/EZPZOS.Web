@@ -2,8 +2,8 @@ import React from "react";
 import HotSales from "../HotSales/HotSales";
 // Define the interface for the props
 interface MenuTabProps {
-  tableNumber: string | null;
-  selectedTab: string | null;
+	tableNumber: string | null;
+	selectedTab: string | null;
 }
 /**
  * This interface defining the properties for the MenuTabProps
@@ -12,11 +12,11 @@ interface MenuTabProps {
  */
 
 const MenuTab: React.FC<MenuTabProps> = ({ tableNumber, selectedTab }) => {
-  return (
-    <div>
-      <HotSales/>
-    </div>
-  );
+	return (
+		<div>
+			<HotSales />
+		</div>
+	);
 };
 
 export default MenuTab;
