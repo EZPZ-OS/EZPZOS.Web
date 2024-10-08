@@ -8,6 +8,8 @@ import { FaDove, FaUser } from "react-icons/fa6"; //  profile
 import { PiForkKnifeBold } from "react-icons/pi"; // kitchen icon
 import MenuIcon from "../Assets/Icons/BottomNavBarMenuIcon.png"; // menu icon
 import TakeAwayIcon from "../Assets/Icons/BottomNavBarTakeAwayIcon.png"; // take away icon
+import { useSelector } from "react-redux";
+import { RootState } from "../Store/Store";
 
 /*
   Read me first before and modification on this component.
@@ -25,37 +27,40 @@ import TakeAwayIcon from "../Assets/Icons/BottomNavBarTakeAwayIcon.png"; // take
 */
 
 interface BottomNavBarProps {
-  isClient: boolean;
+	isClient: boolean;
 }
 
 const BottomNavBar: React.FC<BottomNavBarProps> = ({ isClient }) => {
-  const businessNavBar = {
-    iconList: [HomeIcon, <PiForkKnifeBold />, MenuIcon, <FaUser />],
-    wordList: ["HOME", "KITCHEN", "MENU", "PROFILE"],
-    pathList: ["/", "/kitchen", "/menu", "/profile"],
-  };
+	const user = useSelector((state: RootState) => state.auth.user);
+	const businessNavBar = {
+		iconList: [HomeIcon, <PiForkKnifeBold />, MenuIcon, <FaUser />],
+		wordList: ["HOME", "KITCHEN", "MENU", "PROFILE"],
+		pathList: ["/", "/kitchen", "/menu", "/profile"]
+	};
 
-  const clientNavBar = {
-    iconList: [HomeIcon, MenuIcon, TakeAwayIcon, <FaUser />],
-    wordList: ["Home", "Menu", "Take away", "Profile"],
-    pathList: ["/", "/menu-dinein", "/menu-takeaway", "/profile"],
-  };
+	const clientNavBar = {
+		iconList: [HomeIcon, MenuIcon, TakeAwayIcon, <FaUser />],
+		wordList: ["Home", "Menu", "Take away", "Profile"],
+		pathList:
+			user?.Username === "Admin"
+				? ["/businesshome", "/menu-dinein", "/menu-takeaway", "/profile"]
+				: ["/", "/menu-dinein", "/menu-takeaway", "/profile"]
+	};
 
-  const navBar = isClient ? clientNavBar : businessNavBar;
-  const navigate = useNavigate();
+	const navBar = isClient ? clientNavBar : businessNavBar;
+	const navigate = useNavigate();
 
-  // The key function to render the icon.
-  const renderIcon = (icon: any, alt: string, className: string) => {
-    if (typeof icon === "string") {
-      // img icon
-      return <img src={icon} alt={alt} className={className} />;
-    } else {
-      // react icon component
-      return React.cloneElement(icon, { className });
-    }
-  };
+	// The key function to render the icon.
+	const renderIcon = (icon: any, alt: string, className: string) => {
+		if (typeof icon === "string") {
+			// img icon
+			return <img src={icon} alt={alt} className={className} />;
+		} else {
+			// react icon component
+			return React.cloneElement(icon, { className });
+		}
+	};
 
-  // console.log('here i am')
   return (
     <div className="bg-[#D9D9D9] pt-[8px] text-[#988B8B] w-full h-[88px] flex bottom-0 text-center fixed justify-center px-[10%] gap-0 z-[5000]">
       <div className=" w-full h-[51px] flex justify-between padding-0">

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { PiUploadSimpleLight } from "react-icons/pi";
@@ -10,6 +10,7 @@ import { createCusine, GetCuisineById, editCusine } from "../../Services/Private
 const MenuCreate: React.FC = () => {
   const params = useParams();
   const navigate = useNavigate();
+
 	// State variables to store form inputs and their corresponding setters
 	const [dishName, setDishName] = useState("");
 	const [dishDescription, setDishDescription] = useState("");
@@ -22,24 +23,22 @@ const MenuCreate: React.FC = () => {
 	const [imagePreview, setImagePreview] = useState("");
 	const [showError, setShowError] = useState(false); // Error handling state
 	const [base64, setBase64] = useState<string>(""); // Store cropped image in base64
-
-
-  useEffect(()=>{
-    if(typeof params.id === 'string' && params.id !== ""){
-      // edit page
-      GetCuisineById(params.id).then(res => {
-        if (res.status === 200){
-          setDishName(res.data.Name);
-          setDishDescription(res.data.Description);
-          setDishPrice(res.data.Price);
-          setCategory(res.data.Category);
-          setIsAvailable(res.data.IsAvailable);
-          setBase64(res.data.Image);
-        }
-      });
-    }
-  }, [])
-
+  
+	useEffect(() => {
+		if (typeof params.id === "string" && params.id !== "") {
+			// edit page
+			GetCuisineById(params.id).then(res => {
+				if (res.status === 200) {
+					setDishName(res.data.Name);
+					setDishDescription(res.data.Description);
+					setDishPrice(res.data.Price);
+					setCategory(res.data.Category);
+					setIsAvailable(res.data.IsAvailable);
+					setBase64(res.data.Image);
+				}
+			});
+		}
+	}, []);
 
 	/**
 	 * Adds a new tag to the tags list if it does not already exist
@@ -80,15 +79,15 @@ const MenuCreate: React.FC = () => {
 		}
 
 		const menuDetails = {
-			"Name": dishName,
-			"Description": dishDescription,
-			"Price": parseFloat(dishPrice),
-			"Category": category,
-			"IsAvailable": isAvailable,
-      "EstimatedTime": 60,
-			"Image": base64
+			Name: dishName,
+			Description: dishDescription,
+			Price: parseFloat(dishPrice),
+			Category: category,
+			IsAvailable: isAvailable,
+			EstimatedTime: 60,
+			Image: base64
 		};
-
+    
     if(typeof params.id === 'string' && params.id !== ""){
       editCusine(params.id, menuDetails).then(res => {
         if(res.status === 200){
@@ -105,29 +104,29 @@ const MenuCreate: React.FC = () => {
     }
 	};
 
-  const CustomToast = () => {
-    return (
-        <div>
-            <h2>Success</h2>
-            <p>Cuisine is created successfully!</p>
-        </div>
-    )
-}
-  const handleToast = () => {
-    toast.success(<CustomToast />, {
-        position: 'top-center',
-        autoClose: 3000,
-        hideProgressBar: true,
-        progress: undefined
-    })
-}
+	const CustomToast = () => {
+		return (
+			<div>
+				<h2>Success</h2>
+				<p>Cuisine is created successfully!</p>
+			</div>
+		);
+	};
+	const handleToast = () => {
+		toast.success(<CustomToast />, {
+			position: "top-center",
+			autoClose: 3000,
+			hideProgressBar: true,
+			progress: undefined
+		});
+	};
 
 	/**
 	 * Navigates back to the previous page
 	 */
 	const goBack = () => {
 		// Implement the logic to go back to the previous page
-    navigate('/menu-list')
+		navigate("/menu-list");
 	};
 
 	return (
@@ -249,8 +248,9 @@ const MenuCreate: React.FC = () => {
 									src={base64}
 									alt="Cropped Avatar Preview"
 									style={{
-                    width: "100%",
-                    height: "100%",
+										width: "300px",
+										height: "200px",
+										borderRadius: "5%",
 										objectFit: "cover",
 										objectPosition: "center"
 									}}
@@ -270,7 +270,7 @@ const MenuCreate: React.FC = () => {
 					</button>
 				</div>
 			</div>
-      <ToastContainer />
+			<ToastContainer />
 		</div>
 	);
 };
