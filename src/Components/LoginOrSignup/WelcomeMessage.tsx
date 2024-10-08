@@ -15,15 +15,15 @@ const WelcomeMessage: React.FC<WelcomeMessageProps> = ({ isLogin, isOTPVerified 
 				{isOTPVerified
 					? DefaultLoginSignupValues.VerifiedOTPHeading
 					: isLogin
-					? DefaultLoginSignupValues.LoginHeading
-					: DefaultLoginSignupValues.SignupHeading}
+						? DefaultLoginSignupValues.LoginHeading
+						: DefaultLoginSignupValues.SignupHeading}
 			</p>
 			<p className="ml-[7px] bg-gradient-to-r from-[#FBFBFB] to-[#959595] text-transparent bg-clip-text">
 				{isOTPVerified
 					? DefaultLoginSignupValues.VerifiedOTPSubtitle
 					: isLogin
-					? DefaultLoginSignupValues.LoginSubtitle
-					: DefaultLoginSignupValues.SignupSubtitle}
+						? DefaultLoginSignupValues.LoginSubtitle
+						: DefaultLoginSignupValues.SignupSubtitle}
 			</p>
 		</div>
 	);

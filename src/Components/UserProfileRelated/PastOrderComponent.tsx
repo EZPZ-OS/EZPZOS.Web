@@ -20,7 +20,7 @@ const PastOrderComponent: React.FC<PastOrderProps> = props => {
 	// Handler for "Order Again" button click
 	const handleOrderAgain = () => {
 		// Log the order ID when the button is clicked
-        
+
 		console.log(`Reordering item with ID: ${OrderId}`);
 		// Call the handleReOrder function if needed
 		handleReOrder(OrderId);

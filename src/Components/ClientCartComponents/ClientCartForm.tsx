@@ -4,14 +4,14 @@ import { AiOutlineDelete, AiOutlineGift } from "react-icons/ai";
 import { IoAddOutline } from "react-icons/io5";
 import { GrNext } from "react-icons/gr";
 import { ClientCartDemoData, Cuisine, DemoVoucher } from "ezpzos.core";
-import Dish from '../../Assets/Images/dish.png'
+import Dish from "../../Assets/Images/dish.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const ClientCartForm: React.FC = () => {
 	const [cuisines, setCuisines] = useState<Cuisine[]>(ClientCartDemoData);
 	const [voucherSelected, setVoucherSelected] = useState(false);
-	const [deliveryType, setDeliveryType] = useState('dinein');
+	const [deliveryType, setDeliveryType] = useState("dinein");
 	const [cuisineList, setCuisineList] = useState<any[]>([]);
 	const [checkOutAmount, setCheckOutAmount] = useState(0);
 
@@ -23,24 +23,40 @@ const ClientCartForm: React.FC = () => {
 			sum += item.dish_price;
 		});
 		setCheckOutAmount(sum);
-	}
+	};
 	//Increase Cuisine Amount
 	const handleIncrease = (id: string) => {
 		setCuisineList(prevCuisines => {
-			return prevCuisines.map(cuisine => cuisine.dish_id === id ? { ...cuisine, dish_number: cuisine.dish_number + 1} : cuisine);
+			return prevCuisines.map(cuisine =>
+				cuisine.dish_id === id ? { ...cuisine, dish_number: cuisine.dish_number + 1 } : cuisine
+			);
 		});
 		setCuisineList(prevCuisines => {
-			return prevCuisines.map(cuisine => cuisine.dish_id === id ? { ...cuisine, dish_price: cuisine.dish_number * cuisine.dish_per_price} : cuisine);
+			return prevCuisines.map(cuisine =>
+				cuisine.dish_id === id
+					? { ...cuisine, dish_price: cuisine.dish_number * cuisine.dish_per_price }
+					: cuisine
+			);
 		});
 	};
 
 	//Decrease Cuisine Amount, will remove cuisine if amount is zero
 	const handleDecrease = (id: string) => {
 		setCuisineList(prevCuisines => {
-			return prevCuisines.map(cuisine => cuisine.dish_id === id && cuisine.dish_number > 0 ? { ...cuisine, dish_number: cuisine.dish_number - 1 } : cuisine).filter(cuisine => cuisine.dish_number > 0);
+			return prevCuisines
+				.map(cuisine =>
+					cuisine.dish_id === id && cuisine.dish_number > 0
+						? { ...cuisine, dish_number: cuisine.dish_number - 1 }
+						: cuisine
+				)
+				.filter(cuisine => cuisine.dish_number > 0);
 		});
 		setCuisineList(prevCuisines => {
-			return prevCuisines.map(cuisine => cuisine.dish_id === id && cuisine.dish_number > 0 ? { ...cuisine, dish_price: cuisine.dish_number * cuisine.dish_per_price } : cuisine);
+			return prevCuisines.map(cuisine =>
+				cuisine.dish_id === id && cuisine.dish_number > 0
+					? { ...cuisine, dish_price: cuisine.dish_number * cuisine.dish_per_price }
+					: cuisine
+			);
 		});
 	};
 
@@ -78,72 +94,72 @@ const ClientCartForm: React.FC = () => {
 		// take away -> order/status
 
 		// sync modify localstorage data
-		let userStorage: string|null = localStorage.getItem('user');
-        let user: any = JSON.parse(userStorage!);
+		let userStorage: string | null = localStorage.getItem("user");
+		let user: any = JSON.parse(userStorage!);
 
-		let cartStorage: string|null = localStorage.getItem('cartObj');
-		if(cartStorage !== null){
+		let cartStorage: string | null = localStorage.getItem("cartObj");
+		if (cartStorage !== null) {
 			let cartArr: any = JSON.parse(cartStorage);
-			let arr:any = [];
+			let arr: any = [];
 			cartArr.forEach((item: any) => {
-				if(item.user_id != user.Id){
+				if (item.user_id != user.Id) {
 					arr.push(item);
 				}
-			})
+			});
 			let newArr = [...arr, ...cuisineList];
-			localStorage.setItem('cartObj', JSON.stringify(newArr))
+			localStorage.setItem("cartObj", JSON.stringify(newArr));
 		}
-		
-		if(deliveryType === 'dinein'){
-			navigate('/booking')
-		}else{
-			navigate('/order/status')
+
+		if (deliveryType === "dinein") {
+			navigate("/booking");
+		} else {
+			navigate("/order/status");
 		}
 	};
 
 	const CustomToast = () => {
-        return (
-            <div>
-                <h2>Warning</h2>
-                <p>Shopping cart is empty!</p>
-            </div>
-        )
-    }
-    const handleToast = () => {
-        toast.success(<CustomToast />, {
-            position: 'top-center',
-            autoClose: 3000,
-            hideProgressBar: true,
-            progress: undefined
-        })
-    }
+		return (
+			<div>
+				<h2>Warning</h2>
+				<p>Shopping cart is empty!</p>
+			</div>
+		);
+	};
+	const handleToast = () => {
+		toast.success(<CustomToast />, {
+			position: "top-center",
+			autoClose: 3000,
+			hideProgressBar: true,
+			progress: undefined
+		});
+	};
 
-	useEffect(()=>{
+	useEffect(() => {
 		// get cart data from localhost
-		let userStorage: string|null = localStorage.getItem('user');
-        let user: any = JSON.parse(userStorage!);
+		let userStorage: string | null = localStorage.getItem("user");
+		let user: any = JSON.parse(userStorage!);
 
-		let cartStorage: string|null = localStorage.getItem('cartObj');
-		if(cartStorage === null){
+		let cartStorage: string | null = localStorage.getItem("cartObj");
+		if (cartStorage === null) {
 			handleToast();
-		}else{
+		} else {
 			let cartArr: any = JSON.parse(cartStorage);
 			let sum = 0;
 			cartArr.forEach((item: any) => {
-				if(item.user_id === user.Id){
+				if (item.user_id === user.Id) {
 					sum += item.dish_price;
-					setCuisineList((prevArray:any[]) => {
+					setCuisineList((prevArray: any[]) => {
 						return [...prevArray, item];
-					})
+					});
 				}
 			});
 			setCheckOutAmount(sum);
 		}
-	}, [])
+	}, []);
 
-	useEffect(()=>{
+	useEffect(() => {
 		reCountTotal();
-	}, [cuisineList])
+	}, [cuisineList]);
 
 	// const dineInCuisines = cuisines.filter(cuisine => cuisine.DineType === "Dine In");
 	// const takeAwayCuisines = cuisines.filter(cuisine => cuisine.DineType === "Takeaway");
@@ -171,12 +187,19 @@ const ClientCartForm: React.FC = () => {
 				<ul>
 					{cuisineList.map((cuisine, index) => {
 						return (
-							<li key={cuisine.dish_id} className="relative h-[128px] bg-scroll mt-4 ml-[11px] mr-[11px] font-semibold border-b-[1px] border-b-[#D9D6D6]">
+							<li
+								key={cuisine.dish_id}
+								className="relative h-[128px] bg-scroll mt-4 ml-[11px] mr-[11px] font-semibold border-b-[1px] border-b-[#D9D6D6]"
+							>
 								<div className="flex flex-row">
 									<img src={Dish} className="w-[70px] h-[70px] rounded-lg" />
 									<div className="flex-1 ml-3">
-										<div className="w-[306px] h-[33px] text-[16px] mt-[5px]">{cuisine.dish_name}</div>
-										<div className="w-[306px] text-[15px] mt-[5px] text-[#4D4D4D]">${cuisine.dish_price}</div>
+										<div className="w-[306px] h-[33px] text-[16px] mt-[5px]">
+											{cuisine.dish_name}
+										</div>
+										<div className="w-[306px] text-[15px] mt-[5px] text-[#4D4D4D]">
+											${cuisine.dish_price}
+										</div>
 									</div>
 								</div>
 								<div className="absolute right-0 bottom-2 flex items-center justify-evenly w-[124px] h-[38px] rounded-full bg-[#FF9900]">
@@ -305,11 +328,23 @@ const ClientCartForm: React.FC = () => {
 
 			<div className="flex flex-row justify-center">
 				<label className="flex items-center mr-1">
-					<input type="radio" name="delivery" value="dinein" checked={deliveryType === 'dinein'} onChange={(e) => setDeliveryType(e.target.value)} />
+					<input
+						type="radio"
+						name="delivery"
+						value="dinein"
+						checked={deliveryType === "dinein"}
+						onChange={e => setDeliveryType(e.target.value)}
+					/>
 					<span className="ml-2">Dine in</span>
 				</label>
 				<label className="flex items-center ml-1">
-					<input type="radio" name="delivery" value="takeaway" checked={deliveryType === 'takeaway'} onChange={(e) => setDeliveryType(e.target.value)}/>
+					<input
+						type="radio"
+						name="delivery"
+						value="takeaway"
+						checked={deliveryType === "takeaway"}
+						onChange={e => setDeliveryType(e.target.value)}
+					/>
 					<span className="ml-2">Take away</span>
 				</label>
 			</div>

@@ -38,7 +38,6 @@ const ContactForm: React.FC<ContactFormProps> = ({ isLogin }) => {
 							message: DefaultLoginSignupValues.MobileLoginDefaultValue.LoginSuccessMessage,
 							isError: false,
 							navigateTo: "/businesshome"
-
 						})
 					);
 					return;

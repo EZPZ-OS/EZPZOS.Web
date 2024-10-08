@@ -87,7 +87,6 @@ const HotSales: React.FC<HotSaleProps> = ({}) => {
 				)}
 				<div ref={containerRef} className="flex overflow-x-scroll pb-10 no-scrollbar hide-scroll-bar">
 					<div className="flex flex-nowrap mt-0 lg:ml-40 md:ml-10 ml-2 mr-2 transform transition-transform duration-1000">
-						
 						{/*this is used to map the mock data HotSalesList to show each hot sale card*/}
 						{HotSalesList.map((item: any, index: any) => (
 							<div key={index} className="inline-block px-1">

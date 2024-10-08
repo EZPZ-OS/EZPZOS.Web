@@ -1,5 +1,3 @@
-
-
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -11,7 +9,7 @@ Make sure the following Git Repository is cloned:
 1. EZPZOS.Core is on the same level of this project
    ./EZPZOS.Web
    ./EZPZOS.Core
-2. You need to run "npm run build" against EZPZOS.Core project  
+2. You need to run "npm run build" against EZPZOS.Core project
 
 ## Available Scripts
 
@@ -55,4 +53,5 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
 # ezpzosfe

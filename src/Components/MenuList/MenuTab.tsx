@@ -2,8 +2,8 @@ import React from "react";
 import HotSales from "../HotSales/HotSales";
 // Define the interface for the props
 interface MenuTabProps {
-  tableNumber: string | null;
-  selectedTab: string | null;
+	tableNumber: string | null;
+	selectedTab: string | null;
 }
 /**
  * This interface defining the properties for the MenuTabProps
@@ -12,18 +12,11 @@ interface MenuTabProps {
  */
 
 const MenuTab: React.FC<MenuTabProps> = ({ tableNumber, selectedTab }) => {
-  return (
-    <div>
-      <HotSales/>
-      <h1 className="text-3xl mb-4">
-        This is menu page placeholder, for testing purpose
-      </h1>
-      <h1 className="text-3xl mb-4 text-blue-500">
-        you're on **{selectedTab}**!
-      </h1>
-      <div className="mb-4">Table Number: {tableNumber}</div>
-    </div>
-  );
+	return (
+		<div>
+			<HotSales />
+		</div>
+	);
 };
 
 export default MenuTab;

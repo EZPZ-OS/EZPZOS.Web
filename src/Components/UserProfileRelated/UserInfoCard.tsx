@@ -54,7 +54,7 @@ const UserInfoCard: React.FC<UserInfoCardProps> = ({ username, phone, email, onL
 
 	const handleUpdateUser = async () => {
 		if (user && editedName) {
-			const { Avatar, ...restOfUser } = user
+			const { Avatar, ...restOfUser } = user;
 			const updatedUserData = {
 				...restOfUser,
 				Username: editedName
@@ -66,7 +66,7 @@ const UserInfoCard: React.FC<UserInfoCardProps> = ({ username, phone, email, onL
 
 				if (response.success && response.user) {
 					// If the update is successful, update the user in Redux
-					response.user.Avatar = user.Avatar
+					response.user.Avatar = user.Avatar;
 					dispatch(setUser(response.user));
 					// Show success alert
 					dispatch(showAlert({ message: "User updated successfully", isError: false }));
