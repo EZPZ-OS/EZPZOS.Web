@@ -104,12 +104,16 @@ const DishList = () => {
 				)}
 			</div>
 			{/* go to shopping cart */}
-			<div
-				className="fixed bottom-2 left-0 right-0 m-auto w-10/12 h-12 leading-[48px] mx-auto bg-gradient-to-r from-[#EF7221] to-[#DC4200] opacity-90 rounded-2xl mt-3 text-center text-white font-bold text-xl"
-				onClick={handleShoppingCart}
-			>
-				go to cart
-			</div>
+			{
+				authBtn ? '' : (
+					<div
+						className="fixed bottom-2 left-0 right-0 m-auto w-10/12 h-12 leading-[48px] mx-auto bg-gradient-to-r from-[#EF7221] to-[#DC4200] opacity-90 rounded-2xl mt-3 text-center text-white font-bold text-xl"
+						onClick={handleShoppingCart}
+					>
+						go to cart
+					</div>
+				)
+			}
 		</div>
 	);
 };
